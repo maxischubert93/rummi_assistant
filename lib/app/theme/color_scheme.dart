@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
+import 'package:rummi_assistant/app/theme/app_colors.dart';
 
 @immutable
 abstract class AppColorScheme {
