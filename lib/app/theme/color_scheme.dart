@@ -44,6 +44,8 @@ abstract class AppColorScheme {
   Color get divider;
 
   Color get link;
+
+  Color get navigationColor;
 }
 
 @immutable
@@ -120,4 +122,7 @@ class _LightAppColorScheme implements AppColorScheme {
         onError: onError,
         brightness: Brightness.light,
       );
+
+  @override
+  Color get navigationColor => AppColors.grey[300]!;
 }
