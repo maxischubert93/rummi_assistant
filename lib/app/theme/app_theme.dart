@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rummi_assistant/app/theme/app_typography.dart';
 import 'package:rummi_assistant/app/theme/color_scheme.dart';
+import 'package:rummi_assistant/app/theme/geometry.dart';
 import 'package:rummi_assistant/app/theme/util/context_extension.dart';
 
 class AppTheme extends InheritedWidget {
@@ -14,6 +15,7 @@ class AppTheme extends InheritedWidget {
   final Brightness brightness;
   final AppColorScheme colors;
   late final AppTypography typography = AppTypography(colors);
+  final Geometry geometry = const Geometry();
 
   static AppTheme of(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<AppTheme>();
