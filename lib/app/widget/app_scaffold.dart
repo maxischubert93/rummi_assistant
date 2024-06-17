@@ -14,7 +14,10 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       backgroundColor: context.colors.background,
-      body: body,
+      body: Padding(
+        padding: context.geometry.mediumPadding,
+        child: SafeArea(child: body),
+      ),
     );
   }
 }

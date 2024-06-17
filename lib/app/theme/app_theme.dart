@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rummi_assistant/app/theme/app_colors.dart';
 import 'package:rummi_assistant/app/theme/app_typography.dart';
 import 'package:rummi_assistant/app/theme/color_scheme.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
@@ -50,7 +51,7 @@ class _SystemStyleWrapper extends StatelessWidget {
         systemNavigationBarColor: context.colors.navigationColor,
         systemNavigationBarIconBrightness:
             brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-        statusBarColor: context.colors.navigationColor,
+        statusBarColor: AppColors.transparent,
       ),
       child: child,
     );

@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 class Geometry {
   const Geometry();
 
-  BorderRadius get buttonRadius => BorderRadius.circular(40);
-
   BorderRadius get radiusLarge => BorderRadius.circular(16);
 
   BorderRadius get radiusMedium => BorderRadius.circular(12);
@@ -24,6 +22,11 @@ class Geometry {
   double get spacingDoubleExtraLarge => 40;
 
   double get spacingTripleExtraLarge => 64;
+
+  EdgeInsets get mediumPadding => EdgeInsets.symmetric(
+        vertical: spacingMedium,
+        horizontal: spacingMedium,
+      );
 }
 
 extension WidgetExtension on double {

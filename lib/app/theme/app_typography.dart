@@ -54,18 +54,11 @@ class AppTypography {
         fontWeight: FontWeight.w400,
       );
 
-  TextStyle get subTitleLarge => TextStyle(
+  TextStyle get subtitle => TextStyle(
         color: colors.onBackground,
         fontFamily: textFont,
-        fontSize: 18,
-        fontWeight: FontWeight.w400,
-      );
-
-  TextStyle get subTitle => TextStyle(
-        color: colors.onBackground,
-        fontFamily: textFont,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
       );
 
   TextStyle get bodyLarge => TextStyle(

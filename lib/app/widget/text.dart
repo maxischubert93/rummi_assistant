@@ -5,7 +5,7 @@ class Display extends _BaseText {
   Display(
     super.text, {
     super.singleLine = true,
-    super.textAlign,
+    super.textAlign = TextAlign.center,
     super.color,
     super.key,
   }) : super(style: (context) => context.typography.display);
@@ -49,17 +49,7 @@ class Subtitle extends _BaseText {
     super.textAlign,
     super.color,
     super.key,
-  }) : super(style: (context) => context.typography.subTitle);
-}
-
-class SubtitleLarge extends _BaseText {
-  SubtitleLarge(
-    super.text, {
-    super.singleLine = true,
-    super.textAlign,
-    super.color,
-    super.key,
-  }) : super(style: (context) => context.typography.subTitleLarge);
+  }) : super(style: (context) => context.typography.subtitle);
 }
 
 class Body extends _BaseText {

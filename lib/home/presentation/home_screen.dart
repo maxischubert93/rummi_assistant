@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
 import 'package:rummi_assistant/app/theme/util/context_extension.dart';
 import 'package:rummi_assistant/app/widget/app_scaffold.dart';
+import 'package:rummi_assistant/app/widget/surface.dart';
 import 'package:rummi_assistant/app/widget/text.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,29 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           context.geometry.spacingDoubleExtraLarge.verticalBox,
           Center(
-            child: Display('Rummi Assistant'),
+            child: Display('Rummi Assistant', singleLine: false,),
           ),
           const Spacer(),
-          Container(
-            height: 150,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: context.colors.surface,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ],
-            ),
-          ),
+          const _PlayerSelection(),
           const Spacer(),
           FloatingActionButton(
             backgroundColor: context.colors.primary,
@@ -59,6 +41,24 @@ class _HomeScreenState extends State<HomeScreen> {
             child: const Icon(Icons.add),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _PlayerSelection extends StatelessWidget {
+  const _PlayerSelection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Surface(
+      expand: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Subtitle('Players'),
+          context.geometry.spacingMedium.verticalBox,
+        ]
       ),
     );
   }
