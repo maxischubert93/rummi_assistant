@@ -2,13 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:rummi_assistant/app/theme/app_theme.dart';
+import 'package:rummi_assistant/app/theme/app_typography.dart';
 import 'package:rummi_assistant/app/theme/color_scheme.dart';
 
 extension AppPlatformThemeExtension on AppTheme {
   MaterialAppRouterData get materialAppRouterData {
     final colorSchemeLight = AppColorScheme.light.materialColorScheme;
+    final textTheme = const TextTheme().apply(
+      fontFamily: AppTypography.textFont,
+      displayColor: colors.primary,
+      bodyColor: colors.onBackground,
+    );
+
     final lightTheme = ThemeData(
       colorScheme: colorSchemeLight,
+      textTheme: textTheme,
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: colors.navigationColor,
       ),
@@ -17,6 +25,7 @@ extension AppPlatformThemeExtension on AppTheme {
     final colorSchemeDark = AppColorScheme.dark.materialColorScheme;
     final darkTheme = ThemeData(
       colorScheme: colorSchemeDark,
+      textTheme: textTheme,
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: colors.navigationColor,
       ),
@@ -52,6 +61,13 @@ extension AppPlatformThemeExtension on AppTheme {
       scaffoldBackgroundColor: CupertinoDynamicColor.withBrightness(
         color: lightColorScheme.background,
         darkColor: darkColorScheme.background,
+      ),
+      textTheme: CupertinoTextThemeData(
+        textStyle: TextStyle(
+          fontFamily: AppTypography.textFont,
+          color: lightColorScheme.onBackground,
+        ),
+        primaryColor: primaryColor,
       ),
     );
 

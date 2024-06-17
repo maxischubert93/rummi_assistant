@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rummi_assistant/app/theme/app_typography.dart';
 import 'package:rummi_assistant/app/theme/color_scheme.dart';
 import 'package:rummi_assistant/app/theme/util/context_extension.dart';
 
@@ -12,6 +13,7 @@ class AppTheme extends InheritedWidget {
 
   final Brightness brightness;
   final AppColorScheme colors;
+  late final AppTypography typography = AppTypography(colors);
 
   static AppTheme of(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<AppTheme>();
@@ -44,7 +46,8 @@ class _SystemStyleWrapper extends StatelessWidget {
         statusBarIconBrightness: brightness == Brightness.dark ? Brightness.light : Brightness.dark,
         statusBarBrightness: brightness,
         systemNavigationBarColor: context.colors.navigationColor,
-        systemNavigationBarIconBrightness: brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+        systemNavigationBarIconBrightness:
+            brightness == Brightness.dark ? Brightness.light : Brightness.dark,
         statusBarColor: context.colors.navigationColor,
       ),
       child: child,
