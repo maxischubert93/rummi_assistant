@@ -104,6 +104,8 @@ class _Segment<T extends Object> extends StatelessWidget {
         ? context.colors.segmentedControlTheme.backgroundColorSequence[colorIndex]
         : context.colors.segmentedControlTheme.unselectedBackgroundColor;
 
+    final highlightColor = context.colors.segmentedControlTheme.highlightColorSequence[colorIndex];
+
     final borderRadius = BorderRadius.horizontal(
       left: Radius.circular(segmentIndex == 0 ? 24 : 0),
       right: Radius.circular(isLast ? 24 : 0),
@@ -118,7 +120,7 @@ class _Segment<T extends Object> extends StatelessWidget {
         height: _segmentHeight,
         duration: const Duration(milliseconds: 200),
         child: PlatformClickListener(
-          highlightColor: contentColor,
+          highlightColor: highlightColor,
           border: RoundedRectangleBorder(
             borderRadius: borderRadius,
           ),

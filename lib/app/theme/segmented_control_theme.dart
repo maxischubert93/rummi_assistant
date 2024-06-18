@@ -21,6 +21,12 @@ class SegmentedControlTheme {
         colors.onTertiary,
       ];
 
+  List<Color> get highlightColorSequence => [
+        colors.primaryLight,
+        colors.secondaryLight,
+        colors.tertiaryLight,
+      ];
+
   Color get borderColor => colors.divider;
 
   Color get unselectedBackgroundColor => colors.background;
