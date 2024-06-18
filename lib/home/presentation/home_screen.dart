@@ -22,24 +22,9 @@ class HomeScreen extends StatelessWidget {
           const Spacer(),
           const _PlayerSelection(),
           const Spacer(),
-          Surface(
-            expand: true,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Subtitle('Buttons'),
-                context.geometry.spacingMedium.verticalBox,
-                AppButton.primary(
-                  text: 'Primary Button',
-                  onPressed: () {},
-                  trailingIcon: Assets.icons.chevronRight,
-                ),
-                AppButton.secondary(text: 'Secondary Button', onPressed: () {}),
-                AppButton.tertiary(text: 'Tertiary Button', onPressed: () {}),
-              ],
-            ),
-          ),
+          const _TimerSelection(),
           const Spacer(),
+          AppButton.primary(text: 'Start Game', onPressed: () {}),
         ],
       ),
     );
@@ -73,3 +58,38 @@ class _PlayerSelection extends ConsumerWidget {
     );
   }
 }
+
+class _TimerSelection extends ConsumerWidget {
+  const _TimerSelection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeControllerProvider);
+
+    return Surface(
+      expand: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Subtitle('Timer'),
+          context.geometry.spacingMedium.verticalBox,
+          SegmentedControl<Duration>(
+            segments: {
+              const Duration(minutes: 1): '60',
+              const Duration(minutes: 2): '120',
+            },
+            currentValue: state.timerDuration,
+            onValueChanged: (value) =>
+                ref.read(homeControllerProvider.notifier).setTimerDuration(value),
+            customSegmentText: 'Custom',
+            onCustomSegmentPressed: () {},
+            isCustomSegmentSelected: state.isCustomTimerSelected,
+          ),
+          context.geometry.spacingMedium.verticalBox,
+        ],
+      ),
+    );
+  }
+}
+
+

@@ -11,4 +11,8 @@ class HomeController extends Notifier<HomeScreenState> {
   void setPlayerAmount(int playerAmount) {
     state = state.copyWith(playerAmount: playerAmount);
   }
+
+  void setTimerDuration(Duration timerDuration) {
+    state = state.copyWith(timerDuration: timerDuration);
+  }
 }
