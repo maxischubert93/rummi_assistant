@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rummi_assistant/app/theme/app_button_theme.dart';
 import 'package:rummi_assistant/app/theme/app_colors.dart';
+import 'package:rummi_assistant/app/theme/segmented_control_theme.dart';
 
 @immutable
 abstract class AppColorScheme {
@@ -18,6 +19,8 @@ abstract class AppColorScheme {
   ColorScheme get materialColorScheme;
 
   AppButtonTheme get buttonTheme;
+
+  SegmentedControlTheme get segmentedControlTheme;
 
   Color get primary;
 
@@ -155,4 +158,7 @@ class _LightAppColorScheme implements AppColorScheme {
 
   @override
   AppButtonTheme get buttonTheme => AppButtonTheme(this);
+
+  @override
+  SegmentedControlTheme get segmentedControlTheme => SegmentedControlTheme(this);
 }
