@@ -1,25 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rummi_assistant/app/theme/geometry.dart';
-import 'package:rummi_assistant/app/theme/util/context_extension.dart';
-import 'package:rummi_assistant/app/widget/app_scaffold.dart';
-import 'package:rummi_assistant/app/widget/surface.dart';
-import 'package:rummi_assistant/app/widget/text.dart';
+import 'package:rummi_assistant/app/app.dart';
+import 'package:rummi_assistant/util/assets/assets.gen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +12,14 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           context.geometry.spacingDoubleExtraLarge.verticalBox,
           Center(
-            child: Display('Rummi Assistant', singleLine: false,),
+            child: Display(
+              'Rummi Assistant',
+              singleLine: false,
+            ),
           ),
           const Spacer(),
           const _PlayerSelection(),
           const Spacer(),
-          FloatingActionButton(
-            backgroundColor: context.colors.primary,
-            foregroundColor: context.colors.onPrimary,
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
         ],
       ),
     );
@@ -47,19 +27,23 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _PlayerSelection extends StatelessWidget {
-  const _PlayerSelection({super.key});
+  const _PlayerSelection();
 
   @override
   Widget build(BuildContext context) {
     return Surface(
       expand: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Subtitle('Players'),
-          context.geometry.spacingMedium.verticalBox,
-        ]
-      ),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Subtitle('Buttons'),
+        context.geometry.spacingMedium.verticalBox,
+        AppButton.primary(
+          text: 'Primary Button',
+          onPressed: () {},
+          trailingIcon: Assets.icons.chevronRight,
+        ),
+        AppButton.secondary(text: 'Secondary Button', onPressed: () {}),
+        AppButton.tertiary(text: 'Tertiary Button', onPressed: () {}),
+      ]),
     );
   }
 }

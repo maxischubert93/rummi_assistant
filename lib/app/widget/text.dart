@@ -87,6 +87,8 @@ class Button extends _BaseText {
     super.text, {
     super.color,
     super.key,
+    super.singleLine = true,
+    super.textAlign = TextAlign.center,
   }) : super(style: (context) => context.typography.button);
 }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:rummi_assistant/app/theme/app_button_theme.dart';
 import 'package:rummi_assistant/app/theme/app_colors.dart';
 
 @immutable
@@ -17,17 +17,29 @@ abstract class AppColorScheme {
 
   ColorScheme get materialColorScheme;
 
+  AppButtonTheme get buttonTheme;
+
   Color get primary;
+
+  Color get primaryLight;
 
   Color get onPrimary;
 
   Color get secondary;
 
+  Color get secondaryLight;
+
   Color get onSecondary;
 
   Color get tertiary;
 
+  Color get tertiaryLight;
+
   Color get onTertiary;
+
+  Color get disabled;
+
+  Color get onDisabled;
 
   Color get error;
 
@@ -125,4 +137,22 @@ class _LightAppColorScheme implements AppColorScheme {
 
   @override
   Color get navigationColor => AppColors.grey[300]!;
+
+  @override
+  Color get disabled => AppColors.grey[500]!;
+
+  @override
+  Color get onDisabled => AppColors.black;
+
+  @override
+  Color get primaryLight => AppColors.red[400]!;
+
+  @override
+  Color get secondaryLight => AppColors.blue[400]!;
+
+  @override
+  Color get tertiaryLight => AppColors.orange[400]!;
+
+  @override
+  AppButtonTheme get buttonTheme => AppButtonTheme(this);
 }

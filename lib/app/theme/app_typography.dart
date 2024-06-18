@@ -97,8 +97,8 @@ class AppTypography {
   TextStyle get button => TextStyle(
         color: colors.onBackground,
         fontFamily: textFont,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: FontWeight.w400,
-        height: 1.22,
+        height: 1,
       );
 }
