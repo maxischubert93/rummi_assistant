@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/home/presentation/model/home_controller.dart';
-import 'package:rummi_assistant/util/assets/assets.gen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           const Spacer(),
           const _TimerSelection(),
           const Spacer(),
-          AppButton.primary(text: 'Start Game', onPressed: () {}),
+          AppButton.secondary(text: 'Start Game', onPressed: () => context.push('/timer')),
         ],
       ),
     );
@@ -91,5 +91,3 @@ class _TimerSelection extends ConsumerWidget {
     );
   }
 }
-
-

@@ -14,21 +14,49 @@ extension AppPlatformThemeExtension on AppTheme {
       bodyColor: colors.onBackground,
     );
 
+    final navigationBarTheme = NavigationBarThemeData(
+      backgroundColor: colors.navigation,
+      iconTheme: WidgetStateProperty.resolveWith<IconThemeData>(
+        (states) {
+          if (states.contains(WidgetState.selected)) {
+            return IconThemeData(
+              color: colors.navBarTheme.activeContent,
+            );
+          } else if (states.contains(WidgetState.disabled)) {
+            return IconThemeData(
+              color: colors.navBarTheme.disabled,
+            );
+          } else {
+            return IconThemeData(
+              color: colors.navBarTheme.inactive,
+            );
+          }
+        },
+      ),
+      labelTextStyle: WidgetStateTextStyle.resolveWith((widgetState) {
+        if (widgetState.contains(WidgetState.selected)) {
+          return typography.body.copyWith(
+            color: colors.navBarTheme.active,
+          );
+        } else {
+          return typography.body.copyWith(
+            color: colors.navBarTheme.inactive,
+          );
+        }
+      }),
+    );
+
     final lightTheme = ThemeData(
       colorScheme: colorSchemeLight,
       textTheme: textTheme,
-      navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: colors.navigationColor,
-      ),
+      navigationBarTheme: navigationBarTheme,
     );
 
     final colorSchemeDark = AppColorScheme.dark.materialColorScheme;
     final darkTheme = ThemeData(
       colorScheme: colorSchemeDark,
       textTheme: textTheme,
-      navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: colors.navigationColor,
-      ),
+      navigationBarTheme: navigationBarTheme,
     );
 
     return MaterialAppRouterData(
@@ -50,8 +78,8 @@ extension AppPlatformThemeExtension on AppTheme {
     final theme = CupertinoThemeData(
       brightness: brightness,
       barBackgroundColor: CupertinoDynamicColor.withBrightness(
-        color: lightColorScheme.navigationColor,
-        darkColor: darkColorScheme.navigationColor,
+        color: lightColorScheme.navigation,
+        darkColor: darkColorScheme.navigation,
       ),
       primaryColor: primaryColor,
       primaryContrastingColor: CupertinoDynamicColor.withBrightness(

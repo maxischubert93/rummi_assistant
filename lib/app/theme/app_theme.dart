@@ -48,7 +48,7 @@ class _SystemStyleWrapper extends StatelessWidget {
       value: SystemUiOverlayStyle(
         statusBarIconBrightness: brightness == Brightness.dark ? Brightness.light : Brightness.dark,
         statusBarBrightness: brightness,
-        systemNavigationBarColor: context.colors.navigationColor,
+        systemNavigationBarColor: context.colors.navigation,
         systemNavigationBarIconBrightness:
             brightness == Brightness.dark ? Brightness.light : Brightness.dark,
         statusBarColor: AppColors.transparent,

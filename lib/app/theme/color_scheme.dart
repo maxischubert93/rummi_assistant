@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rummi_assistant/app/theme/app_button_theme.dart';
 import 'package:rummi_assistant/app/theme/app_colors.dart';
+import 'package:rummi_assistant/app/theme/app_nav_bar_theme.dart';
 import 'package:rummi_assistant/app/theme/segmented_control_theme.dart';
 
 @immutable
@@ -22,9 +23,13 @@ abstract class AppColorScheme {
 
   SegmentedControlTheme get segmentedControlTheme;
 
+  AppNavBarTheme get navBarTheme;
+
   Color get primary;
 
   Color get primaryLight;
+
+  Color get primaryLightest;
 
   Color get onPrimary;
 
@@ -60,12 +65,23 @@ abstract class AppColorScheme {
 
   Color get link;
 
-  Color get navigationColor;
+  Color get navigation;
+
+  Color get inactiveNavigation;
 }
 
 @immutable
 class _LightAppColorScheme implements AppColorScheme {
   const _LightAppColorScheme();
+
+  @override
+  AppButtonTheme get buttonTheme => AppButtonTheme(this);
+
+  @override
+  SegmentedControlTheme get segmentedControlTheme => SegmentedControlTheme(this);
+
+  @override
+  AppNavBarTheme get navBarTheme => AppNavBarTheme(this);
 
   @override
   Color get background => AppColors.white;
@@ -139,7 +155,7 @@ class _LightAppColorScheme implements AppColorScheme {
       );
 
   @override
-  Color get navigationColor => AppColors.grey[300]!;
+  Color get navigation => AppColors.grey[300]!;
 
   @override
   Color get disabled => AppColors.grey[500]!;
@@ -157,8 +173,8 @@ class _LightAppColorScheme implements AppColorScheme {
   Color get tertiaryLight => AppColors.orange[400]!;
 
   @override
-  AppButtonTheme get buttonTheme => AppButtonTheme(this);
+  Color get inactiveNavigation => AppColors.grey[800]!;
 
   @override
-  SegmentedControlTheme get segmentedControlTheme => SegmentedControlTheme(this);
+  Color get primaryLightest => AppColors.red[200]!;
 }
