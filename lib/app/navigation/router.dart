@@ -1,7 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rummi_assistant/app/navigation/custom_page/platform_modal_page.dart';
+import 'package:rummi_assistant/app/navigation/route_names.dart';
 import 'package:rummi_assistant/app/widget/bottom_navigation_wrapper.dart';
 import 'package:rummi_assistant/home/presentation/home_screen.dart';
+import 'package:rummi_assistant/home/timer_selection_modal.dart';
 import 'package:rummi_assistant/score/presentation/score_screen.dart';
 import 'package:rummi_assistant/timer/presentation/timer_screen.dart';
 
@@ -14,8 +17,16 @@ GoRouter buildRouter() => GoRouter(
       routes: [
         GoRoute(
           path: '/',
+          name: RouteNames.home,
           builder: (context, state) => const HomeScreen(),
           routes: [
+            GoRoute(
+              path: 'timer-selection',
+              name: RouteNames.customTimerModal,
+              pageBuilder: (context, state) => PlatformModalPage<int>(
+                builder: (_) => const TimerSelectionModal(),
+              ),
+            ),
             StatefulShellRoute.indexedStack(
               parentNavigatorKey: _rootNavigatorKey,
               builder: (_, __, navigationShell) =>
@@ -26,6 +37,7 @@ GoRouter buildRouter() => GoRouter(
                   routes: [
                     GoRoute(
                       path: 'timer',
+                      name: RouteNames.timer,
                       builder: (_, __) => const TimerScreen(),
                     ),
                   ],
@@ -35,6 +47,7 @@ GoRouter buildRouter() => GoRouter(
                   routes: [
                     GoRoute(
                       path: 'score',
+                      name: RouteNames.score,
                       builder: (_, __) => const ScoreScreen(),
                     ),
                   ],

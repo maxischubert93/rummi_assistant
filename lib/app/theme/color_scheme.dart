@@ -145,7 +145,7 @@ class _LightAppColorScheme implements AppColorScheme {
         onSecondaryFixedVariant: AppColors.black,
         tertiary: tertiary,
         onTertiary: onTertiary,
-        surface: surface,
+        surface: background,
         surfaceDim: AppColors.white[600],
         surfaceBright: AppColors.white[200],
         onSurface: onSurface,
