@@ -1,15 +1,61 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:go_router/go_router.dart';
+import 'package:rummi_assistant/app/app.dart';
 
-class TimerSelectionModal extends StatelessWidget {
+class TimerSelectionModal extends StatefulWidget {
   const TimerSelectionModal({super.key});
 
   @override
+  State<TimerSelectionModal> createState() => _TimerSelectionModalState();
+}
+
+class _TimerSelectionModalState extends State<TimerSelectionModal> {
+  String? _timerDuration;
+
+  @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 200,
-      child: Center(
-        child: Text('Select custom timer duration'),
-      ),
+    return Column(
+      children: [
+        Subtitle('Select timer duration in seconds'),
+        context.geometry.spacingLarge.verticalBox,
+        SizedBox(
+          width: 80,
+          height: 50,
+          child: PlatformTextField(
+            onChanged: (value) => _timerDuration = value,
+            onSubmitted: (value) => context.pop<String?>(value),
+            maxLength: 3,
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            style: context.typography.bodyLarge,
+            cursorColor: context.colors.secondary,
+            textInputAction: TextInputAction.done,
+            hintText: 'Timer duration',
+            material: (_, __) => MaterialTextFieldData(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            cupertino: (_, __) => CupertinoTextFieldData(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: context.colors.divider,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
+        ),
+        context.geometry.spacingLarge.verticalBox,
+        AppButton.secondary(
+          text: 'Set timer',
+          onPressed: () => context.pop<String?>(_timerDuration),
+        ),
+        context.geometry.spacingMedium.verticalBox,
+      ],
     );
   }
 }

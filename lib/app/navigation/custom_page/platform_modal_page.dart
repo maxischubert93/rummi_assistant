@@ -45,37 +45,36 @@ class _ModalContainer extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            color: context.colors.background,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
+      child: Container(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom,),
+        decoration: BoxDecoration(
+          color: context.colors.background,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
           ),
-          child: LayoutBuilder(
-            builder: (_, constraints) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                geometry.spacingMedium.verticalBox,
-                const _Handlebar(),
-                geometry.spacingExtraLarge.verticalBox,
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: constraints.maxHeight -
-                        geometry.spacingMedium -
-                        geometry.spacingExtraLarge -
-                        4,
-                  ),
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(horizontal: geometry.spacingMedium),
-                    controller: ModalScrollController.of(context),
-                    child: child,
-                  ),
+        ),
+        child: LayoutBuilder(
+          builder: (_, constraints) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              geometry.spacingMedium.verticalBox,
+              const _Handlebar(),
+              geometry.spacingExtraLarge.verticalBox,
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: constraints.maxHeight -
+                      geometry.spacingMedium -
+                      geometry.spacingExtraLarge -
+                      4,
                 ),
-              ],
-            ),
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: geometry.spacingMedium),
+                  controller: ModalScrollController.of(context),
+                  child: child,
+                ),
+              ),
+            ],
           ),
         ),
       ),

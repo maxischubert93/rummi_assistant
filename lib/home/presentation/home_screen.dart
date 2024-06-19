@@ -81,10 +81,9 @@ class _TimerSelection extends ConsumerWidget {
             currentValue: state.timerDuration,
             onValueChanged: (value) =>
                 ref.read(homeControllerProvider.notifier).setTimerDuration(value),
-            customSegmentText: 'Custom',
-            onCustomSegmentPressed: () {
-              context.pushNamed(RouteNames.customTimerModal);
-            },
+            customSegmentText: state.customTimerDuration ?? 'Custom',
+            onCustomSegmentPressed: () =>
+                ref.read(homeControllerProvider.notifier).showTimerSelection(),
             isCustomSegmentSelected: state.isCustomTimerSelected,
           ),
           context.geometry.spacingMedium.verticalBox,

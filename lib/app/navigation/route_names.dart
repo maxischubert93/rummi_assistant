@@ -2,5 +2,5 @@ class RouteNames {
   static const home = 'home';
   static const timer = 'timer';
   static const score = 'score';
-  static const customTimerModal = 'custom-timer-modal';
+  static const timerModal = 'timer-modal';
 }

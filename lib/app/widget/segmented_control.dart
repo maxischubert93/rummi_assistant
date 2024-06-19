@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rummi_assistant/app/app.dart';
-import 'package:rummi_assistant/app/widget/platform_click_listener.dart';
 
 const double _segmentHeight = 48;
 
@@ -46,7 +45,7 @@ class SegmentedControl<T extends Object> extends StatelessWidget {
         ),
         children: [
           ...segments.entries.mapIndexed((index, entry) {
-            final isSelected = entry.key == currentValue;
+            final isSelected = entry.key == currentValue && !isCustomSegmentSelected;
             return _Segment<T>(
               text: entry.value,
               isSelected: isSelected,
@@ -62,7 +61,7 @@ class SegmentedControl<T extends Object> extends StatelessWidget {
           if (hasCustomSegment)
             _Segment<T>(
               text: customSegmentText!,
-              isSelected: false,
+              isSelected: isCustomSegmentSelected,
               value: null,
               onTap: (_) => onCustomSegmentPressed!.call(),
               segmentIndex: segments.length,

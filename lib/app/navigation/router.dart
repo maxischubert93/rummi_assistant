@@ -22,8 +22,8 @@ GoRouter buildRouter() => GoRouter(
           routes: [
             GoRoute(
               path: 'timer-selection',
-              name: RouteNames.customTimerModal,
-              pageBuilder: (context, state) => PlatformModalPage<int>(
+              name: RouteNames.timerModal,
+              pageBuilder: (context, state) => PlatformModalPage<String?>(
                 builder: (_) => const TimerSelectionModal(),
               ),
             ),
