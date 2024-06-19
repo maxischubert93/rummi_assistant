@@ -15,27 +15,29 @@ GoRouter buildRouter() => GoRouter(
         GoRoute(
           path: '/',
           builder: (context, state) => const HomeScreen(),
-        ),
-        StatefulShellRoute.indexedStack(
-          parentNavigatorKey: _rootNavigatorKey,
-          builder: (_, __, navigationShell) =>
-              BottomNavigationWrapper(navigationShell: navigationShell),
-          branches: [
-            StatefulShellBranch(
-              navigatorKey: _timerTabNavigatorKey,
-              routes: [
-                GoRoute(
-                  path: '/timer',
-                  builder: (_, __) => const TimerScreen(),
+          routes: [
+            StatefulShellRoute.indexedStack(
+              parentNavigatorKey: _rootNavigatorKey,
+              builder: (_, __, navigationShell) =>
+                  BottomNavigationWrapper(navigationShell: navigationShell),
+              branches: [
+                StatefulShellBranch(
+                  navigatorKey: _timerTabNavigatorKey,
+                  routes: [
+                    GoRoute(
+                      path: 'timer',
+                      builder: (_, __) => const TimerScreen(),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            StatefulShellBranch(
-              navigatorKey: _scoreTabNavigatorKey,
-              routes: [
-                GoRoute(
-                  path: '/score',
-                  builder: (_, __) => const ScoreScreen(),
+                StatefulShellBranch(
+                  navigatorKey: _scoreTabNavigatorKey,
+                  routes: [
+                    GoRoute(
+                      path: 'score',
+                      builder: (_, __) => const ScoreScreen(),
+                    ),
+                  ],
                 ),
               ],
             ),
