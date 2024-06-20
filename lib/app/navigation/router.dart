@@ -5,8 +5,8 @@ import 'package:rummi_assistant/app/navigation/route_names.dart';
 import 'package:rummi_assistant/app/widget/bottom_navigation_wrapper.dart';
 import 'package:rummi_assistant/home/presentation/home_screen.dart';
 import 'package:rummi_assistant/home/timer_selection_modal.dart';
-import 'package:rummi_assistant/score/presentation/score_screen.dart';
-import 'package:rummi_assistant/timer/presentation/timer_screen.dart';
+import 'package:rummi_assistant/in_game/presentation/score_screen.dart';
+import 'package:rummi_assistant/in_game/presentation/timer_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _timerTabNavigatorKey = GlobalKey<NavigatorState>();
