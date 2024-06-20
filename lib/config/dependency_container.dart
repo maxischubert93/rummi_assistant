@@ -1,27 +1,34 @@
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rummi_assistant/app/navigation/router.dart';
+import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/core/data/store/database.dart';
+import 'package:rummi_assistant/core/data/store/game_store.dart';
+import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
 
 late PackageInfo packageInfo;
 
 Future<void> prepareApp() async {
   final container = GetIt.instance;
   packageInfo = await PackageInfo.fromPlatform();
-  _registerStores(container);
+  await _registerStores(container);
   //await _setupLogging(container);
-  _registerServices(container);
   await _registerManagers(container);
   _registerNavigation(container);
   _registerInteractors(container);
 }
 
-void _registerServices(GetIt container) {}
-
-void _registerStores(GetIt container) {}
+Future<void> _registerStores(GetIt container) async {
+  container
+    ..registerSingleton(await DatabaseBuilder.openDatabase())
+    ..registerFactory<GameRepository>(GameStore.new);
+}
 
 void _registerInteractors(GetIt container) {}
 
-Future<void> _registerManagers(GetIt container) async {}
+Future<void> _registerManagers(GetIt container) async {
+  container.registerSingleton(GameManager());
+}
 
 /*Future<void> _setupLogging(GetIt container) async {
   configureLogger(

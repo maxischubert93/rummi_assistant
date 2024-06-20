@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:rummi_assistant/app/theme/component_styles/app_button_style.dart';
-import 'package:rummi_assistant/app/theme/geometry.dart';
-import 'package:rummi_assistant/app/theme/util/context_extension.dart';
-import 'package:rummi_assistant/app/widget/text.dart';
+import 'package:rummi_assistant/app/app.dart';
+import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/util/assets/assets.gen.dart';
 import 'package:rummi_assistant/util/extension/svg.dart';
 

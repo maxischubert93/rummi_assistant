@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TimerState {
-  Duration get timeLeft => throw _privateConstructorUsedError;
+  int get secondsPassed => throw _privateConstructorUsedError;
+  Duration get timerDuration => throw _privateConstructorUsedError;
   bool get isRunning => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $TimerStateCopyWith<$Res> {
           TimerState value, $Res Function(TimerState) then) =
       _$TimerStateCopyWithImpl<$Res, TimerState>;
   @useResult
-  $Res call({Duration timeLeft, bool isRunning});
+  $Res call({int secondsPassed, Duration timerDuration, bool isRunning});
 }
 
 /// @nodoc
@@ -46,13 +47,18 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timeLeft = null,
+    Object? secondsPassed = null,
+    Object? timerDuration = null,
     Object? isRunning = null,
   }) {
     return _then(_value.copyWith(
-      timeLeft: null == timeLeft
-          ? _value.timeLeft
-          : timeLeft // ignore: cast_nullable_to_non_nullable
+      secondsPassed: null == secondsPassed
+          ? _value.secondsPassed
+          : secondsPassed // ignore: cast_nullable_to_non_nullable
+              as int,
+      timerDuration: null == timerDuration
+          ? _value.timerDuration
+          : timerDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
       isRunning: null == isRunning
           ? _value.isRunning
@@ -70,7 +76,7 @@ abstract class _$$TimerStateImplCopyWith<$Res>
       __$$TimerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Duration timeLeft, bool isRunning});
+  $Res call({int secondsPassed, Duration timerDuration, bool isRunning});
 }
 
 /// @nodoc
@@ -84,13 +90,18 @@ class __$$TimerStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timeLeft = null,
+    Object? secondsPassed = null,
+    Object? timerDuration = null,
     Object? isRunning = null,
   }) {
     return _then(_$TimerStateImpl(
-      timeLeft: null == timeLeft
-          ? _value.timeLeft
-          : timeLeft // ignore: cast_nullable_to_non_nullable
+      secondsPassed: null == secondsPassed
+          ? _value.secondsPassed
+          : secondsPassed // ignore: cast_nullable_to_non_nullable
+              as int,
+      timerDuration: null == timerDuration
+          ? _value.timerDuration
+          : timerDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
       isRunning: null == isRunning
           ? _value.isRunning
@@ -103,17 +114,22 @@ class __$$TimerStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimerStateImpl extends _TimerState {
-  const _$TimerStateImpl({required this.timeLeft, required this.isRunning})
+  const _$TimerStateImpl(
+      {required this.secondsPassed,
+      required this.timerDuration,
+      required this.isRunning})
       : super._();
 
   @override
-  final Duration timeLeft;
+  final int secondsPassed;
+  @override
+  final Duration timerDuration;
   @override
   final bool isRunning;
 
   @override
   String toString() {
-    return 'TimerState(timeLeft: $timeLeft, isRunning: $isRunning)';
+    return 'TimerState(secondsPassed: $secondsPassed, timerDuration: $timerDuration, isRunning: $isRunning)';
   }
 
   @override
@@ -121,14 +137,17 @@ class _$TimerStateImpl extends _TimerState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TimerStateImpl &&
-            (identical(other.timeLeft, timeLeft) ||
-                other.timeLeft == timeLeft) &&
+            (identical(other.secondsPassed, secondsPassed) ||
+                other.secondsPassed == secondsPassed) &&
+            (identical(other.timerDuration, timerDuration) ||
+                other.timerDuration == timerDuration) &&
             (identical(other.isRunning, isRunning) ||
                 other.isRunning == isRunning));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, timeLeft, isRunning);
+  int get hashCode =>
+      Object.hash(runtimeType, secondsPassed, timerDuration, isRunning);
 
   @JsonKey(ignore: true)
   @override
@@ -139,12 +158,15 @@ class _$TimerStateImpl extends _TimerState {
 
 abstract class _TimerState extends TimerState {
   const factory _TimerState(
-      {required final Duration timeLeft,
+      {required final int secondsPassed,
+      required final Duration timerDuration,
       required final bool isRunning}) = _$TimerStateImpl;
   const _TimerState._() : super._();
 
   @override
-  Duration get timeLeft;
+  int get secondsPassed;
+  @override
+  Duration get timerDuration;
   @override
   bool get isRunning;
   @override

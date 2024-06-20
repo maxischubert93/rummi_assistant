@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rummi_assistant/app/theme/util/context_extension.dart';
+import 'package:rummi_assistant/core/extension/context_extension.dart';
 
 class Display extends _BaseText {
   Display(

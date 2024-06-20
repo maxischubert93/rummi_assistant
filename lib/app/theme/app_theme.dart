@@ -4,7 +4,7 @@ import 'package:rummi_assistant/app/theme/app_colors.dart';
 import 'package:rummi_assistant/app/theme/app_typography.dart';
 import 'package:rummi_assistant/app/theme/color_scheme.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
-import 'package:rummi_assistant/app/theme/util/context_extension.dart';
+import 'package:rummi_assistant/core/extension/context_extension.dart';
 
 class AppTheme extends InheritedWidget {
   AppTheme({

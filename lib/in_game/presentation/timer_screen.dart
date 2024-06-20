@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rummi_assistant/app/app.dart';
-import 'package:rummi_assistant/in_game/model/timer_controller.dart';
+import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/in_game/presentation/controller/timer_controller.dart';
 
 class TimerScreen extends ConsumerWidget {
   const TimerScreen({super.key});

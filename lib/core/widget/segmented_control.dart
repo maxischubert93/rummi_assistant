@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rummi_assistant/app/app.dart';
+import 'package:rummi_assistant/core/core.dart';
 
 const double _segmentHeight = 48;
 

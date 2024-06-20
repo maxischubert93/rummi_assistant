@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
-import 'package:rummi_assistant/home/presentation/model/home_controller.dart';
+import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/home/presentation/controller/home_controller.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       body: Column(
         children: [
@@ -24,7 +24,10 @@ class HomeScreen extends StatelessWidget {
           const Spacer(),
           const _TimerSelection(),
           const Spacer(),
-          AppButton.secondary(text: 'Start Game', onPressed: () => context.push('/timer')),
+          AppButton.secondary(
+            text: 'Start Game',
+            onPressed: () => ref.read(homeControllerProvider.notifier).newGame(),
+          ),
         ],
       ),
     );

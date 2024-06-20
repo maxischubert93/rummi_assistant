@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/app/app.dart';
+import 'package:rummi_assistant/core/core.dart';
 
 class BottomNavigationWrapper extends StatelessWidget {
   const BottomNavigationWrapper({
