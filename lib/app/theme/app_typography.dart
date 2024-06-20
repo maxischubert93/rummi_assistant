@@ -84,7 +84,6 @@ class AppTypography {
         color: colors.onBackground,
       );
 
-
   TextStyle get label => TextStyle(
         color: colors.onBackground,
         fontFamily: textFont,
@@ -100,5 +99,13 @@ class AppTypography {
         fontSize: 18,
         fontWeight: FontWeight.w400,
         height: 1,
+      );
+
+  TextStyle get timer => TextStyle(
+        color: colors.onPrimary,
+        fontFamily: textFont,
+        fontSize: 80,
+        fontWeight: FontWeight.w700,
+        height: 1.5,
       );
 }

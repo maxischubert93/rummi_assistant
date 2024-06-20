@@ -5,9 +5,9 @@ import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/home/presentation/model/home_screen_state.dart';
 
 final homeControllerProvider =
-    NotifierProvider<HomeController, HomeScreenState>(HomeController.new);
+    AutoDisposeNotifierProvider<HomeController, HomeScreenState>(HomeController.new);
 
-class HomeController extends Notifier<HomeScreenState> {
+class HomeController extends AutoDisposeNotifier<HomeScreenState> {
   late final GoRouter _router = GetIt.instance.get();
 
   @override
