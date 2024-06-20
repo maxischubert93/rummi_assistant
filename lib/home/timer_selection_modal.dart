@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
@@ -22,7 +24,7 @@ class _TimerSelectionModalState extends State<TimerSelectionModal> {
         SizedBox(
           width: 80,
           height: 50,
-          child: PlatformTextField(
+          child: CupertinoTextField(
             onChanged: (value) => _timerDuration = value,
             onSubmitted: (value) => context.pop<String?>(value),
             maxLength: 3,
@@ -31,21 +33,12 @@ class _TimerSelectionModalState extends State<TimerSelectionModal> {
             style: context.typography.bodyLarge,
             cursorColor: context.colors.secondary,
             textInputAction: TextInputAction.done,
-            hintText: 'Timer duration',
-            material: (_, __) => MaterialTextFieldData(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+            placeholder: 'Timer duration',
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: context.colors.divider,
               ),
-            ),
-            cupertino: (_, __) => CupertinoTextFieldData(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: context.colors.divider,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
         ),
