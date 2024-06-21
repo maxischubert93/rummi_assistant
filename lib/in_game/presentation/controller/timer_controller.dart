@@ -17,15 +17,16 @@ class TimerController extends StateNotifier<TimerState> {
     });
   }
 
+  static const int _timerInterval = 50;
   late final GameManager _gameManager = GetIt.instance.get();
   StreamSubscription<Game?>? _gameSubscription;
 
   Timer? _timer;
 
   void start() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (state.secondsPassed < state.timerDuration.inSeconds) {
-        state = state.copyWith(secondsPassed: state.secondsPassed + 1);
+    _timer = Timer.periodic(const Duration(milliseconds: _timerInterval), (_) {
+      if (state.millisPassed < state.timerDuration.inMilliseconds) {
+        state = state.copyWith(millisPassed: state.millisPassed + _timerInterval);
       } else {
         _timer?.cancel();
         state = state.copyWith(isRunning: false);
@@ -41,7 +42,7 @@ class TimerController extends StateNotifier<TimerState> {
 
   void reset() {
     _timer?.cancel();
-    state = state.copyWith(secondsPassed: 0);
+    state = state.copyWith(millisPassed: 0);
     start();
   }
 

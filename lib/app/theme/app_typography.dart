@@ -106,6 +106,7 @@ class AppTypography {
         fontFamily: textFont,
         fontSize: 80,
         fontWeight: FontWeight.w700,
-        height: 1.5,
+        height: 1.01,
+        leadingDistribution: TextLeadingDistribution.even,
       );
 }

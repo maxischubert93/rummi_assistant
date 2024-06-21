@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:rummi_assistant/app/theme/app_colors.dart';
 import 'package:rummi_assistant/app/theme/app_typography.dart';
 import 'package:rummi_assistant/app/theme/color_scheme.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
-import 'package:rummi_assistant/core/extension/context_extension.dart';
 
 class AppTheme extends InheritedWidget {
   AppTheme({
@@ -28,32 +25,4 @@ class AppTheme extends InheritedWidget {
 
   @override
   bool updateShouldNotify(AppTheme oldWidget) => oldWidget.brightness != brightness;
-
-  @override
-  Widget get child => _SystemStyleWrapper(child: super.child);
-}
-
-class _SystemStyleWrapper extends StatelessWidget {
-  const _SystemStyleWrapper({
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final brightness = AppTheme.of(context).brightness;
-
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
-        statusBarIconBrightness: brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-        statusBarBrightness: brightness,
-        systemNavigationBarColor: context.colors.navigation,
-        systemNavigationBarIconBrightness:
-            brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-        statusBarColor: AppColors.transparent,
-      ),
-      child: child,
-    );
-  }
 }

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TimerState {
-  int get secondsPassed => throw _privateConstructorUsedError;
+  int get millisPassed => throw _privateConstructorUsedError;
   Duration get timerDuration => throw _privateConstructorUsedError;
   bool get isRunning => throw _privateConstructorUsedError;
 
@@ -31,7 +31,7 @@ abstract class $TimerStateCopyWith<$Res> {
           TimerState value, $Res Function(TimerState) then) =
       _$TimerStateCopyWithImpl<$Res, TimerState>;
   @useResult
-  $Res call({int secondsPassed, Duration timerDuration, bool isRunning});
+  $Res call({int millisPassed, Duration timerDuration, bool isRunning});
 }
 
 /// @nodoc
@@ -47,14 +47,14 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? secondsPassed = null,
+    Object? millisPassed = null,
     Object? timerDuration = null,
     Object? isRunning = null,
   }) {
     return _then(_value.copyWith(
-      secondsPassed: null == secondsPassed
-          ? _value.secondsPassed
-          : secondsPassed // ignore: cast_nullable_to_non_nullable
+      millisPassed: null == millisPassed
+          ? _value.millisPassed
+          : millisPassed // ignore: cast_nullable_to_non_nullable
               as int,
       timerDuration: null == timerDuration
           ? _value.timerDuration
@@ -76,7 +76,7 @@ abstract class _$$TimerStateImplCopyWith<$Res>
       __$$TimerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int secondsPassed, Duration timerDuration, bool isRunning});
+  $Res call({int millisPassed, Duration timerDuration, bool isRunning});
 }
 
 /// @nodoc
@@ -90,14 +90,14 @@ class __$$TimerStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? secondsPassed = null,
+    Object? millisPassed = null,
     Object? timerDuration = null,
     Object? isRunning = null,
   }) {
     return _then(_$TimerStateImpl(
-      secondsPassed: null == secondsPassed
-          ? _value.secondsPassed
-          : secondsPassed // ignore: cast_nullable_to_non_nullable
+      millisPassed: null == millisPassed
+          ? _value.millisPassed
+          : millisPassed // ignore: cast_nullable_to_non_nullable
               as int,
       timerDuration: null == timerDuration
           ? _value.timerDuration
@@ -115,13 +115,13 @@ class __$$TimerStateImplCopyWithImpl<$Res>
 
 class _$TimerStateImpl extends _TimerState {
   const _$TimerStateImpl(
-      {required this.secondsPassed,
+      {required this.millisPassed,
       required this.timerDuration,
       required this.isRunning})
       : super._();
 
   @override
-  final int secondsPassed;
+  final int millisPassed;
   @override
   final Duration timerDuration;
   @override
@@ -129,7 +129,7 @@ class _$TimerStateImpl extends _TimerState {
 
   @override
   String toString() {
-    return 'TimerState(secondsPassed: $secondsPassed, timerDuration: $timerDuration, isRunning: $isRunning)';
+    return 'TimerState(millisPassed: $millisPassed, timerDuration: $timerDuration, isRunning: $isRunning)';
   }
 
   @override
@@ -137,8 +137,8 @@ class _$TimerStateImpl extends _TimerState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TimerStateImpl &&
-            (identical(other.secondsPassed, secondsPassed) ||
-                other.secondsPassed == secondsPassed) &&
+            (identical(other.millisPassed, millisPassed) ||
+                other.millisPassed == millisPassed) &&
             (identical(other.timerDuration, timerDuration) ||
                 other.timerDuration == timerDuration) &&
             (identical(other.isRunning, isRunning) ||
@@ -147,7 +147,7 @@ class _$TimerStateImpl extends _TimerState {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, secondsPassed, timerDuration, isRunning);
+      Object.hash(runtimeType, millisPassed, timerDuration, isRunning);
 
   @JsonKey(ignore: true)
   @override
@@ -158,13 +158,13 @@ class _$TimerStateImpl extends _TimerState {
 
 abstract class _TimerState extends TimerState {
   const factory _TimerState(
-      {required final int secondsPassed,
+      {required final int millisPassed,
       required final Duration timerDuration,
       required final bool isRunning}) = _$TimerStateImpl;
   const _TimerState._() : super._();
 
   @override
-  int get secondsPassed;
+  int get millisPassed;
   @override
   Duration get timerDuration;
   @override
