@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/app/theme/app_colors.dart';
@@ -18,7 +19,7 @@ class TimerScreen extends ConsumerWidget {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          color: AppColors.red[900],
+          color: context.colors.backgroundDark,
           child: const _Timer(),
         ),
       ),
@@ -26,14 +27,25 @@ class TimerScreen extends ConsumerWidget {
   }
 }
 
-class _Timer extends ConsumerWidget {
+class _Timer extends ConsumerStatefulWidget {
   const _Timer();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_Timer> createState() => _TimerState();
+}
+
+class _TimerState extends ConsumerState<_Timer> {
+  final group = AutoSizeGroup();
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(timerControllerProvider);
-    final screenWidth = MediaQuery.sizeOf(context).width;
-    final screenHeight = MediaQuery.sizeOf(context).height;
+    final screenWidth = MediaQuery
+        .sizeOf(context)
+        .width;
+    final screenHeight = MediaQuery
+        .sizeOf(context)
+        .height;
 
     final isPortrait = screenWidth < screenHeight;
     final padding = switch (isPortrait) {
@@ -46,21 +58,29 @@ class _Timer extends ConsumerWidget {
       false => screenHeight - padding * 2,
     };
 
+    final _timerFont = context.typography.timer.copyWith(fontSize: 300);
+
     return Center(
       child: SizedBox(
         width: dimension,
         height: dimension,
         child: Stack(
           children: [
-            Positioned.fill(
-              child: Padding(
-                padding: EdgeInsets.all(context.geometry.spacingDoubleExtraLarge),
-                child: FittedBox(
-                  child: Text(
-                    state.timerText,
-                    style: context.typography.timer,
-                    textAlign: TextAlign.center,
-                  ),
+            _TextContainer(
+              child: AutoSizeText(
+                state.timerText,
+                style: _timerFont,
+                group: group,
+              ),
+            ),
+            _TextContainer(
+              child: Visibility.maintain(
+                visible: false,
+                child: AutoSizeText(
+                  '123',
+                  textAlign: TextAlign.center,
+                  style: _timerFont,
+                  group: group,
                 ),
               ),
             ),
@@ -74,6 +94,23 @@ class _Timer extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _TextContainer extends StatelessWidget {
+  const _TextContainer({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: Container(
+        padding: EdgeInsets.all(context.geometry.spacingDoubleExtraLarge),
+        alignment: Alignment.center,
+        child: child,
       ),
     );
   }

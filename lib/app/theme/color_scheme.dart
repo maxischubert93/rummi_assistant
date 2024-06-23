@@ -59,6 +59,8 @@ abstract class AppColorScheme {
 
   Color get background;
 
+  Color get backgroundDark;
+
   Color get onBackground;
 
   Color get divider;
@@ -177,4 +179,7 @@ class _LightAppColorScheme implements AppColorScheme {
 
   @override
   Color get primaryLightest => AppColors.red[200]!;
+
+  @override
+  Color get backgroundDark => AppColors.red[900]!;
 }
