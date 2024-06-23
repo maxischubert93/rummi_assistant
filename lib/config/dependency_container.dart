@@ -5,6 +5,8 @@ import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/data/store/database.dart';
 import 'package:rummi_assistant/core/data/store/game_store.dart';
 import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
+import 'package:rummi_assistant/in_game/domain/timer_alert_player.dart';
+import 'package:rummi_assistant/in_game/service/audio_service.dart';
 
 late PackageInfo packageInfo;
 
@@ -14,6 +16,7 @@ Future<void> prepareApp() async {
   await _registerStores(container);
   //await _setupLogging(container);
   await _registerManagers(container);
+  _registerServices(container);
   _registerNavigation(container);
   _registerInteractors(container);
 }
@@ -28,6 +31,10 @@ void _registerInteractors(GetIt container) {}
 
 Future<void> _registerManagers(GetIt container) async {
   container.registerSingleton(GameManager());
+}
+
+void _registerServices(GetIt container) {
+  container.registerFactory<TimerAlertPlayer>(AudioService.new);
 }
 
 /*Future<void> _setupLogging(GetIt container) async {

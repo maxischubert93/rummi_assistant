@@ -58,7 +58,7 @@ class _TimerState extends ConsumerState<_Timer> {
       false => screenHeight - padding * 2,
     };
 
-    final _timerFont = context.typography.timer.copyWith(fontSize: 300);
+    final timerFont = context.typography.timer.copyWith(fontSize: 300);
 
     return Center(
       child: SizedBox(
@@ -69,7 +69,7 @@ class _TimerState extends ConsumerState<_Timer> {
             _TextContainer(
               child: AutoSizeText(
                 state.timerText,
-                style: _timerFont,
+                style: timerFont,
                 group: group,
               ),
             ),
@@ -79,7 +79,7 @@ class _TimerState extends ConsumerState<_Timer> {
                 child: AutoSizeText(
                   '123',
                   textAlign: TextAlign.center,
-                  style: _timerFont,
+                  style: timerFont,
                   group: group,
                 ),
               ),

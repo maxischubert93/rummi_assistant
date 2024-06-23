@@ -30,10 +30,21 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [chevronDown, chevronRight, chevronUp];
 }
 
+class $AssetsSoundsGen {
+  const $AssetsSoundsGen();
+
+  /// File path: assets/sounds/timer_alert.mp3
+  String get timerAlert => 'assets/sounds/timer_alert.mp3';
+
+  /// List of all assets
+  List<String> get values => [timerAlert];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsSoundsGen sounds = $AssetsSoundsGen();
 }
 
 class SvgGenImage {
