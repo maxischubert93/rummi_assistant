@@ -20,7 +20,7 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
-        statusBarIconBrightness: statusBarBrightness,
+        statusBarIconBrightness: statusBarBrightness.androidValue,
         statusBarBrightness: statusBarBrightness,
         systemNavigationBarColor: context.colors.navigation,
         systemNavigationBarIconBrightness: Brightness.dark,
@@ -38,4 +38,11 @@ class AppScaffold extends StatelessWidget {
       ),
     );
   }
+}
+
+extension _BrightnessAndroid on Brightness {
+  Brightness get androidValue => switch (this) {
+        Brightness.light => Brightness.dark,
+        Brightness.dark => Brightness.light,
+      };
 }

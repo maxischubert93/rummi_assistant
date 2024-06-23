@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/l10n/l10n.dart';
 
 class TimerSelectionModal extends StatefulWidget {
   const TimerSelectionModal({super.key});
@@ -17,7 +18,7 @@ class _TimerSelectionModalState extends State<TimerSelectionModal> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Subtitle('Select timer duration in seconds'),
+        Subtitle(context.localizations.timerSelectionModalTitle),
         context.geometry.spacingLarge.verticalBox,
         SizedBox(
           width: 80,
@@ -31,7 +32,7 @@ class _TimerSelectionModalState extends State<TimerSelectionModal> {
             style: context.typography.bodyLarge,
             cursorColor: context.colors.secondary,
             textInputAction: TextInputAction.done,
-            placeholder: 'Timer duration',
+            placeholder: context.localizations.timerSelectionModalTextFieldPlaceHolder,
             decoration: BoxDecoration(
               border: Border.all(
                 color: context.colors.divider,
@@ -42,7 +43,7 @@ class _TimerSelectionModalState extends State<TimerSelectionModal> {
         ),
         context.geometry.spacingLarge.verticalBox,
         AppButton.secondary(
-          text: 'Set timer',
+          text: context.localizations.timerSelectionModalButton,
           onPressed: () => context.pop<String?>(_timerDuration),
         ),
         context.geometry.spacingMedium.verticalBox,

@@ -1,0 +1,11 @@
+{
+  "appName": "Rummi Assistant",
+  "homeStartGameButton": "Start game",
+  "homePlayerSection": "Players",
+  "homePlayerAmountSegment": "{amount} players",
+  "homeTimerSection": "Timer",
+  "homeCustomTimerSegment": "Custom",
+  "timerSelectionModalTitle": "Select timer duration in seconds",
+  "timerSelectionModalTextFieldPlaceHolder": "Timer duration",
+  "timerSelectionModalButton": "Set timer"
+}

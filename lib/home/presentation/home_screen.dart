@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/home/presentation/controller/home_controller.dart';
+import 'package:rummi_assistant/l10n/l10n.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -15,7 +16,7 @@ class HomeScreen extends ConsumerWidget {
           context.geometry.spacingDoubleExtraLarge.verticalBox,
           Center(
             child: Display(
-              'Rummi Assistant',
+              context.localizations.appName,
               singleLine: false,
             ),
           ),
@@ -25,7 +26,7 @@ class HomeScreen extends ConsumerWidget {
           const _TimerSelection(),
           const Spacer(),
           AppButton.secondary(
-            text: 'Start Game',
+            text: context.localizations.homeStartGameButton,
             onPressed: () => ref.read(homeControllerProvider.notifier).newGame(),
           ),
         ],
@@ -44,13 +45,13 @@ class _PlayerSelection extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Subtitle('Players'),
+          Subtitle(context.localizations.homePlayerSection),
           context.geometry.spacingMedium.verticalBox,
           SegmentedControl<int>(
-            segments: const {
-              2: '2 Players',
-              3: '3 Players',
-              4: '4 Players',
+            segments: {
+              2: context.localizations.homePlayerAmountSegment(2),
+              3: context.localizations.homePlayerAmountSegment(3),
+              4: context.localizations.homePlayerAmountSegment(4),
             },
             currentValue: ref.watch(homeControllerProvider).playerAmount,
             onValueChanged: (value) =>
@@ -74,7 +75,7 @@ class _TimerSelection extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Subtitle('Timer'),
+          Subtitle(context.localizations.homeTimerSection),
           context.geometry.spacingMedium.verticalBox,
           SegmentedControl<Duration>(
             segments: {
@@ -84,7 +85,8 @@ class _TimerSelection extends ConsumerWidget {
             currentValue: state.timerDuration,
             onValueChanged: (value) =>
                 ref.read(homeControllerProvider.notifier).setTimerDuration(value),
-            customSegmentText: state.customTimerDuration ?? 'Custom',
+            customSegmentText:
+                state.customTimerDuration ?? context.localizations.homeCustomTimerSegment,
             onCustomSegmentPressed: () =>
                 ref.read(homeControllerProvider.notifier).showTimerSelection(),
             isCustomSegmentSelected: state.isCustomTimerSelected,
