@@ -14,4 +14,31 @@ class ScoreState with _$ScoreState {
       );
 
   const ScoreState._();
+
+  int get maxScoreRowCount {
+    return players.map((player) => player.scores.length).reduce(
+          (value, element) => value > element ? value : element,
+        );
+  }
+
+  List<TotalPlayerScore> get totalPlayerScores {
+    final minScore = players.map((player) => player.totalScore).reduce(
+          (value, element) => value < element ? value : element,
+        );
+    return players.map((player) {
+      final totalScore = player.totalScore;
+      return TotalPlayerScore(
+        totalScore: totalScore,
+        isWinning: totalScore == minScore,
+      );
+    }).toList();
+  }
+}
+
+@freezed
+class TotalPlayerScore with _$TotalPlayerScore {
+  const factory TotalPlayerScore({
+    required int totalScore,
+    required bool isWinning,
+  }) = _TotalPlayerScore;
 }

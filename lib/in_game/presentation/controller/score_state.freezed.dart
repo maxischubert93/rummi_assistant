@@ -140,3 +140,142 @@ abstract class _ScoreState extends ScoreState {
   _$$ScoreStateImplCopyWith<_$ScoreStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$TotalPlayerScore {
+  int get totalScore => throw _privateConstructorUsedError;
+  bool get isWinning => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TotalPlayerScoreCopyWith<TotalPlayerScore> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TotalPlayerScoreCopyWith<$Res> {
+  factory $TotalPlayerScoreCopyWith(
+          TotalPlayerScore value, $Res Function(TotalPlayerScore) then) =
+      _$TotalPlayerScoreCopyWithImpl<$Res, TotalPlayerScore>;
+  @useResult
+  $Res call({int totalScore, bool isWinning});
+}
+
+/// @nodoc
+class _$TotalPlayerScoreCopyWithImpl<$Res, $Val extends TotalPlayerScore>
+    implements $TotalPlayerScoreCopyWith<$Res> {
+  _$TotalPlayerScoreCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? totalScore = null,
+    Object? isWinning = null,
+  }) {
+    return _then(_value.copyWith(
+      totalScore: null == totalScore
+          ? _value.totalScore
+          : totalScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      isWinning: null == isWinning
+          ? _value.isWinning
+          : isWinning // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TotalPlayerScoreImplCopyWith<$Res>
+    implements $TotalPlayerScoreCopyWith<$Res> {
+  factory _$$TotalPlayerScoreImplCopyWith(_$TotalPlayerScoreImpl value,
+          $Res Function(_$TotalPlayerScoreImpl) then) =
+      __$$TotalPlayerScoreImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int totalScore, bool isWinning});
+}
+
+/// @nodoc
+class __$$TotalPlayerScoreImplCopyWithImpl<$Res>
+    extends _$TotalPlayerScoreCopyWithImpl<$Res, _$TotalPlayerScoreImpl>
+    implements _$$TotalPlayerScoreImplCopyWith<$Res> {
+  __$$TotalPlayerScoreImplCopyWithImpl(_$TotalPlayerScoreImpl _value,
+      $Res Function(_$TotalPlayerScoreImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? totalScore = null,
+    Object? isWinning = null,
+  }) {
+    return _then(_$TotalPlayerScoreImpl(
+      totalScore: null == totalScore
+          ? _value.totalScore
+          : totalScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      isWinning: null == isWinning
+          ? _value.isWinning
+          : isWinning // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TotalPlayerScoreImpl implements _TotalPlayerScore {
+  const _$TotalPlayerScoreImpl(
+      {required this.totalScore, required this.isWinning});
+
+  @override
+  final int totalScore;
+  @override
+  final bool isWinning;
+
+  @override
+  String toString() {
+    return 'TotalPlayerScore(totalScore: $totalScore, isWinning: $isWinning)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TotalPlayerScoreImpl &&
+            (identical(other.totalScore, totalScore) ||
+                other.totalScore == totalScore) &&
+            (identical(other.isWinning, isWinning) ||
+                other.isWinning == isWinning));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, totalScore, isWinning);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TotalPlayerScoreImplCopyWith<_$TotalPlayerScoreImpl> get copyWith =>
+      __$$TotalPlayerScoreImplCopyWithImpl<_$TotalPlayerScoreImpl>(
+          this, _$identity);
+}
+
+abstract class _TotalPlayerScore implements TotalPlayerScore {
+  const factory _TotalPlayerScore(
+      {required final int totalScore,
+      required final bool isWinning}) = _$TotalPlayerScoreImpl;
+
+  @override
+  int get totalScore;
+  @override
+  bool get isWinning;
+  @override
+  @JsonKey(ignore: true)
+  _$$TotalPlayerScoreImplCopyWith<_$TotalPlayerScoreImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

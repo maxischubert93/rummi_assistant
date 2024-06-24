@@ -8,4 +8,8 @@ class Player with _$Player {
     required String name,
     @Default([]) List<int> scores,
   }) = _Player;
+
+  const Player._();
+
+  int get totalScore => scores.fold(0, (value, element) => value + element);
 }

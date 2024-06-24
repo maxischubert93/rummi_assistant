@@ -1,30 +1,45 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/in_game/presentation/controller/score_controller.dart';
 
 const double _cellHeight = 50;
 
-class ScoreScreen extends StatelessWidget {
+class ScoreScreen extends ConsumerWidget {
   const ScoreScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const AppScaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final content = ref.watch(scoreControllerProvider.select((state) => state.players.isEmpty))
+        ? const Center(child: CircularProgressIndicator())
+        : const _Content();
+
+    return AppScaffold(
       excludePadding: true,
       body: SafeArea(
         top: false,
-        child: Column(
-          children: [
-            _NameRow(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: _ScoreTable(),
-              ),
-            ),
-          ],
-        ),
+        child: content,
       ),
+    );
+  }
+}
+
+class _Content extends StatelessWidget {
+  const _Content();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        _NameRow(),
+        Expanded(
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: _ScoreTable(),
+          ),
+        ),
+        _TotalScoreRow(),
+      ],
     );
   }
 }
@@ -35,17 +50,36 @@ class _ScoreTable extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(scoreControllerProvider);
+
     return Table(
-      border: TableBorder.all(),
-      children: List.generate(
-        20,
-        (index) => TableRow(
-          children: state.players.map((player) {
-            return _ScoreCell(score: null, isInEvenRow: index.isEven);
-          }).toList(),
+        border: TableBorder(
+          horizontalInside: BorderSide(color: context.colors.divider),
+          verticalInside: BorderSide(color: context.colors.divider),
         ),
-      ),
-    );
+        children: [
+          for (var i = 0; i < state.maxScoreRowCount; i++)
+            TableRow(
+              children: state.players
+                  .map(
+                    (player) => _ScoreCell(
+                      score: player.scores.elementAtOrNull(i),
+                      isInEvenRow: i.isEven,
+                    ),
+                  )
+                  .toList(),
+            ),
+          TableRow(
+            children: [
+              Padding(
+                padding: context.geometry.mediumPadding,
+                child: AppButton.primary(
+                  text: 'Add score',
+                  onPressed: () => ref.read(scoreControllerProvider.notifier).addScore(),
+                ),
+              ),
+            ],
+          ),
+        ]);
   }
 }
 
@@ -59,16 +93,47 @@ class _NameRow extends ConsumerWidget {
 
     final paddingTop = MediaQuery.of(context).padding.top;
 
-    return Row(
-      children: playerNames
+    return Container(
+      alignment: Alignment.bottomCenter,
+      height: _cellHeight + paddingTop,
+      color: context.colors.navigation,
+      child: SeparatedRow(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        customSeparator: const VerticalSeparator(height: _cellHeight),
+        children: playerNames
+            .map(
+              (playerName) => Expanded(
+                child: Container(
+                  height: _cellHeight,
+                  alignment: Alignment.center,
+                  child: Subtitle(playerName, textAlign: TextAlign.center),
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+}
+
+class _TotalScoreRow extends ConsumerWidget {
+  const _TotalScoreRow();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final totalScores =
+        ref.watch(scoreControllerProvider.select((state) => state.totalPlayerScores));
+
+    return SeparatedRow(
+      customSeparator: const VerticalSeparator(height: _cellHeight),
+      children: totalScores
           .map(
-            (playerName) => Expanded(
+            (score) => Expanded(
               child: Container(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                height: _cellHeight + paddingTop,
+                height: _cellHeight,
                 alignment: Alignment.center,
-                color: context.colors.navigation,
-                child: Subtitle(playerName, textAlign: TextAlign.center),
+                color: context.colors.secondaryLightest,
+                child: Subtitle(score.totalScore.toString(), textAlign: TextAlign.center),
               ),
             ),
           )
@@ -85,7 +150,7 @@ class _ScoreCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isInEvenRow ? context.colors.tertiaryLightest : context.colors.secondaryLightest;
+    final color = isInEvenRow ? context.colors.tertiaryLightest : context.colors.background;
 
     return Container(
       height: _cellHeight,

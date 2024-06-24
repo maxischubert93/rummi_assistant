@@ -10,3 +10,4 @@ export 'widget/segmented_control.dart';
 export 'widget/separated_row.dart';
 export 'widget/surface.dart';
 export 'widget/text.dart';
+export 'widget/vertical_separator.dart';

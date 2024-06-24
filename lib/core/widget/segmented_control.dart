@@ -38,8 +38,7 @@ class SegmentedControl<T extends Object> extends StatelessWidget {
         ),
       ),
       child: SeparatedRow(
-        customSeparator: Container(
-          width: 1,
+        customSeparator: VerticalSeparator(
           height: _segmentHeight,
           color: context.colors.segmentedControlTheme.borderColor,
         ),

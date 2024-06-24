@@ -99,9 +99,10 @@ class __$$PlayerImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PlayerImpl implements _Player {
+class _$PlayerImpl extends _Player {
   const _$PlayerImpl({required this.name, final List<int> scores = const []})
-      : _scores = scores;
+      : _scores = scores,
+        super._();
 
   @override
   final String name;
@@ -139,9 +140,10 @@ class _$PlayerImpl implements _Player {
       __$$PlayerImplCopyWithImpl<_$PlayerImpl>(this, _$identity);
 }
 
-abstract class _Player implements Player {
+abstract class _Player extends Player {
   const factory _Player({required final String name, final List<int> scores}) =
       _$PlayerImpl;
+  const _Player._() : super._();
 
   @override
   String get name;
