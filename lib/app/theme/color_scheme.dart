@@ -37,11 +37,15 @@ abstract class AppColorScheme {
 
   Color get secondaryLight;
 
+  Color get secondaryLightest;
+
   Color get onSecondary;
 
   Color get tertiary;
 
   Color get tertiaryLight;
+
+  Color get tertiaryLightest;
 
   Color get onTertiary;
 
@@ -182,4 +186,10 @@ class _LightAppColorScheme implements AppColorScheme {
 
   @override
   Color get backgroundDark => AppColors.red[900]!;
+
+  @override
+  Color get tertiaryLightest => AppColors.orange[200]!;
+
+  @override
+  Color get secondaryLightest => AppColors.blue[200]!;
 }
