@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/core/widget/number_text_field.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 class TimerSelectionModal extends StatefulWidget {
@@ -20,26 +21,11 @@ class _TimerSelectionModalState extends State<TimerSelectionModal> {
       children: [
         Subtitle(context.localizations.timerSelectionModalTitle),
         context.geometry.spacingLarge.verticalBox,
-        SizedBox(
-          width: 80,
-          height: 50,
-          child: CupertinoTextField(
-            onChanged: (value) => _timerDuration = value,
-            onSubmitted: (value) => context.pop<String?>(value),
-            maxLength: 3,
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            style: context.typography.bodyLarge,
-            cursorColor: context.colors.secondary,
-            textInputAction: TextInputAction.done,
-            placeholder: context.localizations.timerSelectionModalTextFieldPlaceHolder,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: context.colors.divider,
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+        NumberTextField(
+          onChanged: (value) => _timerDuration = value,
+          onSubmitted: (value) => context.pop<String?>(value),
+          placeHolder: context.localizations.timerSelectionModalTextFieldPlaceHolder,
+          maxLength: 3,
         ),
         context.geometry.spacingLarge.verticalBox,
         AppButton.secondary(

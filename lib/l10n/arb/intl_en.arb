@@ -8,5 +8,8 @@
   "timerSelectionModalTitle": "Select timer duration in seconds",
   "timerSelectionModalTextFieldPlaceHolder": "Timer duration",
   "timerSelectionModalButton": "Set timer",
-  "defaultPlayerName": "Player"
+  "defaultPlayerName": "Player",
+  "scoreScreenAddScoreButton": "Add score",
+  "scoreInputModalButton": "Submit score",
+  "scoreInputRoundWinnerSwitch": "Round winner"
 }

@@ -8,6 +8,7 @@ import 'package:rummi_assistant/util/extension/target_platform.dart';
 class PlatformModalPage<T> extends Page<T> {
   const PlatformModalPage({
     required this.builder,
+    this.applyPadding = true,
     super.key,
     super.name,
     super.arguments,
@@ -15,6 +16,7 @@ class PlatformModalPage<T> extends Page<T> {
   });
 
   final WidgetBuilder builder;
+  final bool applyPadding;
 
   @override
   Route<T> createRoute(BuildContext context) {
@@ -23,22 +25,29 @@ class PlatformModalPage<T> extends Page<T> {
           settings: this,
           expanded: false,
           builder: builder,
-          containerBuilder: (context, animation, child) => _ModalContainer(child: child),
+          containerBuilder: (context, animation, child) => _ModalContainer(
+            applyPadding: applyPadding,
+            child: child,
+          ),
         ),
       false => ModalSheetRoute<T>(
           settings: this,
           expanded: false,
           builder: (context) => Material(child: builder(context)),
-          containerBuilder: (context, animation, child) => _ModalContainer(child: child),
+          containerBuilder: (context, animation, child) => _ModalContainer(
+            applyPadding: applyPadding,
+            child: child,
+          ),
         ),
     };
   }
 }
 
 class _ModalContainer extends StatelessWidget {
-  const _ModalContainer({required this.child});
+  const _ModalContainer({required this.child, this.applyPadding = true});
 
   final Widget child;
+  final bool applyPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +56,9 @@ class _ModalContainer extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom,),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).padding.bottom,
+        ),
         decoration: BoxDecoration(
           color: context.colors.background,
           borderRadius: const BorderRadius.only(
@@ -70,7 +81,9 @@ class _ModalContainer extends StatelessWidget {
                       4,
                 ),
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: geometry.spacingMedium),
+                  padding: applyPadding
+                      ? EdgeInsets.symmetric(horizontal: geometry.spacingMedium)
+                      : null,
                   controller: ModalScrollController.of(context),
                   child: child,
                 ),

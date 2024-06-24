@@ -59,7 +59,7 @@ class TimerController extends StateNotifier<TimerState> {
   void dispose() {
     _timer?.cancel();
     _gameSubscription?.cancel();
-    _alertPlayer.stop();
+    _alertPlayer.dispose();
     super.dispose();
   }
 }

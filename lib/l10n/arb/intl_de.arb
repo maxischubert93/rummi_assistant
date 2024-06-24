@@ -8,5 +8,8 @@
   "timerSelectionModalTitle": "Dauer des Timers in Sekunden wählen",
   "timerSelectionModalTextFieldPlaceHolder": "Timer-Dauer",
   "timerSelectionModalButton": "Bestätigen",
-  "defaultPlayerName": "Spieler"
+  "defaultPlayerName": "Spieler",
+  "scoreScreenAddScoreButton": "Punkte hinzufügen",
+  "scoreInputModalButton": "Bestätigen",
+  "scoreInputRoundWinnerSwitch": "Runden-Sieger"
 }

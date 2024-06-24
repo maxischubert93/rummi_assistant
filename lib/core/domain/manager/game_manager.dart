@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get_it/get_it.dart';
 import 'package:rummi_assistant/core/domain/model/game.dart';
+import 'package:rummi_assistant/core/domain/model/game_round.dart';
 import 'package:rummi_assistant/core/domain/model/player.dart';
 import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -31,6 +32,10 @@ class GameManager {
       players: players,
     );
     _currentGameSubject.add(game);
+  }
+
+  Future<void> submitRoundScores(GameRound round) async {
+
   }
 
   void dispose() {

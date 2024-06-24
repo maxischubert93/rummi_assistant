@@ -34,6 +34,7 @@ GoRouter buildRouter() => GoRouter(
               path: 'score-input',
               name: RouteNames.scoreInputModal,
               pageBuilder: (context, state) => PlatformModalPage(
+                applyPadding: false,
                 builder: (_) => const ScoreInputModal(),
               ),
             ),

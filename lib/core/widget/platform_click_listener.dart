@@ -133,11 +133,12 @@ class _CupertinoClickListenerState extends State<_CupertinoClickListener>
   void _animate() {
     if (_animationController.isAnimating) return;
     final wasHeldDown = _buttonHeldDown;
-    _buttonHeldDown
+    final ticker = _buttonHeldDown
         ? _animationController.animateTo(1, duration: _fadeOutDuration)
-        : _animationController.animateTo(0, duration: _fadeInDuration).whenComplete(() {
-            if (mounted && wasHeldDown != _buttonHeldDown) _animate();
-          });
+        : _animationController.animateTo(0, duration: _fadeInDuration);
+    final _ = ticker.then<void>((value) {
+      if (mounted && wasHeldDown != _buttonHeldDown) _animate();
+    });
   }
 
   @override

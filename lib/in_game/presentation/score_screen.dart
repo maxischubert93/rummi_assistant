@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/in_game/presentation/controller/score_controller.dart';
+import 'package:rummi_assistant/l10n/l10n.dart';
 
 const double _cellHeight = 50;
 
@@ -52,34 +53,35 @@ class _ScoreTable extends ConsumerWidget {
     final state = ref.watch(scoreControllerProvider);
 
     return Table(
-        border: TableBorder(
-          horizontalInside: BorderSide(color: context.colors.divider),
-          verticalInside: BorderSide(color: context.colors.divider),
-        ),
-        children: [
-          for (var i = 0; i < state.maxScoreRowCount; i++)
-            TableRow(
-              children: state.players
-                  .map(
-                    (player) => _ScoreCell(
-                      score: player.scores.elementAtOrNull(i),
-                      isInEvenRow: i.isEven,
-                    ),
-                  )
-                  .toList(),
-            ),
+      border: TableBorder(
+        horizontalInside: BorderSide(color: context.colors.divider),
+        verticalInside: BorderSide(color: context.colors.divider),
+      ),
+      children: [
+        for (var i = 0; i < state.maxScoreRowCount; i++)
           TableRow(
-            children: [
-              Padding(
-                padding: context.geometry.mediumPadding,
-                child: AppButton.primary(
-                  text: 'Add score',
-                  onPressed: () => ref.read(scoreControllerProvider.notifier).addScore(),
-                ),
-              ),
-            ],
+            children: state.players
+                .map(
+                  (player) => _ScoreCell(
+                    score: player.scores.elementAtOrNull(i),
+                    isInEvenRow: i.isEven,
+                  ),
+                )
+                .toList(),
           ),
-        ]);
+        TableRow(
+          children: [
+            Padding(
+              padding: context.geometry.mediumPadding,
+              child: AppButton.primary(
+                text: context.localizations.scoreScreenAddScoreButton,
+                onPressed: () => ref.read(scoreControllerProvider.notifier).addScore(),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
 
