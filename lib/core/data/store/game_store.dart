@@ -43,4 +43,10 @@ class GameStore implements GameRepository {
         .watch()
         .map((game) => game.firstOrNull?.toDomain());
   }
+
+  @override
+  Future<Game?> getCurrentGame() async {
+    final storedGame = await games.filter().isFinishedEqualTo(false).findFirst();
+    return storedGame?.toDomain();
+  }
 }

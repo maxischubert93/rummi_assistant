@@ -10,4 +10,6 @@ abstract class GameRepository {
   Future<void> updateGame(Game game);
 
   Stream<Game?> currentGame();
+
+  Future<Game?> getCurrentGame();
 }

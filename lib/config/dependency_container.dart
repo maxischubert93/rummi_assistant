@@ -31,6 +31,7 @@ void _registerInteractors(GetIt container) {}
 
 Future<void> _registerManagers(GetIt container) async {
   container.registerSingleton(GameManager());
+  await container.get<GameManager>().init();
 }
 
 void _registerServices(GetIt container) {

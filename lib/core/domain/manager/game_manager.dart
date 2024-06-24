@@ -23,6 +23,11 @@ class GameManager {
 
   late StreamSubscription<Game?> _gameSubscription;
 
+  Future<void> init() async {
+    final game = await _gameRepository.getCurrentGame();
+    _currentGameSubject.add(game);
+  }
+
   Future<void> newGame({
     required Duration timerDuration,
     required List<Player> players,
