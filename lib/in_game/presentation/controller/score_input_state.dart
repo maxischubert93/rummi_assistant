@@ -8,7 +8,8 @@ class ScoreInputState with _$ScoreInputState {
     required List<PlayerRoundScore> playerScores,
   }) = _ScoreInputState;
 
-  factory ScoreInputState.initial({required List<String> playerNames}) => ScoreInputState(
+  factory ScoreInputState.initial({required List<String> playerNames}) =>
+      ScoreInputState(
         playerScores: playerNames.map((name) => PlayerRoundScore(playerName: name)).toList(),
       );
 
@@ -16,7 +17,9 @@ class ScoreInputState with _$ScoreInputState {
 
   int get playerCount => playerScores.length;
 
-  bool get isSubmitEnabled => playerScores.every((score) => score.isScoreValid);
+  bool get isSubmitEnabled =>
+      playerScores.every((score) => score.isScoreValid) &&
+          playerScores.any((score) => score.wonRound);
 }
 
 @freezed

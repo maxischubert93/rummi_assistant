@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/widget/number_text_field.dart';
@@ -25,7 +24,7 @@ class ScoreInputModal extends ConsumerWidget {
             isEnabled: ref.watch(
               scoreInputControllerProvider.select((state) => state.isSubmitEnabled),
             ),
-            onPressed: () => context.pop(),
+            onPressed: () => ref.read(scoreInputControllerProvider.notifier).submitScore(),
           ),
         ),
       ],
@@ -102,7 +101,7 @@ class _PlayerInputPage extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Subtitle(
-                  'Enter score for ${state.playerName}',
+                  context.localizations.scoreInputModalTitle(state.playerName),
                   singleLine: false,
                 ),
                 context.geometry.spacingLarge.verticalBox,
@@ -116,7 +115,7 @@ class _PlayerInputPage extends ConsumerWidget {
                         wonRound: value,
                       ),
                     ),
-                    BodyLarge(context.localizations.scoreInputRoundWinnerSwitch),
+                    BodyLarge(context.localizations.scoreInputModalRoundWinnerSwitch),
                   ],
                 ),
                 context.geometry.spacingMedium.verticalBox,

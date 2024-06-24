@@ -11,5 +11,6 @@
   "defaultPlayerName": "Spieler",
   "scoreScreenAddScoreButton": "Punkte hinzufügen",
   "scoreInputModalButton": "Bestätigen",
-  "scoreInputRoundWinnerSwitch": "Runden-Sieger"
+  "scoreInputModalRoundWinnerSwitch": "Runden-Sieger",
+  "scoreInputModalTitle": "Punkte für {playerName}"
 }

@@ -52,33 +52,33 @@ class _ScoreTable extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(scoreControllerProvider);
 
-    return Table(
-      border: TableBorder(
-        horizontalInside: BorderSide(color: context.colors.divider),
-        verticalInside: BorderSide(color: context.colors.divider),
-      ),
+    return Column(
       children: [
-        for (var i = 0; i < state.maxScoreRowCount; i++)
-          TableRow(
-            children: state.players
-                .map(
-                  (player) => _ScoreCell(
-                    score: player.scores.elementAtOrNull(i),
-                    isInEvenRow: i.isEven,
-                  ),
-                )
-                .toList(),
+        Table(
+          border: TableBorder(
+            horizontalInside: BorderSide(color: context.colors.divider),
+            verticalInside: BorderSide(color: context.colors.divider),
           ),
-        TableRow(
           children: [
-            Padding(
-              padding: context.geometry.mediumPadding,
-              child: AppButton.primary(
-                text: context.localizations.scoreScreenAddScoreButton,
-                onPressed: () => ref.read(scoreControllerProvider.notifier).addScore(),
+            for (var i = 0; i < state.maxScoreRowCount; i++)
+              TableRow(
+                children: state.players
+                    .map(
+                      (player) => _ScoreCell(
+                        score: player.scores.elementAtOrNull(i),
+                        isInEvenRow: i.isEven,
+                      ),
+                    )
+                    .toList(),
               ),
-            ),
           ],
+        ),
+        Padding(
+          padding: context.geometry.mediumPadding,
+          child: AppButton.primary(
+            text: context.localizations.scoreScreenAddScoreButton,
+            onPressed: () => ref.read(scoreControllerProvider.notifier).addScore(),
+          ),
         ),
       ],
     );

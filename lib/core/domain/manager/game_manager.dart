@@ -35,7 +35,19 @@ class GameManager {
   }
 
   Future<void> submitRoundScores(GameRound round) async {
+    if (currentGame == null) return;
 
+    final updatedPlayers = currentGame!.players.map((player) {
+      final roundScore = round.scores.firstWhere((score) => score.playerName == player.name);
+      final newScores = [...player.scores, roundScore.score];
+      return player.copyWith(scores: newScores);
+    }).toList();
+
+    final updatedGame = currentGame!.copyWith(
+      players: updatedPlayers,
+    );
+
+    await _gameRepository.updateGame(updatedGame);
   }
 
   void dispose() {

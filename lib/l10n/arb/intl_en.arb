@@ -11,5 +11,6 @@
   "defaultPlayerName": "Player",
   "scoreScreenAddScoreButton": "Add score",
   "scoreInputModalButton": "Submit score",
-  "scoreInputRoundWinnerSwitch": "Round winner"
+  "scoreInputModalRoundWinnerSwitch": "Round winner",
+  "scoreInputModalTitle": "Enter score for {playerName}"
 }
