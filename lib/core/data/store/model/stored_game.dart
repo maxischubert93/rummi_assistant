@@ -10,4 +10,12 @@ class StoredGame {
   late int timerDurationInSeconds;
 
   bool isFinished = false;
+
+  late List<StoredPlayer> players;
+}
+
+@embedded
+class StoredPlayer {
+  late String name;
+  late List<int> scores;
 }

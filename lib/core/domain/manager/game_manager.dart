@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:get_it/get_it.dart';
-import 'package:rummi_assistant/core/domain/game.dart';
+import 'package:rummi_assistant/core/domain/model/game.dart';
+import 'package:rummi_assistant/core/domain/model/player.dart';
 import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -21,8 +22,14 @@ class GameManager {
 
   late StreamSubscription<Game?> _gameSubscription;
 
-  Future<void> newGame({required Duration timerDuration}) async {
-    final game = await _gameRepository.newGame(timerDuration: timerDuration);
+  Future<void> newGame({
+    required Duration timerDuration,
+    required List<Player> players,
+  }) async {
+    final game = await _gameRepository.newGame(
+      timerDuration: timerDuration,
+      players: players,
+    );
     _currentGameSubject.add(game);
   }
 

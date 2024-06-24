@@ -7,5 +7,6 @@
   "homeCustomTimerSegment": "Custom",
   "timerSelectionModalTitle": "Select timer duration in seconds",
   "timerSelectionModalTextFieldPlaceHolder": "Timer duration",
-  "timerSelectionModalButton": "Set timer"
+  "timerSelectionModalButton": "Set timer",
+  "defaultPlayerName": "Player"
 }

@@ -1,5 +1,6 @@
-export 'domain/game.dart';
 export 'domain/manager/game_manager.dart';
+export 'domain/model/game.dart';
+export 'domain/model/player.dart';
 export 'extension/context_extension.dart';
 export 'widget/app_scaffold.dart';
 export 'widget/button/app_button.dart';

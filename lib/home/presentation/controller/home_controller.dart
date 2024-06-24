@@ -30,9 +30,15 @@ class HomeController extends AutoDisposeNotifier<HomeScreenState> {
     }
   }
 
-  Future<void> newGame() async {
+  Future<void> newGame({required String defaultPlayerName}) async {
+    final players = List.generate(
+      state.playerAmount,
+      (index) => Player(name: '$defaultPlayerName ${index + 1}'),
+    );
+
     await _gameManager.newGame(
       timerDuration: state.selectedTimerDuration,
+      players: players,
     );
     await _router.push('/timer');
   }

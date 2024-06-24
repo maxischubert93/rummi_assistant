@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rummi_assistant/core/domain/model/player.dart';
 
 part 'game.freezed.dart';
 
@@ -8,5 +9,6 @@ class Game with _$Game {
     required int id,
     required Duration timerDuration,
     required bool isFinished,
+    required List<Player> players,
   }) = _Game;
 }

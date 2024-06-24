@@ -27,7 +27,9 @@ class HomeScreen extends ConsumerWidget {
           const Spacer(),
           AppButton.secondary(
             text: context.localizations.homeStartGameButton,
-            onPressed: () => ref.read(homeControllerProvider.notifier).newGame(),
+            onPressed: () => ref.read(homeControllerProvider.notifier).newGame(
+                  defaultPlayerName: context.localizations.defaultPlayerName,
+                ),
           ),
         ],
       ),
