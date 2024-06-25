@@ -29,19 +29,19 @@ class ScoreInputController extends AutoDisposeNotifier<ScoreInputState> {
     _router.pop();
   }
 
-  void onWonRoundChanged({required int index, required bool wonRound}) {
+  void onWinnerSelected({required int index}) {
     final updated = state.playerScores.mapIndexed((i, score) {
       if (i == index) {
-        return score.copyWith(wonRound: wonRound, score: null);
+        return score.copyWith(wonRound: true, score: null);
       }
-      return score.copyWith(wonRound: !wonRound);
+      return score.copyWith(wonRound: false);
     }).toList();
     state = state.copyWith(playerScores: updated);
   }
 
-  void onScoreChanged({required int index, required String? points}) {
-    final updated = state.playerScores.mapIndexed((i, score) {
-      if (i == index) {
+  void onScoreChanged({required String playerName, required String? points}) {
+    final updated = state.playerScores.map((score) {
+      if (score.playerName == playerName) {
         return score.copyWith(score: points);
       }
       return score;

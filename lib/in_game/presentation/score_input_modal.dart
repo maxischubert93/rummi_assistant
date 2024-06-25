@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/widget/number_text_field.dart';
 import 'package:rummi_assistant/in_game/presentation/controller/score_input_controller.dart';
+import 'package:rummi_assistant/in_game/presentation/widget/button_group.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 class ScoreInputModal extends ConsumerWidget {
@@ -16,17 +16,6 @@ class ScoreInputModal extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const _PlayerInputPageView(),
-        context.geometry.spacingLarge.verticalBox,
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.geometry.spacingMedium),
-          child: AppButton.primary(
-            text: context.localizations.scoreInputModalButton,
-            isEnabled: ref.watch(
-              scoreInputControllerProvider.select((state) => state.isSubmitEnabled),
-            ),
-            onPressed: () => ref.read(scoreInputControllerProvider.notifier).submitScore(),
-          ),
-        ),
       ],
     );
   }
@@ -50,10 +39,9 @@ class _PlayerInputPageViewState extends ConsumerState<_PlayerInputPageView> {
     return SizedBox(
       height: 200,
       child: PageView.builder(
-        physics: const ClampingScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         itemCount: playerCount,
-        allowImplicitScrolling: true,
         itemBuilder: (context, index) {
           return _PlayerInputPage(
             index: index,
@@ -82,12 +70,10 @@ class _PlayerInputPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state =
-        ref.watch(scoreInputControllerProvider.select((state) => state.playerScores[index]));
-
-    ScoreInputController notifier() => ref.read(scoreInputControllerProvider.notifier);
+    final state = ref.watch(scoreInputControllerProvider);
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _PageViewControl(
           isEnabled: index > 0,
@@ -97,53 +83,118 @@ class _PlayerInputPage extends ConsumerWidget {
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: context.geometry.spacingMedium),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Subtitle(
-                  context.localizations.scoreInputModalTitle(state.playerName),
-                  singleLine: false,
-                ),
-                context.geometry.spacingLarge.verticalBox,
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    PlatformSwitch(
-                      value: state.wonRound,
-                      onChanged: (value) => notifier().onWonRoundChanged(
-                        index: index,
-                        wonRound: value,
-                      ),
-                    ),
-                    BodyLarge(context.localizations.scoreInputModalRoundWinnerSwitch),
-                  ],
-                ),
-                context.geometry.spacingMedium.verticalBox,
-                NumberTextField(
-                  onChanged: (value) => notifier().onScoreChanged(
-                    index: index,
-                    points: value,
-                  ),
-                  enabled: !state.wonRound,
-                  onSubmitted: (value) {
-                    notifier().onScoreChanged(
-                      index: index,
-                      points: value,
-                    );
-                    if (!isLast) {
-                      onNext();
-                    }
+            child: switch (index == 0) {
+              true => _WinnerInputPage(onNext: onNext),
+              false => _ScoreInputPage(
+                  index: index,
+                  isLast: isLast,
+                  onNext: () {
+                    if (!isLast) onNext();
                   },
-                  maxLength: 4,
                 ),
-              ],
-            ),
+            },
           ),
         ),
         _PageViewControl(
-          isEnabled: !isLast,
+          isEnabled: (index > 0 && !isLast && state.losingPlayerScores[index - 1].isScoreValid) ||
+              (index == 0 && state.hasWinner),
           onPressed: onNext,
           position: PageViewControlPosition.trailing,
+        ),
+      ],
+    );
+  }
+}
+
+class _WinnerInputPage extends ConsumerWidget {
+  const _WinnerInputPage({required this.onNext});
+
+  final void Function() onNext;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final playerScores = ref.watch(
+      scoreInputControllerProvider.select((state) => state.playerScores),
+    );
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Subtitle(context.localizations.scoreInputModalSelectWinnerTitle),
+        const Spacer(),
+        ButtonGroup(
+          buttonTexts: playerScores.map((score) => score.playerName).toList(),
+          selectedIndex: playerScores.indexWhere((score) => score.wonRound),
+          onSelected: (index) {
+            ref.read(scoreInputControllerProvider.notifier).onWinnerSelected(
+                  index: index,
+                );
+            onNext();
+          },
+        ),
+        const Spacer(),
+      ],
+    );
+  }
+}
+
+class _ScoreInputPage extends ConsumerWidget {
+  const _ScoreInputPage({
+    required this.index,
+    required this.onNext,
+    required this.isLast,
+  });
+
+  final int index;
+  final bool isLast;
+  final void Function() onNext;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(
+      scoreInputControllerProvider.select((state) => state.losingPlayerScores[index - 1]),
+    );
+
+    ScoreInputController notifier() => ref.read(scoreInputControllerProvider.notifier);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Subtitle(
+          context.localizations.scoreInputModalTitle(state.playerName),
+          singleLine: false,
+        ),
+        context.geometry.spacingLarge.verticalBox,
+        NumberTextField(
+          onChanged: (value) => notifier().onScoreChanged(
+            playerName: state.playerName,
+            points: value,
+          ),
+          onSubmitted: (value) {
+            notifier().onScoreChanged(
+              playerName: state.playerName,
+              points: value,
+            );
+            onNext();
+          },
+          maxLength: 4,
+        ),
+        context.geometry.spacingSmall.verticalBox,
+        Padding(
+          padding: EdgeInsets.all(context.geometry.spacingMedium),
+          child: AppButton.primary(
+            text: isLast
+                ? context.localizations.scoreInputModalButtonFinish
+                : context.localizations.scoreInputModalButtonStep,
+            isEnabled: state.isScoreValid,
+            onPressed: () {
+              if (isLast) {
+                ref.read(scoreInputControllerProvider.notifier).submitScore();
+              } else {
+                onNext();
+              }
+            },
+          ),
         ),
       ],
     );

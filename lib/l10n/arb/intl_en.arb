@@ -10,7 +10,8 @@
   "timerSelectionModalButton": "Set timer",
   "defaultPlayerName": "Player",
   "scoreScreenAddScoreButton": "Add score",
-  "scoreInputModalButton": "Submit score",
-  "scoreInputModalRoundWinnerSwitch": "Round winner",
-  "scoreInputModalTitle": "Enter score for {playerName}"
+  "scoreInputModalButtonStep": "Submit score",
+  "scoreInputModalButtonFinish": "Finish",
+  "scoreInputModalTitle": "Enter score for {playerName}",
+  "scoreInputModalSelectWinnerTitle": "Select the round winner"
 }

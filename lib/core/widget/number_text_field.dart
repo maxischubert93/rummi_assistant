@@ -34,6 +34,7 @@ class NumberTextField extends StatelessWidget {
         cursorColor: context.colors.secondary,
         textInputAction: TextInputAction.done,
         placeholder: placeHolder,
+        onTapOutside: (_) => FocusScope.of(context).unfocus(),
         decoration: BoxDecoration(
           border: Border.all(
             color: context.colors.divider,

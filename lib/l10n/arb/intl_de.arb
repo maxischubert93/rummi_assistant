@@ -10,7 +10,8 @@
   "timerSelectionModalButton": "Bestätigen",
   "defaultPlayerName": "Spieler",
   "scoreScreenAddScoreButton": "Punkte hinzufügen",
-  "scoreInputModalButton": "Bestätigen",
-  "scoreInputModalRoundWinnerSwitch": "Runden-Sieger",
-  "scoreInputModalTitle": "Punkte für {playerName}"
+  "scoreInputModalButtonStep": "Punkte eintragen",
+  "scoreInputModalButtonFinish": "Fertig",
+  "scoreInputModalTitle": "Punkte für {playerName}",
+  "scoreInputModalSelectWinnerTitle": "Sieger der Runde auswählen"
 }
