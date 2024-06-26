@@ -3,7 +3,9 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/core/extension/iterable.dart';
 import 'package:rummi_assistant/home/presentation/controller/home_screen_state.dart';
+import 'package:rummi_assistant/home/util/player_list.dart';
 
 final homeControllerProvider =
     AutoDisposeNotifierProvider<HomeController, HomeScreenState>(HomeController.new);
@@ -16,7 +18,11 @@ class HomeController extends AutoDisposeNotifier<HomeScreenState> {
   HomeScreenState build() => HomeScreenState.initial();
 
   void setPlayerAmount(int playerAmount) {
-    state = state.copyWith(playerAmount: playerAmount);
+    final players = List.generate(
+      playerAmount,
+      (index) => state.players.tryElementAt(index) ?? Player(name: generatePlayerName(index + 1)),
+    );
+    state = state.copyWith(players: players);
   }
 
   void setTimerDuration(Duration timerDuration) {
@@ -30,16 +36,21 @@ class HomeController extends AutoDisposeNotifier<HomeScreenState> {
     }
   }
 
-  Future<void> newGame({required String defaultPlayerName}) async {
-    final players = List.generate(
-      state.playerAmount,
-      (index) => Player(name: '$defaultPlayerName ${index + 1}'),
-    );
-
+  Future<void> newGame() async {
     await _gameManager.newGame(
       timerDuration: state.selectedTimerDuration,
-      players: players,
+      players: state.players,
     );
     await _router.push('/timer');
+  }
+
+  Future<void> showPlayerNamesModal() async {
+    final newNames = await _router.pushNamed<List<String>>(RouteNames.playerNamesModal);
+    if (newNames != null) {
+      final players = newNames.map((name) {
+        return Player(name: name);
+      }).toList();
+      state = state.copyWith(players: players);
+    }
   }
 }

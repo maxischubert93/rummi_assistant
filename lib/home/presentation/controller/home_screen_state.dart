@@ -1,19 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rummi_assistant/core/domain/model/player.dart';
+import 'package:rummi_assistant/home/util/player_list.dart';
 
 part 'home_screen_state.freezed.dart';
 
 @freezed
 class HomeScreenState with _$HomeScreenState {
   const factory HomeScreenState({
-    required int playerAmount,
     required Duration timerDuration,
     required String? customTimerDuration,
+    required List<Player> players,
   }) = _HomeScreenState;
 
-  factory HomeScreenState.initial() => const HomeScreenState(
-        playerAmount: 2,
-        timerDuration: Duration(minutes: 1),
+  factory HomeScreenState.initial() => HomeScreenState(
+        timerDuration: const Duration(minutes: 1),
         customTimerDuration: null,
+        players: generatePlayersList(2),
       );
 
   const HomeScreenState._();
@@ -26,4 +28,6 @@ class HomeScreenState with _$HomeScreenState {
     }
     return timerDuration;
   }
+
+  int get playerAmount => players.length;
 }

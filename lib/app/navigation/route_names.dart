@@ -3,5 +3,6 @@ class RouteNames {
   static const timer = 'timer';
   static const score = 'score';
   static const timerModal = 'timer-modal';
+  static const playerNamesModal = 'player-names-modal';
   static const scoreInputModal = 'score-input-modal';
 }

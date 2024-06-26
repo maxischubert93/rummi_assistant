@@ -6,6 +6,7 @@ import 'package:rummi_assistant/app/navigation/route_names.dart';
 import 'package:rummi_assistant/app/widget/bottom_navigation_wrapper.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/home/presentation/home_screen.dart';
+import 'package:rummi_assistant/home/presentation/player_names_modal.dart';
 import 'package:rummi_assistant/home/presentation/timer_selection_modal.dart';
 import 'package:rummi_assistant/in_game/presentation/score_input_modal.dart';
 import 'package:rummi_assistant/in_game/presentation/score_screen.dart';
@@ -28,6 +29,13 @@ GoRouter buildRouter() => GoRouter(
               name: RouteNames.timerModal,
               pageBuilder: (context, state) => PlatformModalPage<String?>(
                 builder: (_) => const TimerSelectionModal(),
+              ),
+            ),
+            GoRoute(
+              path: 'player-names',
+              name: RouteNames.playerNamesModal,
+              pageBuilder: (context, state) => PlatformModalPage<List<String>>(
+                builder: (_) => const PlayerNamesModal(),
               ),
             ),
             GoRoute(

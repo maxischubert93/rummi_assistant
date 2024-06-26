@@ -15,6 +15,9 @@ import 'package:vector_graphics/vector_graphics.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/app_icon.svg
+  SvgGenImage get appIcon => const SvgGenImage('assets/icons/app_icon.svg');
+
   /// File path: assets/icons/chevron_down.svg
   SvgGenImage get chevronDown =>
       const SvgGenImage('assets/icons/chevron_down.svg');
@@ -27,7 +30,8 @@ class $AssetsIconsGen {
   SvgGenImage get chevronUp => const SvgGenImage('assets/icons/chevron_up.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [chevronDown, chevronRight, chevronUp];
+  List<SvgGenImage> get values =>
+      [appIcon, chevronDown, chevronRight, chevronUp];
 }
 
 class $AssetsSoundsGen {

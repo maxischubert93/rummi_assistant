@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeScreenState {
-  int get playerAmount => throw _privateConstructorUsedError;
   Duration get timerDuration => throw _privateConstructorUsedError;
   String? get customTimerDuration => throw _privateConstructorUsedError;
+  List<Player> get players => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeScreenStateCopyWith<HomeScreenState> get copyWith =>
@@ -32,7 +32,9 @@ abstract class $HomeScreenStateCopyWith<$Res> {
       _$HomeScreenStateCopyWithImpl<$Res, HomeScreenState>;
   @useResult
   $Res call(
-      {int playerAmount, Duration timerDuration, String? customTimerDuration});
+      {Duration timerDuration,
+      String? customTimerDuration,
+      List<Player> players});
 }
 
 /// @nodoc
@@ -48,15 +50,11 @@ class _$HomeScreenStateCopyWithImpl<$Res, $Val extends HomeScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? playerAmount = null,
     Object? timerDuration = null,
     Object? customTimerDuration = freezed,
+    Object? players = null,
   }) {
     return _then(_value.copyWith(
-      playerAmount: null == playerAmount
-          ? _value.playerAmount
-          : playerAmount // ignore: cast_nullable_to_non_nullable
-              as int,
       timerDuration: null == timerDuration
           ? _value.timerDuration
           : timerDuration // ignore: cast_nullable_to_non_nullable
@@ -65,6 +63,10 @@ class _$HomeScreenStateCopyWithImpl<$Res, $Val extends HomeScreenState>
           ? _value.customTimerDuration
           : customTimerDuration // ignore: cast_nullable_to_non_nullable
               as String?,
+      players: null == players
+          ? _value.players
+          : players // ignore: cast_nullable_to_non_nullable
+              as List<Player>,
     ) as $Val);
   }
 }
@@ -78,7 +80,9 @@ abstract class _$$HomeScreenStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int playerAmount, Duration timerDuration, String? customTimerDuration});
+      {Duration timerDuration,
+      String? customTimerDuration,
+      List<Player> players});
 }
 
 /// @nodoc
@@ -92,15 +96,11 @@ class __$$HomeScreenStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? playerAmount = null,
     Object? timerDuration = null,
     Object? customTimerDuration = freezed,
+    Object? players = null,
   }) {
     return _then(_$HomeScreenStateImpl(
-      playerAmount: null == playerAmount
-          ? _value.playerAmount
-          : playerAmount // ignore: cast_nullable_to_non_nullable
-              as int,
       timerDuration: null == timerDuration
           ? _value.timerDuration
           : timerDuration // ignore: cast_nullable_to_non_nullable
@@ -109,6 +109,10 @@ class __$$HomeScreenStateImplCopyWithImpl<$Res>
           ? _value.customTimerDuration
           : customTimerDuration // ignore: cast_nullable_to_non_nullable
               as String?,
+      players: null == players
+          ? _value._players
+          : players // ignore: cast_nullable_to_non_nullable
+              as List<Player>,
     ));
   }
 }
@@ -117,21 +121,27 @@ class __$$HomeScreenStateImplCopyWithImpl<$Res>
 
 class _$HomeScreenStateImpl extends _HomeScreenState {
   const _$HomeScreenStateImpl(
-      {required this.playerAmount,
-      required this.timerDuration,
-      required this.customTimerDuration})
-      : super._();
+      {required this.timerDuration,
+      required this.customTimerDuration,
+      required final List<Player> players})
+      : _players = players,
+        super._();
 
-  @override
-  final int playerAmount;
   @override
   final Duration timerDuration;
   @override
   final String? customTimerDuration;
+  final List<Player> _players;
+  @override
+  List<Player> get players {
+    if (_players is EqualUnmodifiableListView) return _players;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_players);
+  }
 
   @override
   String toString() {
-    return 'HomeScreenState(playerAmount: $playerAmount, timerDuration: $timerDuration, customTimerDuration: $customTimerDuration)';
+    return 'HomeScreenState(timerDuration: $timerDuration, customTimerDuration: $customTimerDuration, players: $players)';
   }
 
   @override
@@ -139,17 +149,16 @@ class _$HomeScreenStateImpl extends _HomeScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeScreenStateImpl &&
-            (identical(other.playerAmount, playerAmount) ||
-                other.playerAmount == playerAmount) &&
             (identical(other.timerDuration, timerDuration) ||
                 other.timerDuration == timerDuration) &&
             (identical(other.customTimerDuration, customTimerDuration) ||
-                other.customTimerDuration == customTimerDuration));
+                other.customTimerDuration == customTimerDuration) &&
+            const DeepCollectionEquality().equals(other._players, _players));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, playerAmount, timerDuration, customTimerDuration);
+  int get hashCode => Object.hash(runtimeType, timerDuration,
+      customTimerDuration, const DeepCollectionEquality().hash(_players));
 
   @JsonKey(ignore: true)
   @override
@@ -161,17 +170,17 @@ class _$HomeScreenStateImpl extends _HomeScreenState {
 
 abstract class _HomeScreenState extends HomeScreenState {
   const factory _HomeScreenState(
-      {required final int playerAmount,
-      required final Duration timerDuration,
-      required final String? customTimerDuration}) = _$HomeScreenStateImpl;
+      {required final Duration timerDuration,
+      required final String? customTimerDuration,
+      required final List<Player> players}) = _$HomeScreenStateImpl;
   const _HomeScreenState._() : super._();
 
-  @override
-  int get playerAmount;
   @override
   Duration get timerDuration;
   @override
   String? get customTimerDuration;
+  @override
+  List<Player> get players;
   @override
   @JsonKey(ignore: true)
   _$$HomeScreenStateImplCopyWith<_$HomeScreenStateImpl> get copyWith =>

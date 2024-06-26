@@ -9,12 +9,14 @@ class AppScaffold extends StatelessWidget {
     required this.body,
     this.excludePadding = false,
     this.statusBarBrightness = Brightness.light,
+    this.resizeToAvoidBottomInset = true,
     super.key,
   });
 
   final Widget body;
   final bool excludePadding;
   final Brightness statusBarBrightness;
+  final bool resizeToAvoidBottomInset;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,12 @@ class AppScaffold extends StatelessWidget {
       ),
       child: PlatformScaffold(
         backgroundColor: context.colors.background,
+        material: (_, __) => MaterialScaffoldData(
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        ),
+        cupertino: (_, __) => CupertinoPageScaffoldData(
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        ),
         body: switch (excludePadding) {
           true => body,
           false => Padding(

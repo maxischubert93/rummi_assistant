@@ -11,6 +11,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           context.geometry.spacingDoubleExtraLarge.verticalBox,
@@ -25,11 +26,9 @@ class HomeScreen extends ConsumerWidget {
           const Spacer(),
           const _TimerSelection(),
           const Spacer(),
-          AppButton.secondary(
+          AppButton.primary(
             text: context.localizations.homeStartGameButton,
-            onPressed: () => ref.read(homeControllerProvider.notifier).newGame(
-                  defaultPlayerName: context.localizations.defaultPlayerName,
-                ),
+            onPressed: () => ref.read(homeControllerProvider.notifier).newGame(),
           ),
         ],
       ),
@@ -58,6 +57,11 @@ class _PlayerSelection extends ConsumerWidget {
             currentValue: ref.watch(homeControllerProvider).playerAmount,
             onValueChanged: (value) =>
                 ref.read(homeControllerProvider.notifier).setPlayerAmount(value),
+          ),
+          context.geometry.spacingMedium.verticalBox,
+          AppButton.secondary(
+            text: context.localizations.homePlayerSectionChangeNamesButton,
+            onPressed: () => ref.read(homeControllerProvider.notifier).showPlayerNamesModal(),
           ),
         ],
       ),
