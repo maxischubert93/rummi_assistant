@@ -41,7 +41,7 @@ class HomeController extends AutoDisposeNotifier<HomeScreenState> {
       timerDuration: state.selectedTimerDuration,
       players: state.players,
     );
-    await _router.push('/timer');
+    _router.goNamed(RouteNames.timer);
   }
 
   Future<void> showPlayerNamesModal() async {

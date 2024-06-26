@@ -55,6 +55,16 @@ class GameManager {
     await _gameRepository.updateGame(updatedGame);
   }
 
+  Future<void> finishCurrentGame() async {
+    if (currentGame == null) return;
+
+    final finishedGame = currentGame!.copyWith(
+      isFinished: true,
+    );
+
+    await _gameRepository.updateGame(finishedGame);
+  }
+
   void dispose() {
     _currentGameSubject.close();
     _gameSubscription.cancel();

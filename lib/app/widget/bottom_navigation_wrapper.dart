@@ -53,6 +53,10 @@ class BottomNavigationWrapper extends StatelessWidget {
             icon: Icon(Icons.numbers),
             label: 'Score',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
         ],
       ),
     );

@@ -10,17 +10,78 @@ import 'package:rummi_assistant/home/presentation/player_names_modal.dart';
 import 'package:rummi_assistant/home/presentation/timer_selection_modal.dart';
 import 'package:rummi_assistant/in_game/presentation/score_input_modal.dart';
 import 'package:rummi_assistant/in_game/presentation/score_screen.dart';
+import 'package:rummi_assistant/in_game/presentation/settings_screen.dart';
 import 'package:rummi_assistant/in_game/presentation/timer_screen.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _timerTabNavigatorKey = GlobalKey<NavigatorState>();
 final _scoreTabNavigatorKey = GlobalKey<NavigatorState>();
+final _settingsTabNavigatorKey = GlobalKey<NavigatorState>();
 
 GoRouter buildRouter() => GoRouter(
       navigatorKey: _rootNavigatorKey,
+      initialLocation: '/timer',
       routes: [
+        StatefulShellRoute.indexedStack(
+          redirect: (_, __) {
+            if (!GetIt.instance.get<GameManager>().hasRunningGame) {
+              return '/home';
+            } else {
+              return null;
+            }
+          },
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (_, __, navigationShell) =>
+              BottomNavigationWrapper(navigationShell: navigationShell),
+          branches: [
+            StatefulShellBranch(
+              navigatorKey: _timerTabNavigatorKey,
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: _timerTabNavigatorKey,
+                  path: '/timer',
+                  name: RouteNames.timer,
+                  builder: (_, __) => const TimerScreen(),
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              navigatorKey: _scoreTabNavigatorKey,
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: _scoreTabNavigatorKey,
+                  path: '/score',
+                  name: RouteNames.score,
+                  builder: (_, __) => const ScoreScreen(),
+                  routes: [
+                    GoRoute(
+                      path: 'score-input',
+                      parentNavigatorKey: _rootNavigatorKey,
+                      name: RouteNames.scoreInputModal,
+                      pageBuilder: (context, state) => PlatformModalPage(
+                        applyPadding: false,
+                        builder: (_) => const ScoreInputModal(),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              navigatorKey: _settingsTabNavigatorKey,
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: _settingsTabNavigatorKey,
+                  path: '/settings',
+                  name: RouteNames.settings,
+                  builder: (_, __) => const SettingsScreen(),
+                ),
+              ],
+            ),
+          ],
+        ),
         GoRoute(
-          path: '/',
+          path: '/home',
           name: RouteNames.home,
           builder: (context, state) => const HomeScreen(),
           routes: [
@@ -37,48 +98,6 @@ GoRouter buildRouter() => GoRouter(
               pageBuilder: (context, state) => PlatformModalPage<List<String>>(
                 builder: (_) => const PlayerNamesModal(),
               ),
-            ),
-            GoRoute(
-              path: 'score-input',
-              name: RouteNames.scoreInputModal,
-              pageBuilder: (context, state) => PlatformModalPage(
-                applyPadding: false,
-                builder: (_) => const ScoreInputModal(),
-              ),
-            ),
-            StatefulShellRoute.indexedStack(
-              redirect: (_, __) {
-                if (!GetIt.instance.get<GameManager>().hasRunningGame) {
-                  return '/';
-                } else {
-                  return null;
-                }
-              },
-              parentNavigatorKey: _rootNavigatorKey,
-              builder: (_, __, navigationShell) =>
-                  BottomNavigationWrapper(navigationShell: navigationShell),
-              branches: [
-                StatefulShellBranch(
-                  navigatorKey: _timerTabNavigatorKey,
-                  routes: [
-                    GoRoute(
-                      path: 'timer',
-                      name: RouteNames.timer,
-                      builder: (_, __) => const TimerScreen(),
-                    ),
-                  ],
-                ),
-                StatefulShellBranch(
-                  navigatorKey: _scoreTabNavigatorKey,
-                  routes: [
-                    GoRoute(
-                      path: 'score',
-                      name: RouteNames.score,
-                      builder: (_, __) => const ScoreScreen(),
-                    ),
-                  ],
-                ),
-              ],
             ),
           ],
         ),
