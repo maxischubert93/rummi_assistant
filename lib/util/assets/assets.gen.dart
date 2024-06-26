@@ -37,11 +37,14 @@ class $AssetsIconsGen {
 class $AssetsSoundsGen {
   const $AssetsSoundsGen();
 
+  /// File path: assets/sounds/ticking.mp3
+  String get ticking => 'assets/sounds/ticking.mp3';
+
   /// File path: assets/sounds/timer_alert.mp3
   String get timerAlert => 'assets/sounds/timer_alert.mp3';
 
   /// List of all assets
-  List<String> get values => [timerAlert];
+  List<String> get values => [ticking, timerAlert];
 }
 
 class Assets {

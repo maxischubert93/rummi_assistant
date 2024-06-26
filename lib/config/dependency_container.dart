@@ -35,7 +35,9 @@ Future<void> _registerManagers(GetIt container) async {
 }
 
 void _registerServices(GetIt container) {
-  container.registerFactory<TimerAlertPlayer>(AudioService.new);
+  container.registerFactoryParam<TimerAlertPlayer, String, void>(
+    (assetPath, _) => AudioService(assetPath: assetPath),
+  );
 }
 
 /*Future<void> _setupLogging(GetIt container) async {

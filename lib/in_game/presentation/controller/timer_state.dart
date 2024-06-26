@@ -27,5 +27,7 @@ class TimerState with _$TimerState {
         .toString();
   }
 
+  int get secondsLeft => max((timerDuration.inMilliseconds - millisPassed) / 1000, 0).toInt();
+
   double get timerProgress => 1 - millisPassed / timerDuration.inMilliseconds;
 }
