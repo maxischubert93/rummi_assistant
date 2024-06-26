@@ -44,13 +44,24 @@ class TimerController extends StateNotifier<TimerState> {
     await _alertPlayer.play();
   }
 
-  void stop() {
+  void togglePause() {
+    if (state.isRunning) {
+      _timer?.cancel();
+      state = state.copyWith(isRunning: false);
+    } else {
+      start();
+    }
+  }
+
+  void stopAndReset() {
     _timer?.cancel();
-    state = state.copyWith(isRunning: false);
+    _alertPlayer.stop();
+    state = state.copyWith(isRunning: false, millisPassed: 0);
   }
 
   void reset() {
     _timer?.cancel();
+    _alertPlayer.stop();
     state = state.copyWith(millisPassed: 0);
     start();
   }

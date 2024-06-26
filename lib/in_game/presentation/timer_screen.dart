@@ -15,7 +15,7 @@ class TimerScreen extends ConsumerWidget {
       excludePadding: true,
       body: GestureDetector(
         onTap: () => ref.read(timerControllerProvider.notifier).reset(),
-        onDoubleTap: () => ref.read(timerControllerProvider.notifier).stop(),
+        onDoubleTap: () => ref.read(timerControllerProvider.notifier).togglePause(),
         child: Container(
           width: double.infinity,
           height: double.infinity,
@@ -40,12 +40,8 @@ class _TimerState extends ConsumerState<_Timer> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(timerControllerProvider);
-    final screenWidth = MediaQuery
-        .sizeOf(context)
-        .width;
-    final screenHeight = MediaQuery
-        .sizeOf(context)
-        .height;
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenHeight = MediaQuery.sizeOf(context).height;
 
     final isPortrait = screenWidth < screenHeight;
     final padding = switch (isPortrait) {

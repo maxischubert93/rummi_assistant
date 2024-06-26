@@ -9,9 +9,7 @@ class AudioService implements TimerAlertPlayer {
     _player.setAsset(Assets.sounds.timerAlert);
     _subscription = _player.processingStateStream.listen((state) {
       if (state == ProcessingState.completed) {
-        _player
-          ..pause()
-          ..seek(Duration.zero);
+        stop();
       }
     });
   }
@@ -28,5 +26,11 @@ class AudioService implements TimerAlertPlayer {
   Future<void> dispose() async {
     await _player.dispose();
     await _subscription?.cancel();
+  }
+
+  @override
+  Future<void> stop() async {
+    await _player.pause();
+    await _player.seek(Duration.zero);
   }
 }

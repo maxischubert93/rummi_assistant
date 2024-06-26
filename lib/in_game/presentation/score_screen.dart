@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/in_game/presentation/controller/score_controller.dart';
+import 'package:rummi_assistant/in_game/presentation/controller/timer_controller.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 const double _cellHeight = 50;
@@ -63,12 +64,7 @@ class _ScoreTable extends ConsumerWidget {
             for (var i = 0; i < state.maxScoreRowCount; i++)
               TableRow(
                 children: state.players
-                    .map(
-                      (player) => _ScoreCell(
-                        score: player.scores.elementAtOrNull(i),
-                        isInEvenRow: i.isEven,
-                      ),
-                    )
+                    .map((player) => _ScoreCell(score: player.scores.elementAtOrNull(i)))
                     .toList(),
               ),
           ],
@@ -77,7 +73,10 @@ class _ScoreTable extends ConsumerWidget {
           padding: context.geometry.mediumPadding,
           child: AppButton.primary(
             text: context.localizations.scoreScreenAddScoreButton,
-            onPressed: () => ref.read(scoreControllerProvider.notifier).addScore(),
+            onPressed: () {
+              ref.read(timerControllerProvider.notifier).stopAndReset();
+              ref.read(scoreControllerProvider.notifier).addScore();
+            },
           ),
         ),
       ],
@@ -134,7 +133,7 @@ class _TotalScoreRow extends ConsumerWidget {
               child: Container(
                 height: _cellHeight,
                 alignment: Alignment.center,
-                color: context.colors.secondaryLightest,
+                color: score.isWinning ? context.colors.tertiary : context.colors.secondaryLightest,
                 child: Subtitle(score.totalScore.toString(), textAlign: TextAlign.center),
               ),
             ),
@@ -145,14 +144,13 @@ class _TotalScoreRow extends ConsumerWidget {
 }
 
 class _ScoreCell extends StatelessWidget {
-  const _ScoreCell({required this.score, required this.isInEvenRow});
+  const _ScoreCell({required this.score});
 
   final int? score;
-  final bool isInEvenRow;
 
   @override
   Widget build(BuildContext context) {
-    final color = isInEvenRow ? context.colors.tertiaryLightest : context.colors.background;
+    final color = (score ?? 0) < 0 ? context.colors.tertiaryLightest : context.colors.background;
 
     return Container(
       height: _cellHeight,
