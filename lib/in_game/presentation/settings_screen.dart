@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/core/widget/button/menu_button.dart';
+import 'package:rummi_assistant/core/widget/separated_column.dart';
 import 'package:rummi_assistant/in_game/presentation/controller/settings_controller.dart';
+import 'package:rummi_assistant/in_game/presentation/widget/version_text.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -11,15 +14,21 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       appBarTitle: 'Settings',
+      excludePadding: true,
       body: SingleChildScrollView(
+        padding: context.geometry.mediumPadding,
         child: Column(
           children: [
-            const _PlayersSection(),
-            context.geometry.spacingLarge.verticalBox,
             AppButton.primary(
               text: 'Finish game',
               onPressed: () => ref.read(settingsControllerProvider.notifier).finishGame(),
             ),
+            context.geometry.spacingLarge.verticalBox,
+            const _PlayersSection(),
+            context.geometry.spacingLarge.verticalBox,
+            const _LegalSection(),
+            context.geometry.spacingTripleExtraLarge.verticalBox,
+            const VersionText(),
           ],
         ),
       ),
@@ -82,11 +91,11 @@ class _PlayerLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = [
-      context.colors.primaryLightest.withOpacity(0.6),
-      context.colors.secondaryLightest.withOpacity(0.6),
-      context.colors.tertiaryLightest.withOpacity(0.6),
-      context.colors.divider.withOpacity(0.6),
+    final borderColors = [
+      context.colors.primary,
+      context.colors.secondary,
+      context.colors.tertiary,
+      context.colors.divider,
     ];
 
     return Expanded(
@@ -96,10 +105,31 @@ class _PlayerLabel extends StatelessWidget {
           vertical: context.geometry.spacingSmall,
         ),
         decoration: BoxDecoration(
-          color: colors[index % colors.length],
+          color: context.colors.background,
           borderRadius: context.geometry.radiusMedium,
+          border: Border.all(color: borderColors[index % borderColors.length]),
         ),
         child: BodyLarge(playerName),
+      ),
+    );
+  }
+}
+
+class _LegalSection extends StatelessWidget {
+  const _LegalSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return _SettingsSection(
+      title: 'Legal',
+      child: SeparatedColumn(
+        spacing: context.geometry.spacingExtraSmall,
+        children: const [
+          MenuButton(routeName: "routeName", title: "Privacy Policy", icon: Icons.privacy_tip),
+          MenuButton(
+              routeName: "routeName", title: "Open source licenses", icon: Icons.library_books),
+          MenuButton(routeName: "routeName", title: "Imprint", icon: Icons.local_library_rounded),
+        ],
       ),
     );
   }

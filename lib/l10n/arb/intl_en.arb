@@ -19,5 +19,6 @@
   "scoreInputModalButtonStep": "Submit score",
   "scoreInputModalButtonFinish": "Finish",
   "scoreInputModalTitle": "Enter score for {playerName}",
-  "scoreInputModalSelectWinnerTitle": "Select the round winner"
+  "scoreInputModalSelectWinnerTitle": "Select the round winner",
+  "settingsAppVersion": "Appversion: {version} ({build})"
 }

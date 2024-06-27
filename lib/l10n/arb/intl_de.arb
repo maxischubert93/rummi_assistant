@@ -19,5 +19,6 @@
   "scoreInputModalButtonStep": "Punkte eintragen",
   "scoreInputModalButtonFinish": "Fertig",
   "scoreInputModalTitle": "Punkte für {playerName}",
-  "scoreInputModalSelectWinnerTitle": "Sieger der Runde auswählen"
+  "scoreInputModalSelectWinnerTitle": "Sieger der Runde auswählen",
+  "settingsAppVersion": "Appversion: {version} ({build})"
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rummi_assistant/core/domain/model/game.dart';
 import 'package:rummi_assistant/core/domain/model/game_round.dart';
@@ -68,8 +69,8 @@ class GameManager {
   Future<void> updatePlayerNames(List<String> names) async {
     if (currentGame == null) return;
 
-    final updatedPlayers = names.map((name) {
-      final player = currentGame!.players.firstWhere((player) => player.name == name);
+    final updatedPlayers = names.mapIndexed((index, name) {
+      final player = currentGame!.players[index].copyWith(name: name);
       return player;
     }).toList();
 
