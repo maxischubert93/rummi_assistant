@@ -12,12 +12,7 @@ class ScoreInputModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const _PlayerInputPageView(),
-      ],
-    );
+    return const _PlayerInputPageView();
   }
 }
 

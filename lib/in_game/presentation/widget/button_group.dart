@@ -61,7 +61,6 @@ class _SelectableButton extends StatelessWidget {
           borderRadius: borderRadius,
           border: Border.all(
             color: context.colors.primary,
-            width: 1,
           ),
         ),
         child: Button(
