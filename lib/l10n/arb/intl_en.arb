@@ -20,5 +20,6 @@
   "scoreInputModalButtonFinish": "Finish",
   "scoreInputModalTitle": "Enter score for {playerName}",
   "scoreInputModalSelectWinnerTitle": "Select the round winner",
-  "settingsAppVersion": "Appversion: {version} ({build})"
+  "settingsAppVersion": "Appversion: {version} ({build})",
+  "settingsOpenSourceLicenses": "Open source licenses"
 }

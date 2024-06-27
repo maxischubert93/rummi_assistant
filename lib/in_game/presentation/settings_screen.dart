@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rummi_assistant/app/theme/geometry.dart';
+import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/widget/button/menu_button.dart';
 import 'package:rummi_assistant/core/widget/separated_column.dart';
 import 'package:rummi_assistant/in_game/presentation/controller/settings_controller.dart';
 import 'package:rummi_assistant/in_game/presentation/widget/version_text.dart';
+import 'package:rummi_assistant/l10n/l10n.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -15,6 +16,7 @@ class SettingsScreen extends ConsumerWidget {
     return AppScaffold(
       appBarTitle: 'Settings',
       excludePadding: true,
+      hideBackButton: true,
       body: SingleChildScrollView(
         padding: context.geometry.mediumPadding,
         child: Column(
@@ -124,11 +126,22 @@ class _LegalSection extends StatelessWidget {
       title: 'Legal',
       child: SeparatedColumn(
         spacing: context.geometry.spacingExtraSmall,
-        children: const [
-          MenuButton(routeName: "routeName", title: "Privacy Policy", icon: Icons.privacy_tip),
+        children: [
+          const MenuButton(
+            routeName: 'routeName',
+            title: 'Privacy Policy',
+            icon: Icons.privacy_tip,
+          ),
           MenuButton(
-              routeName: "routeName", title: "Open source licenses", icon: Icons.library_books),
-          MenuButton(routeName: "routeName", title: "Imprint", icon: Icons.local_library_rounded),
+            routeName: RouteNames.licenses,
+            title: context.localizations.settingsOpenSourceLicenses,
+            icon: Icons.library_books,
+          ),
+          const MenuButton(
+            routeName: 'routeName',
+            title: 'Imprint',
+            icon: Icons.local_library_rounded,
+          ),
         ],
       ),
     );

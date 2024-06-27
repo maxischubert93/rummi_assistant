@@ -20,5 +20,6 @@
   "scoreInputModalButtonFinish": "Fertig",
   "scoreInputModalTitle": "Punkte für {playerName}",
   "scoreInputModalSelectWinnerTitle": "Sieger der Runde auswählen",
-  "settingsAppVersion": "Appversion: {version} ({build})"
+  "settingsAppVersion": "Appversion: {version} ({build})",
+  "settingsOpenSourceLicenses": "Open Source Lizenzen"
 }

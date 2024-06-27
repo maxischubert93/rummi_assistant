@@ -6,4 +6,6 @@ class RouteNames {
   static const timerModal = 'timer-modal';
   static const playerNamesModal = 'player-names-modal';
   static const scoreInputModal = 'score-input-modal';
+  static const licenses = 'licences';
+  static const licenseDetail = 'licence-detail';
 }

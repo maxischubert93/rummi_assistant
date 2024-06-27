@@ -13,12 +13,14 @@ class AppScaffold extends StatelessWidget {
     this.excludePadding = false,
     this.statusBarBrightness = Brightness.light,
     this.resizeToAvoidBottomInset = true,
+    this.hideBackButton = false,
     this.appBarTitle,
     super.key,
   });
 
   final Widget body;
   final bool excludePadding;
+  final bool hideBackButton;
   final Brightness statusBarBrightness;
   final bool resizeToAvoidBottomInset;
   final String? appBarTitle;
@@ -43,8 +45,8 @@ class AppScaffold extends StatelessWidget {
         ),
         appBar: appBarTitle != null
             ? RummiAppBar(
-                title: HeadlineMedium(appBarTitle!),
-                leading: context.canPop()
+                title: HeadlineSmall(appBarTitle!),
+                leading: (context.canPop() && !hideBackButton)
                     ? AppBarBackButton(onPressed: () => context.pop(), isEnabled: true)
                     : null,
               )

@@ -8,6 +8,8 @@ import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/home/presentation/home_screen.dart';
 import 'package:rummi_assistant/home/presentation/player_names_modal.dart';
 import 'package:rummi_assistant/home/presentation/timer_selection_modal.dart';
+import 'package:rummi_assistant/in_game/presentation/licences_screen.dart';
+import 'package:rummi_assistant/in_game/presentation/license_detail_screen.dart';
 import 'package:rummi_assistant/in_game/presentation/score_input_modal.dart';
 import 'package:rummi_assistant/in_game/presentation/score_screen.dart';
 import 'package:rummi_assistant/in_game/presentation/settings_screen.dart';
@@ -75,6 +77,20 @@ GoRouter buildRouter() => GoRouter(
                   path: '/settings',
                   name: RouteNames.settings,
                   builder: (_, __) => const SettingsScreen(),
+                  routes: [
+                    GoRoute(
+                      path: 'licenses',
+                      name: RouteNames.licenses,
+                      builder: (_, __) => const LicensesScreen(),
+                      routes: [
+                        GoRoute(
+                          path: 'license-detail',
+                          name: RouteNames.licenseDetail,
+                          builder: (_, __) => const LicenseDetailScreen(),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
