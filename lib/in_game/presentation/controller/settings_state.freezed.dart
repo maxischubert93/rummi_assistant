@@ -15,13 +15,21 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$SettingsState {}
+mixin _$SettingsState {
+  List<Player> get players => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SettingsStateCopyWith<SettingsState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $SettingsStateCopyWith<$Res> {
   factory $SettingsStateCopyWith(
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
+  @useResult
+  $Res call({List<Player> players});
 }
 
 /// @nodoc
@@ -33,13 +41,30 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? players = null,
+  }) {
+    return _then(_value.copyWith(
+      players: null == players
+          ? _value.players
+          : players // ignore: cast_nullable_to_non_nullable
+              as List<Player>,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$SettingsStateImplCopyWith<$Res> {
+abstract class _$$SettingsStateImplCopyWith<$Res>
+    implements $SettingsStateCopyWith<$Res> {
   factory _$$SettingsStateImplCopyWith(
           _$SettingsStateImpl value, $Res Function(_$SettingsStateImpl) then) =
       __$$SettingsStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Player> players});
 }
 
 /// @nodoc
@@ -49,29 +74,69 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   __$$SettingsStateImplCopyWithImpl(
       _$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? players = null,
+  }) {
+    return _then(_$SettingsStateImpl(
+      players: null == players
+          ? _value._players
+          : players // ignore: cast_nullable_to_non_nullable
+              as List<Player>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SettingsStateImpl extends _SettingsState {
-  const _$SettingsStateImpl() : super._();
+  const _$SettingsStateImpl({required final List<Player> players})
+      : _players = players,
+        super._();
+
+  final List<Player> _players;
+  @override
+  List<Player> get players {
+    if (_players is EqualUnmodifiableListView) return _players;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_players);
+  }
 
   @override
   String toString() {
-    return 'SettingsState()';
+    return 'SettingsState(players: $players)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SettingsStateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SettingsStateImpl &&
+            const DeepCollectionEquality().equals(other._players, _players));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_players));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
+      __$$SettingsStateImplCopyWithImpl<_$SettingsStateImpl>(this, _$identity);
 }
 
 abstract class _SettingsState extends SettingsState {
-  const factory _SettingsState() = _$SettingsStateImpl;
+  const factory _SettingsState({required final List<Player> players}) =
+      _$SettingsStateImpl;
   const _SettingsState._() : super._();
+
+  @override
+  List<Player> get players;
+  @override
+  @JsonKey(ignore: true)
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

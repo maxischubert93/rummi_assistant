@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -11,13 +13,32 @@ final settingsControllerProvider =
 );
 
 class SettingsController extends StateNotifier<SettingsState> {
-  SettingsController() : super(SettingsState.initial());
+  SettingsController() : super(SettingsState.initial()) {
+    _gameSubscription = _gameManager.currentGameStream.filterNull().listen((game) {
+      state = state.copyWith(players: game.players);
+    });
+  }
 
   late final GameManager _gameManager = GetIt.instance.get();
   late final GoRouter _router = GetIt.instance.get();
 
+  StreamSubscription<Game>? _gameSubscription;
+
   Future<void> finishGame() async {
     await _gameManager.finishCurrentGame();
     _router.goNamed(RouteNames.home);
+  }
+
+  Future<void> changePlayerNames() async {
+    final newNames = await _router.pushNamed<List<String>>(RouteNames.playerNamesModal);
+    if (newNames != null) {
+      await _gameManager.updatePlayerNames(newNames);
+    }
+  }
+
+  @override
+  void dispose() {
+    _gameSubscription?.cancel();
+    super.dispose();
   }
 }

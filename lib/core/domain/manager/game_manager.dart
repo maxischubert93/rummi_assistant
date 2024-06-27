@@ -65,6 +65,21 @@ class GameManager {
     await _gameRepository.updateGame(finishedGame);
   }
 
+  Future<void> updatePlayerNames(List<String> names) async {
+    if (currentGame == null) return;
+
+    final updatedPlayers = names.map((name) {
+      final player = currentGame!.players.firstWhere((player) => player.name == name);
+      return player;
+    }).toList();
+
+    final updatedGame = currentGame!.copyWith(
+      players: updatedPlayers,
+    );
+
+    await _gameRepository.updateGame(updatedGame);
+  }
+
   void dispose() {
     _currentGameSubject.close();
     _gameSubscription.cancel();
