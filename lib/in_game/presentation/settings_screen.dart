@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/app/theme/geometry.dart';
@@ -11,6 +10,7 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
+      appBarTitle: 'Settings',
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -34,8 +34,12 @@ class _PlayersSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final players = ref.watch(settingsControllerProvider.select((state) => state.players));
 
+    if (players.isEmpty) {
+      return const SizedBox();
+    }
+
     return _SettingsSection(
-      title: 'Player options',
+      title: 'Player names',
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

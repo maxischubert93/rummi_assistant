@@ -13,16 +13,20 @@ class BaseButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.isLoading,
+    this.expand = true,
     this.leadingIcon,
     this.trailingIcon,
+    this.centerIcon,
     super.key,
-  });
+  }) : assert(text == null || centerIcon == null, 'Only one of text or centerIcon can be provided');
 
   final bool isEnabled;
+  final bool expand;
   final AppButtonStyle style;
   final VoidCallback onPressed;
   final bool isLoading;
-  final String text;
+  final String? text;
+  final IconData? centerIcon;
 
   final SvgGenImage? leadingIcon;
   final SvgGenImage? trailingIcon;
@@ -36,8 +40,10 @@ class BaseButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(40),
       child: _Content(
         text: text,
+        centerIcon: centerIcon,
         isLoading: isLoading,
-        contentColor: style.active.content,
+        expand: expand,
+        style: style,
         leadingIcon: leadingIcon,
         trailingIcon: trailingIcon,
       ),
@@ -45,51 +51,79 @@ class BaseButton extends StatelessWidget {
   }
 }
 
-class _Content extends StatelessWidget {
+class _Content extends StatefulWidget {
   const _Content({
     required this.text,
+    required this.centerIcon,
     required this.isLoading,
-    required this.contentColor,
+    required this.style,
+    required this.expand,
     this.leadingIcon,
     this.trailingIcon,
   });
 
   final bool isLoading;
+  final bool expand;
   final SvgGenImage? leadingIcon;
   final SvgGenImage? trailingIcon;
-  final Color contentColor;
-  final String text;
+  final AppButtonStyle style;
+  final String? text;
+  final IconData? centerIcon;
+
+  @override
+  State<_Content> createState() => _ContentState();
+}
+
+class _ContentState extends State<_Content> {
+  bool _isPressed = false;
+
+  bool get isPressed => _isPressed;
+
+  set isPressed(bool isPressed) {
+    setState(() => _isPressed = isPressed);
+  }
+
+  Color get _contentColor {
+    return isPressed ? widget.style.iOSPressed.content : widget.style.active.content;
+  }
 
   @override
   Widget build(BuildContext context) {
     final geometry = context.geometry;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
-      child: Stack(
-        children: [
-          Visibility.maintain(
-            visible: !isLoading,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (leadingIcon != null) leadingIcon!.coloredSvg(contentColor),
-                if (leadingIcon != null) geometry.spacingSmall.horizontalBox,
-                Button(text, color: contentColor),
-                if (trailingIcon != null) geometry.spacingSmall.horizontalBox,
-                if (trailingIcon != null) trailingIcon!.coloredSvg(contentColor),
-              ],
-            ),
-          ),
-          Positioned.fill(
-            child: Visibility(
-              visible: isLoading,
-              child: Center(
-                child: CircularProgressIndicator(color: contentColor),
+    return GestureDetector(
+      onTapDown: (_) => isPressed = true,
+      onTapCancel: () => isPressed = false,
+      onTapUp: (_) => isPressed = false,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+        child: Stack(
+          children: [
+            Visibility.maintain(
+              visible: !widget.isLoading,
+              child: Row(
+                mainAxisSize: widget.expand ? MainAxisSize.max : MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (widget.leadingIcon != null) widget.leadingIcon!.coloredSvg(_contentColor),
+                  if (widget.leadingIcon != null) geometry.spacingSmall.horizontalBox,
+                  if (widget.text != null) Button(widget.text!, color: _contentColor),
+                  if (widget.centerIcon != null) Icon(widget.centerIcon, color: _contentColor),
+                  if (widget.trailingIcon != null) geometry.spacingSmall.horizontalBox,
+                  if (widget.trailingIcon != null) widget.trailingIcon!.coloredSvg(_contentColor),
+                ],
               ),
             ),
-          ),
-        ],
+            Positioned.fill(
+              child: Visibility(
+                visible: widget.isLoading,
+                child: Center(
+                  child: CircularProgressIndicator(color: widget.style.active.content),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

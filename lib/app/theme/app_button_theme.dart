@@ -65,4 +65,23 @@ class AppButtonTheme {
         ),
         androidRipple: colors.onTertiary.withOpacity(0.2),
       );
+
+  AppButtonStyle get appBarButton => AppButtonStyle(
+        active: AppButtonStateStyle(
+          background: AppColors.transparent,
+          border: AppColors.transparent,
+          content: colors.onBackground,
+        ),
+        iOSPressed: AppButtonStateStyle(
+          background: AppColors.transparent,
+          border: AppColors.transparent,
+          content: colors.onBackground.withOpacity(0.5),
+        ),
+        disabled: AppButtonStateStyle(
+          background: colors.disabled,
+          border: AppColors.transparent,
+          content: colors.onDisabled,
+        ),
+        androidRipple: colors.onBackground.withOpacity(0.2),
+      );
 }
