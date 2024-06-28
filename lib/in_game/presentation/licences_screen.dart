@@ -78,13 +78,13 @@ class _LicenseButton extends StatelessWidget {
         borderRadius: context.geometry.radiusMedium,
       ),
       onTap: () {
-        context.pushNamed(RouteNames.licenseDetail);
+        context.pushNamed(RouteNames.licenseDetail, extra: license);
       },
       child: Container(
         padding: context.geometry.mediumPadding,
         decoration: BoxDecoration(
           borderRadius: context.geometry.radiusMedium,
-          color: context.colors.primaryLightest,
+          color: context.colors.primaryLight,
         ),
         child: Row(
           children: [
