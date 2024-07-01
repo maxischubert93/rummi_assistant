@@ -5,6 +5,8 @@ import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/data/store/database.dart';
 import 'package:rummi_assistant/core/data/store/game_store.dart';
 import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
+import 'package:rummi_assistant/settings/data/store/user_settings_store.dart';
+import 'package:rummi_assistant/settings/domain/user_settings.dart';
 import 'package:rummi_assistant/timer/domain/timer_alert_player.dart';
 import 'package:rummi_assistant/timer/service/audio_service.dart';
 
@@ -24,6 +26,7 @@ Future<void> prepareApp() async {
 Future<void> _registerStores(GetIt container) async {
   container
     ..registerSingleton(await DatabaseBuilder.openDatabase())
+    ..registerSingleton<UserSettings>(UserSettingsStore())
     ..registerFactory<GameRepository>(GameStore.new);
 }
 

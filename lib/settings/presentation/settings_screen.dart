@@ -65,12 +65,42 @@ class _TimerSection extends ConsumerWidget {
     return _SettingsSection(
       title: context.localizations.settingsTimerSectionTitle,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TimerSegmentedControl(
             currentValue: timerDuration,
             onValueChanged: (duration) =>
                 ref.read(settingsControllerProvider.notifier).onTimerDurationChanged(duration),
           ),
+          context.geometry.spacingMedium.verticalBox,
+          const _TimerSoundCheckBox(),
+        ],
+      ),
+    );
+  }
+}
+
+class _TimerSoundCheckBox extends ConsumerWidget {
+  const _TimerSoundCheckBox();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isEnabled =
+        ref.watch(settingsControllerProvider.select((state) => state.isTimerSoundEnabled));
+
+    return GestureDetector(
+      onTap: () => ref.read(settingsControllerProvider.notifier).onToggleTimerSoundEnabled(),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Checkbox.adaptive(
+            value: isEnabled,
+            onChanged: (_) =>
+                ref.read(settingsControllerProvider.notifier).onToggleTimerSoundEnabled(),
+            activeColor: context.colors.primary,
+            checkColor: context.colors.onPrimary,
+          ),
+          BodyLarge(context.localizations.settingsTimerSectionSoundCheckBox),
         ],
       ),
     );

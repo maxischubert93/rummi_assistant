@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:get_it/get_it.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:rummi_assistant/settings/domain/user_settings.dart';
 import 'package:rummi_assistant/timer/domain/timer_alert_player.dart';
 
 class AudioService implements TimerAlertPlayer {
@@ -13,11 +15,14 @@ class AudioService implements TimerAlertPlayer {
     });
   }
 
+  late final UserSettings _userSettings = GetIt.instance.get();
+
   final _player = AudioPlayer();
   StreamSubscription<ProcessingState>? _subscription;
 
   @override
   Future<void> play() async {
+    if (!_userSettings.isTimerSoundEnabled) return;
     await _player.play();
   }
 

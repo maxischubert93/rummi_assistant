@@ -8,11 +8,13 @@ class SettingsState with _$SettingsState {
   const factory SettingsState({
     required List<Player> players,
     required Duration timerDuration,
+    required bool isTimerSoundEnabled,
   }) = _SettingsState;
 
   factory SettingsState.initial() => const SettingsState(
         players: [],
         timerDuration: Duration(minutes: 1),
+        isTimerSoundEnabled: true,
       );
 
   const SettingsState._();

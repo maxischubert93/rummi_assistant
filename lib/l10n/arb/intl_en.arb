@@ -25,6 +25,7 @@
   "settingsOpenSourceLicenses": "Open source licenses",
   "settingsFinishGameButton": "Finish game",
   "settingsTimerSectionTitle": "Timer",
+  "settingsTimerSectionSoundCheckBox": "Timer sound 🔈",
   "settingsPlayerSectionTitle": "Player names",
   "settingsPlayerSectionChangeNamesButton": "Change player names",
   "settingsLegalSectionTitle": "Legal"

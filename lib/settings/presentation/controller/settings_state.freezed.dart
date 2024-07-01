@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingsState {
   List<Player> get players => throw _privateConstructorUsedError;
   Duration get timerDuration => throw _privateConstructorUsedError;
+  bool get isTimerSoundEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsStateCopyWith<SettingsState> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
-  $Res call({List<Player> players, Duration timerDuration});
+  $Res call(
+      {List<Player> players, Duration timerDuration, bool isTimerSoundEnabled});
 }
 
 /// @nodoc
@@ -48,6 +50,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   $Res call({
     Object? players = null,
     Object? timerDuration = null,
+    Object? isTimerSoundEnabled = null,
   }) {
     return _then(_value.copyWith(
       players: null == players
@@ -58,6 +61,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.timerDuration
           : timerDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      isTimerSoundEnabled: null == isTimerSoundEnabled
+          ? _value.isTimerSoundEnabled
+          : isTimerSoundEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -70,7 +77,8 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
       __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Player> players, Duration timerDuration});
+  $Res call(
+      {List<Player> players, Duration timerDuration, bool isTimerSoundEnabled});
 }
 
 /// @nodoc
@@ -86,6 +94,7 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? players = null,
     Object? timerDuration = null,
+    Object? isTimerSoundEnabled = null,
   }) {
     return _then(_$SettingsStateImpl(
       players: null == players
@@ -96,6 +105,10 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
           ? _value.timerDuration
           : timerDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      isTimerSoundEnabled: null == isTimerSoundEnabled
+          ? _value.isTimerSoundEnabled
+          : isTimerSoundEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,7 +117,9 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 
 class _$SettingsStateImpl extends _SettingsState {
   const _$SettingsStateImpl(
-      {required final List<Player> players, required this.timerDuration})
+      {required final List<Player> players,
+      required this.timerDuration,
+      required this.isTimerSoundEnabled})
       : _players = players,
         super._();
 
@@ -118,10 +133,12 @@ class _$SettingsStateImpl extends _SettingsState {
 
   @override
   final Duration timerDuration;
+  @override
+  final bool isTimerSoundEnabled;
 
   @override
   String toString() {
-    return 'SettingsState(players: $players, timerDuration: $timerDuration)';
+    return 'SettingsState(players: $players, timerDuration: $timerDuration, isTimerSoundEnabled: $isTimerSoundEnabled)';
   }
 
   @override
@@ -131,12 +148,17 @@ class _$SettingsStateImpl extends _SettingsState {
             other is _$SettingsStateImpl &&
             const DeepCollectionEquality().equals(other._players, _players) &&
             (identical(other.timerDuration, timerDuration) ||
-                other.timerDuration == timerDuration));
+                other.timerDuration == timerDuration) &&
+            (identical(other.isTimerSoundEnabled, isTimerSoundEnabled) ||
+                other.isTimerSoundEnabled == isTimerSoundEnabled));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_players), timerDuration);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_players),
+      timerDuration,
+      isTimerSoundEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +170,16 @@ class _$SettingsStateImpl extends _SettingsState {
 abstract class _SettingsState extends SettingsState {
   const factory _SettingsState(
       {required final List<Player> players,
-      required final Duration timerDuration}) = _$SettingsStateImpl;
+      required final Duration timerDuration,
+      required final bool isTimerSoundEnabled}) = _$SettingsStateImpl;
   const _SettingsState._() : super._();
 
   @override
   List<Player> get players;
   @override
   Duration get timerDuration;
+  @override
+  bool get isTimerSoundEnabled;
   @override
   @JsonKey(ignore: true)
   _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
