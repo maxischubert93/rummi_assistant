@@ -4,9 +4,10 @@ import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/widget/button/menu_button.dart';
 import 'package:rummi_assistant/core/widget/separated_column.dart';
-import 'package:rummi_assistant/in_game/presentation/controller/settings_controller.dart';
-import 'package:rummi_assistant/in_game/presentation/widget/version_text.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
+import 'package:rummi_assistant/settings/presentation/controller/settings_controller.dart';
+import 'package:rummi_assistant/settings/presentation/widget/version_text.dart';
+import 'package:rummi_assistant/timer/presentation/widget/timer_segmented_control.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -14,25 +15,63 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
-      appBarTitle: 'Settings',
+      appBarTitle: context.localizations.settingsTitle,
       excludePadding: true,
       hideBackButton: true,
-      body: SingleChildScrollView(
-        padding: context.geometry.mediumPadding,
-        child: Column(
-          children: [
-            AppButton.primary(
-              text: 'Finish game',
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: context.geometry.mediumPadding,
+              child: Column(
+                children: [
+                  const _PlayersSection(),
+                  context.geometry.spacingLarge.verticalBox,
+                  const _TimerSection(),
+                  context.geometry.spacingLarge.verticalBox,
+                  const _LegalSection(),
+                  context.geometry.spacingTripleExtraLarge.verticalBox,
+                  const VersionText(),
+                  context.geometry.spacingLarge.verticalBox,
+                ],
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.geometry.spacingMedium,
+              vertical: context.geometry.spacingMedium,
+            ),
+            color: context.colors.navigation,
+            child: AppButton.primary(
+              text: context.localizations.settingsFinishGameButton,
               onPressed: () => ref.read(settingsControllerProvider.notifier).finishGame(),
             ),
-            context.geometry.spacingLarge.verticalBox,
-            const _PlayersSection(),
-            context.geometry.spacingLarge.verticalBox,
-            const _LegalSection(),
-            context.geometry.spacingTripleExtraLarge.verticalBox,
-            const VersionText(),
-          ],
-        ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TimerSection extends ConsumerWidget {
+  const _TimerSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final timerDuration =
+        ref.watch(settingsControllerProvider.select((state) => state.timerDuration));
+
+    return _SettingsSection(
+      title: context.localizations.settingsTimerSectionTitle,
+      child: Column(
+        children: [
+          TimerSegmentedControl(
+            currentValue: timerDuration,
+            onValueChanged: (duration) =>
+                ref.read(settingsControllerProvider.notifier).onTimerDurationChanged(duration),
+          ),
+        ],
       ),
     );
   }
@@ -50,7 +89,7 @@ class _PlayersSection extends ConsumerWidget {
     }
 
     return _SettingsSection(
-      title: 'Player names',
+      title: context.localizations.settingsPlayerSectionTitle,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -73,7 +112,7 @@ class _PlayersSection extends ConsumerWidget {
             ),
           context.geometry.spacingLarge.verticalBox,
           AppButton.secondary(
-            text: 'Change player names',
+            text: context.localizations.settingsPlayerSectionChangeNamesButton,
             onPressed: () => ref.read(settingsControllerProvider.notifier).changePlayerNames(),
           ),
         ],
@@ -123,7 +162,7 @@ class _LegalSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _SettingsSection(
-      title: 'Legal',
+      title: context.localizations.settingsLegalSectionTitle,
       child: SeparatedColumn(
         spacing: context.geometry.spacingExtraSmall,
         children: [

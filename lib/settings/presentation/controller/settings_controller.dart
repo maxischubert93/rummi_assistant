@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/navigation/route_names.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/in_game/presentation/controller/settings_state.dart';
+import 'package:rummi_assistant/settings/presentation/controller/settings_state.dart';
 
 final settingsControllerProvider =
     StateNotifierProvider.autoDispose<SettingsController, SettingsState>(
@@ -15,7 +15,7 @@ final settingsControllerProvider =
 class SettingsController extends StateNotifier<SettingsState> {
   SettingsController() : super(SettingsState.initial()) {
     _gameSubscription = _gameManager.currentGameStream.filterNull().listen((game) {
-      state = state.copyWith(players: game.players);
+      state = state.copyWith(players: game.players, timerDuration: game.timerDuration);
     });
   }
 
@@ -40,5 +40,9 @@ class SettingsController extends StateNotifier<SettingsState> {
   void dispose() {
     _gameSubscription?.cancel();
     super.dispose();
+  }
+
+  Future<void> onTimerDurationChanged(Duration duration) async {
+    await _gameManager.updateTimerDuration(duration);
   }
 }

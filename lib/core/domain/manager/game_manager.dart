@@ -81,6 +81,16 @@ class GameManager {
     await _gameRepository.updateGame(updatedGame);
   }
 
+  Future<void> updateTimerDuration(Duration duration) async {
+    if (currentGame == null) return;
+
+    final updatedGame = currentGame!.copyWith(
+      timerDuration: duration,
+    );
+
+    await _gameRepository.updateGame(updatedGame);
+  }
+
   void dispose() {
     _currentGameSubject.close();
     _gameSubscription.cancel();

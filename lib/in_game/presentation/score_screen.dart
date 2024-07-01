@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/in_game/presentation/controller/score_controller.dart';
-import 'package:rummi_assistant/in_game/presentation/controller/timer_controller.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
+import 'package:rummi_assistant/timer/presentation/controller/timer_controller.dart';
 
 const double _cellHeight = 50;
 

@@ -26,19 +26,12 @@ class HomeController extends AutoDisposeNotifier<HomeScreenState> {
   }
 
   void setTimerDuration(Duration timerDuration) {
-    state = state.copyWith(timerDuration: timerDuration, customTimerDuration: null);
-  }
-
-  Future<void> showTimerSelection() async {
-    final result = await _router.pushNamed<String?>(RouteNames.timerModal);
-    if (result != null && result.isNotEmpty) {
-      state = state.copyWith(customTimerDuration: result);
-    }
+    state = state.copyWith(timerDuration: timerDuration);
   }
 
   Future<void> newGame() async {
     await _gameManager.newGame(
-      timerDuration: state.selectedTimerDuration,
+      timerDuration: state.timerDuration,
       players: state.players,
     );
     _router.goNamed(RouteNames.timer);

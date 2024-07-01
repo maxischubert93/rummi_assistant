@@ -4,6 +4,7 @@ import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/home/presentation/controller/home_controller.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
+import 'package:rummi_assistant/timer/timer.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -83,19 +84,10 @@ class _TimerSelection extends ConsumerWidget {
         children: [
           Subtitle(context.localizations.homeTimerSection),
           context.geometry.spacingMedium.verticalBox,
-          SegmentedControl<Duration>(
-            segments: {
-              const Duration(minutes: 1): '60',
-              const Duration(minutes: 2): '120',
-            },
+          TimerSegmentedControl(
             currentValue: state.timerDuration,
-            onValueChanged: (value) =>
-                ref.read(homeControllerProvider.notifier).setTimerDuration(value),
-            customSegmentText:
-                state.customTimerDuration ?? context.localizations.homeCustomTimerSegment,
-            onCustomSegmentPressed: () =>
-                ref.read(homeControllerProvider.notifier).showTimerSelection(),
-            isCustomSegmentSelected: state.isCustomTimerSelected,
+            onValueChanged: (duration) =>
+                ref.read(homeControllerProvider.notifier).setTimerDuration(duration),
           ),
           context.geometry.spacingMedium.verticalBox,
         ],

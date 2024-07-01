@@ -20,6 +20,12 @@
   "scoreInputModalButtonFinish": "Finish",
   "scoreInputModalTitle": "Enter score for {playerName}",
   "scoreInputModalSelectWinnerTitle": "Select the round winner",
+  "settingsTitle": "Settings",
   "settingsAppVersion": "Appversion: {version} ({build})",
-  "settingsOpenSourceLicenses": "Open source licenses"
+  "settingsOpenSourceLicenses": "Open source licenses",
+  "settingsFinishGameButton": "Finish game",
+  "settingsTimerSectionTitle": "Timer",
+  "settingsPlayerSectionTitle": "Player names",
+  "settingsPlayerSectionChangeNamesButton": "Change player names",
+  "settingsLegalSectionTitle": "Legal"
 }

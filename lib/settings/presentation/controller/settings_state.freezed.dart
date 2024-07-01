@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SettingsState {
   List<Player> get players => throw _privateConstructorUsedError;
+  Duration get timerDuration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsStateCopyWith<SettingsState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
-  $Res call({List<Player> players});
+  $Res call({List<Player> players, Duration timerDuration});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   @override
   $Res call({
     Object? players = null,
+    Object? timerDuration = null,
   }) {
     return _then(_value.copyWith(
       players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
+      timerDuration: null == timerDuration
+          ? _value.timerDuration
+          : timerDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
       __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Player> players});
+  $Res call({List<Player> players, Duration timerDuration});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? players = null,
+    Object? timerDuration = null,
   }) {
     return _then(_$SettingsStateImpl(
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
+      timerDuration: null == timerDuration
+          ? _value.timerDuration
+          : timerDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ));
   }
 }
@@ -92,7 +103,8 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SettingsStateImpl extends _SettingsState {
-  const _$SettingsStateImpl({required final List<Player> players})
+  const _$SettingsStateImpl(
+      {required final List<Player> players, required this.timerDuration})
       : _players = players,
         super._();
 
@@ -105,8 +117,11 @@ class _$SettingsStateImpl extends _SettingsState {
   }
 
   @override
+  final Duration timerDuration;
+
+  @override
   String toString() {
-    return 'SettingsState(players: $players)';
+    return 'SettingsState(players: $players, timerDuration: $timerDuration)';
   }
 
   @override
@@ -114,12 +129,14 @@ class _$SettingsStateImpl extends _SettingsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SettingsStateImpl &&
-            const DeepCollectionEquality().equals(other._players, _players));
+            const DeepCollectionEquality().equals(other._players, _players) &&
+            (identical(other.timerDuration, timerDuration) ||
+                other.timerDuration == timerDuration));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_players));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_players), timerDuration);
 
   @JsonKey(ignore: true)
   @override
@@ -129,12 +146,15 @@ class _$SettingsStateImpl extends _SettingsState {
 }
 
 abstract class _SettingsState extends SettingsState {
-  const factory _SettingsState({required final List<Player> players}) =
-      _$SettingsStateImpl;
+  const factory _SettingsState(
+      {required final List<Player> players,
+      required final Duration timerDuration}) = _$SettingsStateImpl;
   const _SettingsState._() : super._();
 
   @override
   List<Player> get players;
+  @override
+  Duration get timerDuration;
   @override
   @JsonKey(ignore: true)
   _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>

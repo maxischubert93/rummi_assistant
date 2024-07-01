@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeScreenState {
   Duration get timerDuration => throw _privateConstructorUsedError;
-  String? get customTimerDuration => throw _privateConstructorUsedError;
   List<Player> get players => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,10 +30,7 @@ abstract class $HomeScreenStateCopyWith<$Res> {
           HomeScreenState value, $Res Function(HomeScreenState) then) =
       _$HomeScreenStateCopyWithImpl<$Res, HomeScreenState>;
   @useResult
-  $Res call(
-      {Duration timerDuration,
-      String? customTimerDuration,
-      List<Player> players});
+  $Res call({Duration timerDuration, List<Player> players});
 }
 
 /// @nodoc
@@ -51,7 +47,6 @@ class _$HomeScreenStateCopyWithImpl<$Res, $Val extends HomeScreenState>
   @override
   $Res call({
     Object? timerDuration = null,
-    Object? customTimerDuration = freezed,
     Object? players = null,
   }) {
     return _then(_value.copyWith(
@@ -59,10 +54,6 @@ class _$HomeScreenStateCopyWithImpl<$Res, $Val extends HomeScreenState>
           ? _value.timerDuration
           : timerDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
-      customTimerDuration: freezed == customTimerDuration
-          ? _value.customTimerDuration
-          : customTimerDuration // ignore: cast_nullable_to_non_nullable
-              as String?,
       players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
@@ -79,10 +70,7 @@ abstract class _$$HomeScreenStateImplCopyWith<$Res>
       __$$HomeScreenStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Duration timerDuration,
-      String? customTimerDuration,
-      List<Player> players});
+  $Res call({Duration timerDuration, List<Player> players});
 }
 
 /// @nodoc
@@ -97,7 +85,6 @@ class __$$HomeScreenStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? timerDuration = null,
-    Object? customTimerDuration = freezed,
     Object? players = null,
   }) {
     return _then(_$HomeScreenStateImpl(
@@ -105,10 +92,6 @@ class __$$HomeScreenStateImplCopyWithImpl<$Res>
           ? _value.timerDuration
           : timerDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
-      customTimerDuration: freezed == customTimerDuration
-          ? _value.customTimerDuration
-          : customTimerDuration // ignore: cast_nullable_to_non_nullable
-              as String?,
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
@@ -121,16 +104,12 @@ class __$$HomeScreenStateImplCopyWithImpl<$Res>
 
 class _$HomeScreenStateImpl extends _HomeScreenState {
   const _$HomeScreenStateImpl(
-      {required this.timerDuration,
-      required this.customTimerDuration,
-      required final List<Player> players})
+      {required this.timerDuration, required final List<Player> players})
       : _players = players,
         super._();
 
   @override
   final Duration timerDuration;
-  @override
-  final String? customTimerDuration;
   final List<Player> _players;
   @override
   List<Player> get players {
@@ -141,7 +120,7 @@ class _$HomeScreenStateImpl extends _HomeScreenState {
 
   @override
   String toString() {
-    return 'HomeScreenState(timerDuration: $timerDuration, customTimerDuration: $customTimerDuration, players: $players)';
+    return 'HomeScreenState(timerDuration: $timerDuration, players: $players)';
   }
 
   @override
@@ -151,14 +130,12 @@ class _$HomeScreenStateImpl extends _HomeScreenState {
             other is _$HomeScreenStateImpl &&
             (identical(other.timerDuration, timerDuration) ||
                 other.timerDuration == timerDuration) &&
-            (identical(other.customTimerDuration, customTimerDuration) ||
-                other.customTimerDuration == customTimerDuration) &&
             const DeepCollectionEquality().equals(other._players, _players));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, timerDuration,
-      customTimerDuration, const DeepCollectionEquality().hash(_players));
+      const DeepCollectionEquality().hash(_players));
 
   @JsonKey(ignore: true)
   @override
@@ -171,14 +148,11 @@ class _$HomeScreenStateImpl extends _HomeScreenState {
 abstract class _HomeScreenState extends HomeScreenState {
   const factory _HomeScreenState(
       {required final Duration timerDuration,
-      required final String? customTimerDuration,
       required final List<Player> players}) = _$HomeScreenStateImpl;
   const _HomeScreenState._() : super._();
 
   @override
   Duration get timerDuration;
-  @override
-  String? get customTimerDuration;
   @override
   List<Player> get players;
   @override

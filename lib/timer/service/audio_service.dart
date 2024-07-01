@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:just_audio/just_audio.dart';
-import 'package:rummi_assistant/in_game/domain/timer_alert_player.dart';
+import 'package:rummi_assistant/timer/domain/timer_alert_player.dart';
 
 class AudioService implements TimerAlertPlayer {
   AudioService({required String assetPath}) {

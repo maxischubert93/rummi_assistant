@@ -5,8 +5,8 @@ import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/data/store/database.dart';
 import 'package:rummi_assistant/core/data/store/game_store.dart';
 import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
-import 'package:rummi_assistant/in_game/domain/timer_alert_player.dart';
-import 'package:rummi_assistant/in_game/service/audio_service.dart';
+import 'package:rummi_assistant/timer/domain/timer_alert_player.dart';
+import 'package:rummi_assistant/timer/service/audio_service.dart';
 
 late PackageInfo packageInfo;
 

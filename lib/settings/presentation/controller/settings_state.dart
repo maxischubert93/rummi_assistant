@@ -7,10 +7,12 @@ part 'settings_state.freezed.dart';
 class SettingsState with _$SettingsState {
   const factory SettingsState({
     required List<Player> players,
+    required Duration timerDuration,
   }) = _SettingsState;
 
   factory SettingsState.initial() => const SettingsState(
         players: [],
+        timerDuration: Duration(minutes: 1),
       );
 
   const SettingsState._();

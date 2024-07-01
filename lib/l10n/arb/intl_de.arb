@@ -20,6 +20,12 @@
   "scoreInputModalButtonFinish": "Fertig",
   "scoreInputModalTitle": "Punkte für {playerName}",
   "scoreInputModalSelectWinnerTitle": "Sieger der Runde auswählen",
+  "settingsTitle": "Einstellungen",
   "settingsAppVersion": "Appversion: {version} ({build})",
-  "settingsOpenSourceLicenses": "Open Source Lizenzen"
+  "settingsOpenSourceLicenses": "Open Source Lizenzen",
+  "settingsFinishGameButton": "Spiel beenden",
+  "settingsTimerSectionTitle": "Timer",
+  "settingsPlayerSectionTitle": "Spielernamen",
+  "settingsPlayerSectionChangeNamesButton": "Spielernamen ändern",
+  "settingsLegalSectionTitle": "Rechtliches"
 }

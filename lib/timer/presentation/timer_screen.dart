@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/app/theme/app_colors.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/in_game/presentation/controller/timer_controller.dart';
+import 'package:rummi_assistant/timer/presentation/controller/timer_controller.dart';
 
 class TimerScreen extends ConsumerWidget {
   const TimerScreen({super.key});
