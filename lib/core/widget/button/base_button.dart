@@ -38,20 +38,17 @@ class BaseButton extends StatelessWidget {
       style: style,
       onPressed: onPressed,
       borderRadius: BorderRadius.circular(40),
-      child: _Content(
-        text: text,
-        centerIcon: centerIcon,
-        isLoading: isLoading,
-        expand: expand,
-        style: style,
-        leadingIcon: leadingIcon,
-        trailingIcon: trailingIcon,
-      ),
+      text: text,
+      centerIcon: centerIcon,
+      isLoading: isLoading,
+      expand: expand,
+      leadingIcon: leadingIcon,
+      trailingIcon: trailingIcon,
     );
   }
 }
 
-class _Content extends StatefulWidget {
+class _Content extends StatelessWidget {
   const _Content({
     required this.text,
     required this.centerIcon,
@@ -60,6 +57,7 @@ class _Content extends StatefulWidget {
     required this.expand,
     this.leadingIcon,
     this.trailingIcon,
+    this.isPressedIOS = false,
   });
 
   final bool isLoading;
@@ -69,61 +67,42 @@ class _Content extends StatefulWidget {
   final AppButtonStyle style;
   final String? text;
   final IconData? centerIcon;
-
-  @override
-  State<_Content> createState() => _ContentState();
-}
-
-class _ContentState extends State<_Content> {
-  bool _isPressed = false;
-
-  bool get isPressed => _isPressed;
-
-  set isPressed(bool isPressed) {
-    setState(() => _isPressed = isPressed);
-  }
-
-  Color get _contentColor {
-    return isPressed ? widget.style.iOSPressed.content : widget.style.active.content;
-  }
+  final bool isPressedIOS;
 
   @override
   Widget build(BuildContext context) {
     final geometry = context.geometry;
 
-    return GestureDetector(
-      onTapDown: (_) => isPressed = true,
-      onTapCancel: () => isPressed = false,
-      onTapUp: (_) => isPressed = false,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
-        child: Stack(
-          children: [
-            Visibility.maintain(
-              visible: !widget.isLoading,
-              child: Row(
-                mainAxisSize: widget.expand ? MainAxisSize.max : MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (widget.leadingIcon != null) widget.leadingIcon!.coloredSvg(_contentColor),
-                  if (widget.leadingIcon != null) geometry.spacingSmall.horizontalBox,
-                  if (widget.text != null) Button(widget.text!, color: _contentColor),
-                  if (widget.centerIcon != null) Icon(widget.centerIcon, color: _contentColor),
-                  if (widget.trailingIcon != null) geometry.spacingSmall.horizontalBox,
-                  if (widget.trailingIcon != null) widget.trailingIcon!.coloredSvg(_contentColor),
-                ],
+    final contentColor = isPressedIOS ? style.iOSPressed.content : style.active.content;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+      child: Stack(
+        children: [
+          Visibility.maintain(
+            visible: !isLoading,
+            child: Row(
+              mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (leadingIcon != null) leadingIcon!.coloredSvg(contentColor),
+                if (leadingIcon != null) geometry.spacingSmall.horizontalBox,
+                if (text != null) Button(text!, color: contentColor),
+                if (centerIcon != null) Icon(centerIcon, color: contentColor),
+                if (trailingIcon != null) geometry.spacingSmall.horizontalBox,
+                if (trailingIcon != null) trailingIcon!.coloredSvg(contentColor),
+              ],
+            ),
+          ),
+          Positioned.fill(
+            child: Visibility(
+              visible: isLoading,
+              child: Center(
+                child: CircularProgressIndicator(color: style.active.content),
               ),
             ),
-            Positioned.fill(
-              child: Visibility(
-                visible: widget.isLoading,
-                child: Center(
-                  child: CircularProgressIndicator(color: widget.style.active.content),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -133,16 +112,26 @@ class _FoundationButton extends StatelessWidget {
   const _FoundationButton({
     required this.isEnabled,
     required this.style,
-    required this.child,
     required this.onPressed,
+    required this.text,
+    required this.centerIcon,
+    required this.isLoading,
+    required this.expand,
     this.borderRadius,
+    this.leadingIcon,
+    this.trailingIcon,
   });
 
   final bool isEnabled;
   final AppButtonStyle style;
-  final Widget child;
   final VoidCallback onPressed;
   final BorderRadius? borderRadius;
+  final bool isLoading;
+  final bool expand;
+  final SvgGenImage? leadingIcon;
+  final SvgGenImage? trailingIcon;
+  final String? text;
+  final IconData? centerIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -152,14 +141,27 @@ class _FoundationButton extends StatelessWidget {
         style: style,
         onPressed: onPressed,
         borderRadius: borderRadius,
-        child: child,
+        child: _Content(
+          text: text,
+          centerIcon: centerIcon,
+          isLoading: isLoading,
+          expand: expand,
+          style: style,
+          leadingIcon: leadingIcon,
+          trailingIcon: trailingIcon,
+        ),
       ),
       cupertino: (_, __) => _CupertinoButton(
         isEnabled: isEnabled,
         style: style,
         onPressed: onPressed,
         borderRadius: borderRadius,
-        child: child,
+        text: text,
+        centerIcon: centerIcon,
+        isLoading: isLoading,
+        expand: expand,
+        leadingIcon: leadingIcon,
+        trailingIcon: trailingIcon,
       ),
     );
   }
@@ -237,16 +239,26 @@ class _CupertinoButton extends StatefulWidget {
   const _CupertinoButton({
     required this.isEnabled,
     required this.style,
-    required this.child,
     required this.borderRadius,
     required this.onPressed,
+    required this.isLoading,
+    required this.expand,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.text,
+    this.centerIcon,
   });
 
   final bool isEnabled;
   final AppButtonStyle style;
-  final Widget child;
   final BorderRadius? borderRadius;
   final VoidCallback onPressed;
+  final bool isLoading;
+  final bool expand;
+  final SvgGenImage? leadingIcon;
+  final SvgGenImage? trailingIcon;
+  final String? text;
+  final IconData? centerIcon;
 
   @override
   State<_CupertinoButton> createState() => _CupertinoButtonState();
@@ -289,7 +301,16 @@ class _CupertinoButtonState extends State<_CupertinoButton> {
           minSize: 0,
           padding: EdgeInsets.zero,
           borderRadius: widget.borderRadius,
-          child: widget.child,
+          child: _Content(
+            text: widget.text,
+            centerIcon: widget.centerIcon,
+            isLoading: widget.isLoading,
+            expand: widget.expand,
+            style: widget.style,
+            leadingIcon: widget.leadingIcon,
+            trailingIcon: widget.trailingIcon,
+            isPressedIOS: isPressed,
+          ),
         ),
       ),
     );
