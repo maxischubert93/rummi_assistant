@@ -31,6 +31,11 @@ class _PlayerInputPageViewState extends ConsumerState<_PlayerInputPageView> {
     final playerCount =
         ref.watch(scoreInputControllerProvider.select((state) => state.playerCount));
 
+    final nodes = ref.watch(
+      scoreInputControllerProvider
+          .select((state) => state.playerScores.map((score) => score.focusNode).toList()),
+    );
+
     return SizedBox(
       height: 200,
       child: PageView.builder(
@@ -38,11 +43,25 @@ class _PlayerInputPageViewState extends ConsumerState<_PlayerInputPageView> {
         controller: _pageController,
         itemCount: playerCount,
         itemBuilder: (context, index) {
+          final isLast = index == playerCount - 1;
+
           return _PlayerInputPage(
             index: index,
-            isLast: index == playerCount - 1,
-            onPrevious: _pageController.previous,
-            onNext: _pageController.next,
+            isLast: isLast,
+            onPrevious: () {
+              _pageController.previous();
+              if (index == 1) {
+                nodes[index].unfocus();
+              } else if (index >= 2) {
+                nodes[index - 1].requestFocus();
+              }
+            },
+            onNext: () {
+              _pageController.next();
+              if (!isLast) {
+                nodes[index + 1].requestFocus();
+              }
+            },
           );
         },
       ),
@@ -173,6 +192,7 @@ class _ScoreInputPage extends ConsumerWidget {
             onNext();
           },
           maxLength: 4,
+          focusNode: state.focusNode,
         ),
         context.geometry.spacingSmall.verticalBox,
         Padding(

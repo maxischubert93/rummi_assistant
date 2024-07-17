@@ -9,6 +9,7 @@ class NumberTextField extends StatelessWidget {
     required this.maxLength,
     this.enabled = true,
     this.placeHolder,
+    this.focusNode,
     super.key,
   });
 
@@ -17,6 +18,7 @@ class NumberTextField extends StatelessWidget {
   final int maxLength;
   final bool enabled;
   final String? placeHolder;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class NumberTextField extends StatelessWidget {
       child: CupertinoTextField(
         onChanged: onChanged,
         onSubmitted: onSubmitted,
+        focusNode: focusNode,
         maxLength: 3,
         padding: const EdgeInsets.all(12),
         keyboardType: TextInputType.number,

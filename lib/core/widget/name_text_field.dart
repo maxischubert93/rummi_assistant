@@ -33,6 +33,11 @@ class _NameTextFieldState extends State<NameTextField> {
   void initState() {
     super.initState();
     _controller.text = widget.initialValue ?? '';
+    widget.focusNode?.addListener(() {
+      if (widget.focusNode?.hasFocus ?? false) {
+        _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
+      }
+    });
   }
 
   @override

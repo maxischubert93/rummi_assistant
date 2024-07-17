@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'score_input_state.freezed.dart';
@@ -9,7 +10,14 @@ class ScoreInputState with _$ScoreInputState {
   }) = _ScoreInputState;
 
   factory ScoreInputState.initial({required List<String> playerNames}) => ScoreInputState(
-        playerScores: playerNames.map((name) => PlayerRoundScore(playerName: name)).toList(),
+        playerScores: playerNames
+            .map(
+              (name) => PlayerRoundScore(
+                playerName: name,
+                focusNode: FocusNode(),
+              ),
+            )
+            .toList(),
       );
 
   const ScoreInputState._();
@@ -28,6 +36,7 @@ class ScoreInputState with _$ScoreInputState {
 class PlayerRoundScore with _$PlayerRoundScore {
   const factory PlayerRoundScore({
     required String playerName,
+    required FocusNode focusNode,
     String? score,
     @Default(false) bool wonRound,
   }) = _PlayerRoundScore;

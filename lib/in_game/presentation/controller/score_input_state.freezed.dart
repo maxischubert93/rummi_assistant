@@ -148,6 +148,7 @@ abstract class _ScoreInputState extends ScoreInputState {
 /// @nodoc
 mixin _$PlayerRoundScore {
   String get playerName => throw _privateConstructorUsedError;
+  FocusNode get focusNode => throw _privateConstructorUsedError;
   String? get score => throw _privateConstructorUsedError;
   bool get wonRound => throw _privateConstructorUsedError;
 
@@ -162,7 +163,8 @@ abstract class $PlayerRoundScoreCopyWith<$Res> {
           PlayerRoundScore value, $Res Function(PlayerRoundScore) then) =
       _$PlayerRoundScoreCopyWithImpl<$Res, PlayerRoundScore>;
   @useResult
-  $Res call({String playerName, String? score, bool wonRound});
+  $Res call(
+      {String playerName, FocusNode focusNode, String? score, bool wonRound});
 }
 
 /// @nodoc
@@ -179,6 +181,7 @@ class _$PlayerRoundScoreCopyWithImpl<$Res, $Val extends PlayerRoundScore>
   @override
   $Res call({
     Object? playerName = null,
+    Object? focusNode = null,
     Object? score = freezed,
     Object? wonRound = null,
   }) {
@@ -187,6 +190,10 @@ class _$PlayerRoundScoreCopyWithImpl<$Res, $Val extends PlayerRoundScore>
           ? _value.playerName
           : playerName // ignore: cast_nullable_to_non_nullable
               as String,
+      focusNode: null == focusNode
+          ? _value.focusNode
+          : focusNode // ignore: cast_nullable_to_non_nullable
+              as FocusNode,
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -207,7 +214,8 @@ abstract class _$$PlayerRoundScoreImplCopyWith<$Res>
       __$$PlayerRoundScoreImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String playerName, String? score, bool wonRound});
+  $Res call(
+      {String playerName, FocusNode focusNode, String? score, bool wonRound});
 }
 
 /// @nodoc
@@ -222,6 +230,7 @@ class __$$PlayerRoundScoreImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? playerName = null,
+    Object? focusNode = null,
     Object? score = freezed,
     Object? wonRound = null,
   }) {
@@ -230,6 +239,10 @@ class __$$PlayerRoundScoreImplCopyWithImpl<$Res>
           ? _value.playerName
           : playerName // ignore: cast_nullable_to_non_nullable
               as String,
+      focusNode: null == focusNode
+          ? _value.focusNode
+          : focusNode // ignore: cast_nullable_to_non_nullable
+              as FocusNode,
       score: freezed == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -246,11 +259,16 @@ class __$$PlayerRoundScoreImplCopyWithImpl<$Res>
 
 class _$PlayerRoundScoreImpl extends _PlayerRoundScore {
   const _$PlayerRoundScoreImpl(
-      {required this.playerName, this.score, this.wonRound = false})
+      {required this.playerName,
+      required this.focusNode,
+      this.score,
+      this.wonRound = false})
       : super._();
 
   @override
   final String playerName;
+  @override
+  final FocusNode focusNode;
   @override
   final String? score;
   @override
@@ -259,7 +277,7 @@ class _$PlayerRoundScoreImpl extends _PlayerRoundScore {
 
   @override
   String toString() {
-    return 'PlayerRoundScore(playerName: $playerName, score: $score, wonRound: $wonRound)';
+    return 'PlayerRoundScore(playerName: $playerName, focusNode: $focusNode, score: $score, wonRound: $wonRound)';
   }
 
   @override
@@ -269,13 +287,16 @@ class _$PlayerRoundScoreImpl extends _PlayerRoundScore {
             other is _$PlayerRoundScoreImpl &&
             (identical(other.playerName, playerName) ||
                 other.playerName == playerName) &&
+            (identical(other.focusNode, focusNode) ||
+                other.focusNode == focusNode) &&
             (identical(other.score, score) || other.score == score) &&
             (identical(other.wonRound, wonRound) ||
                 other.wonRound == wonRound));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, playerName, score, wonRound);
+  int get hashCode =>
+      Object.hash(runtimeType, playerName, focusNode, score, wonRound);
 
   @JsonKey(ignore: true)
   @override
@@ -288,12 +309,15 @@ class _$PlayerRoundScoreImpl extends _PlayerRoundScore {
 abstract class _PlayerRoundScore extends PlayerRoundScore {
   const factory _PlayerRoundScore(
       {required final String playerName,
+      required final FocusNode focusNode,
       final String? score,
       final bool wonRound}) = _$PlayerRoundScoreImpl;
   const _PlayerRoundScore._() : super._();
 
   @override
   String get playerName;
+  @override
+  FocusNode get focusNode;
   @override
   String? get score;
   @override
