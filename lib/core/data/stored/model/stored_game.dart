@@ -12,6 +12,8 @@ class StoredGame {
   bool isFinished = false;
 
   late List<StoredPlayer> players;
+
+  late DateTime createdAt;
 }
 
 @embedded

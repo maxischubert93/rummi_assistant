@@ -28,9 +28,3 @@ class Geometry {
         horizontal: spacingMedium,
       );
 }
-
-extension WidgetExtension on double {
-  SizedBox get verticalBox => SizedBox(height: this);
-
-  SizedBox get horizontalBox => SizedBox(width: this);
-}

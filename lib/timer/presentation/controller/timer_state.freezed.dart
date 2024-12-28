@@ -20,7 +20,9 @@ mixin _$TimerState {
   Duration get timerDuration => throw _privateConstructorUsedError;
   bool get isRunning => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TimerStateCopyWith<TimerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$TimerStateCopyWithImpl<$Res, $Val extends TimerState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$TimerStateImplCopyWithImpl<$Res>
       _$TimerStateImpl _value, $Res Function(_$TimerStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,7 +155,9 @@ class _$TimerStateImpl extends _TimerState {
   int get hashCode =>
       Object.hash(runtimeType, millisPassed, timerDuration, isRunning);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimerStateImplCopyWith<_$TimerStateImpl> get copyWith =>
@@ -169,8 +177,11 @@ abstract class _TimerState extends TimerState {
   Duration get timerDuration;
   @override
   bool get isRunning;
+
+  /// Create a copy of TimerState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimerStateImplCopyWith<_$TimerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

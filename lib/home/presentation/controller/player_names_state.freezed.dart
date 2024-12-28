@@ -19,7 +19,9 @@ mixin _$PlayerNamesState {
   List<String> get playerNames => throw _privateConstructorUsedError;
   List<FocusNode> get focusNodes => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerNamesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlayerNamesStateCopyWith<PlayerNamesState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$PlayerNamesStateCopyWithImpl<$Res, $Val extends PlayerNamesState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlayerNamesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$PlayerNamesStateImplCopyWithImpl<$Res>
       $Res Function(_$PlayerNamesStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlayerNamesState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -148,7 +154,9 @@ class _$PlayerNamesStateImpl extends _PlayerNamesState {
       const DeepCollectionEquality().hash(_playerNames),
       const DeepCollectionEquality().hash(_focusNodes));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerNamesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlayerNamesStateImplCopyWith<_$PlayerNamesStateImpl> get copyWith =>
@@ -166,8 +174,11 @@ abstract class _PlayerNamesState extends PlayerNamesState {
   List<String> get playerNames;
   @override
   List<FocusNode> get focusNodes;
+
+  /// Create a copy of PlayerNamesState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlayerNamesStateImplCopyWith<_$PlayerNamesStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

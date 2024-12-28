@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 import 'package:rummi_assistant/settings/presentation/controller/settings_controller.dart';
 import 'package:rummi_assistant/settings/presentation/widget/settings_legal_section.dart';
 import 'package:rummi_assistant/settings/presentation/widget/version_text.dart';
-import 'package:rummi_assistant/timer/presentation/widget/timer_segmented_control.dart';
+import 'package:rummi_assistant/timer/presentation/widget/timer_section.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.read(settingsControllerProvider.notifier);
+    final timerDuration =
+        ref.watch(settingsControllerProvider.select((state) => state.timerDuration));
+    final isTimerSoundEnabled =
+        ref.watch(settingsControllerProvider.select((state) => state.isTimerSoundEnabled));
+
     return AppScaffold(
       appBarTitle: context.localizations.settingsTitle,
       excludePadding: true,
@@ -26,7 +31,12 @@ class SettingsScreen extends ConsumerWidget {
                 children: [
                   const _PlayersSection(),
                   context.geometry.spacingLarge.verticalBox,
-                  const _TimerSection(),
+                  TimerSection(
+                    currentValue: timerDuration,
+                    onValueChanged: controller.onTimerDurationChanged,
+                    isTimerSoundEnabled: isTimerSoundEnabled,
+                    onToggleTimerSoundEnabled: controller.onToggleTimerSoundEnabled,
+                  ),
                   context.geometry.spacingLarge.verticalBox,
                   const SettingsLegalSection(),
                   context.geometry.spacingTripleExtraLarge.verticalBox,
@@ -47,59 +57,6 @@ class SettingsScreen extends ConsumerWidget {
               onPressed: () => ref.read(settingsControllerProvider.notifier).finishGame(),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TimerSection extends ConsumerWidget {
-  const _TimerSection();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final timerDuration =
-        ref.watch(settingsControllerProvider.select((state) => state.timerDuration));
-
-    return Section(
-      title: context.localizations.settingsTimerSectionTitle,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TimerSegmentedControl(
-            currentValue: timerDuration,
-            onValueChanged: (duration) =>
-                ref.read(settingsControllerProvider.notifier).onTimerDurationChanged(duration),
-          ),
-          context.geometry.spacingMedium.verticalBox,
-          const _TimerSoundCheckBox(),
-        ],
-      ),
-    );
-  }
-}
-
-class _TimerSoundCheckBox extends ConsumerWidget {
-  const _TimerSoundCheckBox();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isEnabled =
-        ref.watch(settingsControllerProvider.select((state) => state.isTimerSoundEnabled));
-
-    return GestureDetector(
-      onTap: () => ref.read(settingsControllerProvider.notifier).onToggleTimerSoundEnabled(),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Checkbox.adaptive(
-            value: isEnabled,
-            onChanged: (_) =>
-                ref.read(settingsControllerProvider.notifier).onToggleTimerSoundEnabled(),
-            activeColor: context.colors.primary,
-            checkColor: context.colors.onPrimary,
-          ),
-          BodyLarge(context.localizations.settingsTimerSectionSoundCheckBox),
         ],
       ),
     );

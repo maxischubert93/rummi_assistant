@@ -20,8 +20,11 @@ mixin _$Game {
   Duration get timerDuration => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
   List<Player> get players => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GameCopyWith<Game> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -31,7 +34,11 @@ abstract class $GameCopyWith<$Res> {
       _$GameCopyWithImpl<$Res, Game>;
   @useResult
   $Res call(
-      {int id, Duration timerDuration, bool isFinished, List<Player> players});
+      {int id,
+      Duration timerDuration,
+      bool isFinished,
+      List<Player> players,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -44,6 +51,8 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -51,6 +60,7 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
     Object? timerDuration = null,
     Object? isFinished = null,
     Object? players = null,
+    Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -69,6 +79,10 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -81,7 +95,11 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id, Duration timerDuration, bool isFinished, List<Player> players});
+      {int id,
+      Duration timerDuration,
+      bool isFinished,
+      List<Player> players,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -91,6 +109,8 @@ class __$$GameImplCopyWithImpl<$Res>
   __$$GameImplCopyWithImpl(_$GameImpl _value, $Res Function(_$GameImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -98,6 +118,7 @@ class __$$GameImplCopyWithImpl<$Res>
     Object? timerDuration = null,
     Object? isFinished = null,
     Object? players = null,
+    Object? createdAt = null,
   }) {
     return _then(_$GameImpl(
       id: null == id
@@ -116,19 +137,25 @@ class __$$GameImplCopyWithImpl<$Res>
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
 
 /// @nodoc
 
-class _$GameImpl implements _Game {
+class _$GameImpl extends _Game {
   const _$GameImpl(
       {required this.id,
       required this.timerDuration,
       required this.isFinished,
-      required final List<Player> players})
-      : _players = players;
+      required final List<Player> players,
+      required this.createdAt})
+      : _players = players,
+        super._();
 
   @override
   final int id;
@@ -145,8 +172,11 @@ class _$GameImpl implements _Game {
   }
 
   @override
+  final DateTime createdAt;
+
+  @override
   String toString() {
-    return 'Game(id: $id, timerDuration: $timerDuration, isFinished: $isFinished, players: $players)';
+    return 'Game(id: $id, timerDuration: $timerDuration, isFinished: $isFinished, players: $players, createdAt: $createdAt)';
   }
 
   @override
@@ -159,26 +189,32 @@ class _$GameImpl implements _Game {
                 other.timerDuration == timerDuration) &&
             (identical(other.isFinished, isFinished) ||
                 other.isFinished == isFinished) &&
-            const DeepCollectionEquality().equals(other._players, _players));
+            const DeepCollectionEquality().equals(other._players, _players) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, timerDuration, isFinished,
-      const DeepCollectionEquality().hash(_players));
+      const DeepCollectionEquality().hash(_players), createdAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GameImplCopyWith<_$GameImpl> get copyWith =>
       __$$GameImplCopyWithImpl<_$GameImpl>(this, _$identity);
 }
 
-abstract class _Game implements Game {
+abstract class _Game extends Game {
   const factory _Game(
       {required final int id,
       required final Duration timerDuration,
       required final bool isFinished,
-      required final List<Player> players}) = _$GameImpl;
+      required final List<Player> players,
+      required final DateTime createdAt}) = _$GameImpl;
+  const _Game._() : super._();
 
   @override
   int get id;
@@ -189,7 +225,12 @@ abstract class _Game implements Game {
   @override
   List<Player> get players;
   @override
-  @JsonKey(ignore: true)
+  DateTime get createdAt;
+
+  /// Create a copy of Game
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GameImplCopyWith<_$GameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

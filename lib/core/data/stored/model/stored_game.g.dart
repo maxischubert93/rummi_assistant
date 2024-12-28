@@ -17,19 +17,24 @@ const StoredGameSchema = CollectionSchema(
   name: r'Games',
   id: 6468509838350687517,
   properties: {
-    r'isFinished': PropertySchema(
+    r'createdAt': PropertySchema(
       id: 0,
+      name: r'createdAt',
+      type: IsarType.dateTime,
+    ),
+    r'isFinished': PropertySchema(
+      id: 1,
       name: r'isFinished',
       type: IsarType.bool,
     ),
     r'players': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'players',
       type: IsarType.objectList,
       target: r'StoredPlayer',
     ),
     r'timerDurationInSeconds': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'timerDurationInSeconds',
       type: IsarType.long,
     )
@@ -71,14 +76,15 @@ void _storedGameSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeBool(offsets[0], object.isFinished);
+  writer.writeDateTime(offsets[0], object.createdAt);
+  writer.writeBool(offsets[1], object.isFinished);
   writer.writeObjectList<StoredPlayer>(
-    offsets[1],
+    offsets[2],
     allOffsets,
     StoredPlayerSchema.serialize,
     object.players,
   );
-  writer.writeLong(offsets[2], object.timerDurationInSeconds);
+  writer.writeLong(offsets[3], object.timerDurationInSeconds);
 }
 
 StoredGame _storedGameDeserialize(
@@ -88,16 +94,17 @@ StoredGame _storedGameDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = StoredGame();
+  object.createdAt = reader.readDateTime(offsets[0]);
   object.id = id;
-  object.isFinished = reader.readBool(offsets[0]);
+  object.isFinished = reader.readBool(offsets[1]);
   object.players = reader.readObjectList<StoredPlayer>(
-        offsets[1],
+        offsets[2],
         StoredPlayerSchema.deserialize,
         allOffsets,
         StoredPlayer(),
       ) ??
       [];
-  object.timerDurationInSeconds = reader.readLong(offsets[2]);
+  object.timerDurationInSeconds = reader.readLong(offsets[3]);
   return object;
 }
 
@@ -109,8 +116,10 @@ P _storedGameDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBool(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 1:
+      return (reader.readBool(offset)) as P;
+    case 2:
       return (reader.readObjectList<StoredPlayer>(
             offset,
             StoredPlayerSchema.deserialize,
@@ -118,7 +127,7 @@ P _storedGameDeserializeProp<P>(
             StoredPlayer(),
           ) ??
           []) as P;
-    case 2:
+    case 3:
       return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -216,6 +225,60 @@ extension StoredGameQueryWhere
 
 extension StoredGameQueryFilter
     on QueryBuilder<StoredGame, StoredGame, QFilterCondition> {
+  QueryBuilder<StoredGame, StoredGame, QAfterFilterCondition> createdAtEqualTo(
+      DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<StoredGame, StoredGame, QAfterFilterCondition>
+      createdAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<StoredGame, StoredGame, QAfterFilterCondition> createdAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<StoredGame, StoredGame, QAfterFilterCondition> createdAtBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'createdAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<StoredGame, StoredGame, QAfterFilterCondition> idEqualTo(
       Id value) {
     return QueryBuilder.apply(this, (query) {
@@ -439,6 +502,18 @@ extension StoredGameQueryLinks
 
 extension StoredGameQuerySortBy
     on QueryBuilder<StoredGame, StoredGame, QSortBy> {
+  QueryBuilder<StoredGame, StoredGame, QAfterSortBy> sortByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<StoredGame, StoredGame, QAfterSortBy> sortByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
   QueryBuilder<StoredGame, StoredGame, QAfterSortBy> sortByIsFinished() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isFinished', Sort.asc);
@@ -468,6 +543,18 @@ extension StoredGameQuerySortBy
 
 extension StoredGameQuerySortThenBy
     on QueryBuilder<StoredGame, StoredGame, QSortThenBy> {
+  QueryBuilder<StoredGame, StoredGame, QAfterSortBy> thenByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<StoredGame, StoredGame, QAfterSortBy> thenByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
   QueryBuilder<StoredGame, StoredGame, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -509,6 +596,12 @@ extension StoredGameQuerySortThenBy
 
 extension StoredGameQueryWhereDistinct
     on QueryBuilder<StoredGame, StoredGame, QDistinct> {
+  QueryBuilder<StoredGame, StoredGame, QDistinct> distinctByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'createdAt');
+    });
+  }
+
   QueryBuilder<StoredGame, StoredGame, QDistinct> distinctByIsFinished() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isFinished');
@@ -528,6 +621,12 @@ extension StoredGameQueryProperty
   QueryBuilder<StoredGame, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<StoredGame, DateTime, QQueryOperations> createdAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'createdAt');
     });
   }
 

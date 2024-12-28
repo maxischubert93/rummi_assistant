@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
 import 'package:rummi_assistant/core/data/stored/mapping/game.dart';
 import 'package:rummi_assistant/core/data/stored/mapping/player.dart';
@@ -7,11 +8,14 @@ import 'package:rummi_assistant/core/domain/model/player.dart';
 import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
 
 class GameStore implements GameRepository {
-  GameStore({required Isar isar}) : _isar = isar;
-
-  final Isar _isar;
+  late final Isar _isar = GetIt.instance.get();
 
   IsarCollection<StoredGame> get games => _isar.storedGames;
+
+  @override
+  Future<void> performMigrationIfNeeded() async {
+    // No migration required
+  }
 
   @override
   Future<Game> newGame({
@@ -21,6 +25,7 @@ class GameStore implements GameRepository {
     final game = StoredGame()
       ..timerDurationInSeconds = timerDuration.inSeconds
       ..isFinished = false
+      ..createdAt = DateTime.now()
       ..players = players.map((player) => player.toStored()).toList();
     await _isar.writeTxn(() async {
       await games.filter().isFinishedEqualTo(false).deleteAll();
@@ -37,7 +42,7 @@ class GameStore implements GameRepository {
   }
 
   @override
-  Stream<Game?> currentGame() {
+  Stream<Game?> watchCurrentGame() {
     return games
         .filter()
         .isFinishedEqualTo(false)
@@ -46,8 +51,25 @@ class GameStore implements GameRepository {
   }
 
   @override
+  Stream<List<Game>> watchFinishedGames() {
+    return games
+        .filter()
+        .isFinishedEqualTo(true)
+        .sortByCreatedAtDesc()
+        .watch(fireImmediately: true)
+        .map((games) => games.map((game) => game.toDomain()).toList());
+  }
+
+  @override
   Future<Game?> getCurrentGame() async {
     final storedGame = await games.filter().isFinishedEqualTo(false).findFirst();
     return storedGame?.toDomain();
+  }
+
+  @override
+  Future<void> deleteGame(Game game) {
+    return _isar.writeTxn(() async {
+      await games.delete(game.id);
+    });
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:rummi_assistant/app/theme/geometry.dart';
 import 'package:rummi_assistant/core/core.dart';
 
 class Section extends StatelessWidget {

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:isar/isar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rummi_assistant/app/navigation/router.dart';
 import 'package:rummi_assistant/core/core.dart';
@@ -32,9 +33,7 @@ void _registerStores() {
   _container
     ..registerSingletonAsync(DatabaseBuilder.openDatabase)
     ..registerSingleton<UserSettings>(UserSettingsStore())
-    ..registerFactoryAsync<GameRepository>(
-      () async => GameStore(isar: await _container.getAsync()),
-    );
+    ..registerFactory<GameRepository>(GameStore.new);
 }
 
 void _registerInteractors() {
@@ -43,7 +42,8 @@ void _registerInteractors() {
 
 void _registerManagers() {
   _container.registerSingletonAsync(
-    () async => GameManager.createInstance(gameRepository: await _container.getAsync()),
+    () => GameManager.createInstance(gameRepository: _container.get()),
+    dependsOn: [Isar],
   );
 }
 

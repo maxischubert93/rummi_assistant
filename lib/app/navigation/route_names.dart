@@ -8,4 +8,5 @@ class RouteNames {
   static const scoreInputModal = 'score-input-modal';
   static const licenses = 'licences';
   static const licenseDetail = 'licence-detail';
+  static const gameHistory = 'game-history';
 }

@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ScoreState {
   List<Player> get players => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScoreState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ScoreStateCopyWith<ScoreState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$ScoreStateCopyWithImpl<$Res, $Val extends ScoreState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ScoreState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +79,8 @@ class __$$ScoreStateImplCopyWithImpl<$Res>
       _$ScoreStateImpl _value, $Res Function(_$ScoreStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ScoreState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,7 +127,9 @@ class _$ScoreStateImpl extends _ScoreState {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_players));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScoreState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ScoreStateImplCopyWith<_$ScoreStateImpl> get copyWith =>
@@ -135,8 +143,11 @@ abstract class _ScoreState extends ScoreState {
 
   @override
   List<Player> get players;
+
+  /// Create a copy of ScoreState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ScoreStateImplCopyWith<_$ScoreStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -146,7 +157,9 @@ mixin _$TotalPlayerScore {
   int get totalScore => throw _privateConstructorUsedError;
   bool get isWinning => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TotalPlayerScore
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TotalPlayerScoreCopyWith<TotalPlayerScore> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -170,6 +183,8 @@ class _$TotalPlayerScoreCopyWithImpl<$Res, $Val extends TotalPlayerScore>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TotalPlayerScore
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -208,6 +223,8 @@ class __$$TotalPlayerScoreImplCopyWithImpl<$Res>
       $Res Function(_$TotalPlayerScoreImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TotalPlayerScore
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -257,7 +274,9 @@ class _$TotalPlayerScoreImpl implements _TotalPlayerScore {
   @override
   int get hashCode => Object.hash(runtimeType, totalScore, isWinning);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TotalPlayerScore
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TotalPlayerScoreImplCopyWith<_$TotalPlayerScoreImpl> get copyWith =>
@@ -274,8 +293,11 @@ abstract class _TotalPlayerScore implements TotalPlayerScore {
   int get totalScore;
   @override
   bool get isWinning;
+
+  /// Create a copy of TotalPlayerScore
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TotalPlayerScoreImplCopyWith<_$TotalPlayerScoreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

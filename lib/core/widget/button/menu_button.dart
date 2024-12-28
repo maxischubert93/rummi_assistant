@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/interactor/url_interactor.dart';
 
@@ -24,7 +23,7 @@ class MenuButton extends StatelessWidget {
     return PlatformClickListener(
       highlightColor: context.colors.primaryLight,
       child: Padding(
-        padding:  EdgeInsets.symmetric(vertical: context.geometry.spacingSmall),
+        padding: EdgeInsets.symmetric(vertical: context.geometry.spacingSmall),
         child: Row(
           children: [
             Container(

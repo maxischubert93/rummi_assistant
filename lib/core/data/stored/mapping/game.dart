@@ -8,6 +8,7 @@ extension ToStored on Game {
       ..id = id
       ..timerDurationInSeconds = timerDuration.inSeconds
       ..isFinished = isFinished
+      ..createdAt = createdAt
       ..players = players.map((e) => e.toStored()).toList();
   }
 }
@@ -19,6 +20,7 @@ extension ToDomain on StoredGame {
       timerDuration: Duration(seconds: timerDurationInSeconds),
       isFinished: isFinished,
       players: players.map((e) => e.toDomain()).toList(),
+      createdAt: createdAt,
     );
   }
 }

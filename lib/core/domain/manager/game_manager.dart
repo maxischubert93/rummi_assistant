@@ -28,7 +28,9 @@ class GameManager {
   }
 
   Future<void> init() async {
-    _gameSubscription = _gameRepository.currentGame().listen(_currentGameSubject.add);
+    await _gameRepository.performMigrationIfNeeded();
+
+    _gameSubscription = _gameRepository.watchCurrentGame().listen(_currentGameSubject.add);
     final game = await _gameRepository.getCurrentGame();
     _currentGameSubject.add(game);
   }
@@ -62,6 +64,11 @@ class GameManager {
 
   Future<void> finishCurrentGame() async {
     if (currentGame == null) return;
+
+    if(currentGame?.winners == null) {
+      await _gameRepository.deleteGame(currentGame!);
+      return;
+    }
 
     final finishedGame = currentGame!.copyWith(
       isFinished: true,

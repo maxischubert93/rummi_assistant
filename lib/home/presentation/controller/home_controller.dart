@@ -25,7 +25,7 @@ class HomeController extends AutoDisposeNotifier<HomeScreenState> {
     state = state.copyWith(players: players);
   }
 
-  void setTimerDuration(Duration timerDuration) {
+  void onTimerDurationChanged(Duration timerDuration) {
     state = state.copyWith(timerDuration: timerDuration);
   }
 

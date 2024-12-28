@@ -44,7 +44,7 @@ dependencies:
   path_provider: ^2.1.5
 
 dependency_overrides:
-  analyzer: ^7.1.0
+  analyzer: ^6.4.1
 
 dev_dependencies:
   flutter_test:

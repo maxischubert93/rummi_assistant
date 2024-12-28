@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/in_game/presentation/controller/score_state.dart';
+import 'package:rummi_assistant/game/presentation/controller/score_state.dart';
 
 final scoreControllerProvider =
     StateNotifierProvider.autoDispose<ScoreController, ScoreState>((ref) {

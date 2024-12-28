@@ -9,7 +9,13 @@ abstract class GameRepository {
 
   Future<void> updateGame(Game game);
 
-  Stream<Game?> currentGame();
+  Future<void> deleteGame(Game game);
+
+  Future<void> performMigrationIfNeeded();
+
+  Stream<Game?> watchCurrentGame();
+
+  Stream<List<Game>> watchFinishedGames();
 
   Future<Game?> getCurrentGame();
 }

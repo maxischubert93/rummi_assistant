@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/game/game.dart';
 import 'package:rummi_assistant/home/presentation/controller/home_controller.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
-import 'package:rummi_assistant/settings/presentation/widget/settings_legal_section.dart';
+import 'package:rummi_assistant/settings/settings.dart';
 import 'package:rummi_assistant/timer/timer.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -12,6 +12,9 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(homeControllerProvider.notifier);
+    final state = ref.watch(homeControllerProvider);
+
     return AppScaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -29,11 +32,14 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   context.geometry.spacingDoubleExtraLarge.verticalBox,
                   const _PlayerSelection(),
-                  context.geometry.spacingDoubleExtraLarge.verticalBox,
-                  const _TimerSelection(),
-                  context.geometry.spacingDoubleExtraLarge.verticalBox,
-                  const _GameHistory(),
-                  context.geometry.spacingDoubleExtraLarge.verticalBox,
+                  context.geometry.spacingLarge.verticalBox,
+                  TimerSection(
+                    currentValue: state.timerDuration,
+                    onValueChanged: controller.onTimerDurationChanged,
+                  ),
+                  context.geometry.spacingLarge.verticalBox,
+                  const GameHistorySection(),
+                  context.geometry.spacingLarge.verticalBox,
                   const SettingsLegalSection(),
                   context.geometry.spacingDoubleExtraLarge.verticalBox,
                 ],
@@ -82,48 +88,3 @@ class _PlayerSelection extends ConsumerWidget {
     );
   }
 }
-
-class _TimerSelection extends ConsumerWidget {
-  const _TimerSelection();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeControllerProvider);
-
-    return Surface(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Subtitle(context.localizations.homeTimerSection),
-          context.geometry.spacingMedium.verticalBox,
-          TimerSegmentedControl(
-            currentValue: state.timerDuration,
-            onValueChanged: (duration) =>
-                ref.read(homeControllerProvider.notifier).setTimerDuration(duration),
-          ),
-          context.geometry.spacingMedium.verticalBox,
-        ],
-      ),
-    );
-  }
-}
-
-class _GameHistory extends StatelessWidget {
-  const _GameHistory();
-
-  @override
-  Widget build(BuildContext context) {
-    return Surface(
-      expand: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Subtitle(context.localizations.homeTimerSection),
-          context.geometry.spacingMedium.verticalBox,
-          context.geometry.spacingMedium.verticalBox,
-        ],
-      ),
-    );
-  }
-}
-

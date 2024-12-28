@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ScoreInputState {
   List<PlayerRoundScore> get playerScores => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScoreInputState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ScoreInputStateCopyWith<ScoreInputState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$ScoreInputStateCopyWithImpl<$Res, $Val extends ScoreInputState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ScoreInputState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +79,8 @@ class __$$ScoreInputStateImplCopyWithImpl<$Res>
       _$ScoreInputStateImpl _value, $Res Function(_$ScoreInputStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ScoreInputState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,7 +129,9 @@ class _$ScoreInputStateImpl extends _ScoreInputState {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_playerScores));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ScoreInputState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ScoreInputStateImplCopyWith<_$ScoreInputStateImpl> get copyWith =>
@@ -139,8 +147,11 @@ abstract class _ScoreInputState extends ScoreInputState {
 
   @override
   List<PlayerRoundScore> get playerScores;
+
+  /// Create a copy of ScoreInputState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ScoreInputStateImplCopyWith<_$ScoreInputStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -152,7 +163,9 @@ mixin _$PlayerRoundScore {
   String? get score => throw _privateConstructorUsedError;
   bool get wonRound => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerRoundScore
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlayerRoundScoreCopyWith<PlayerRoundScore> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -177,6 +190,8 @@ class _$PlayerRoundScoreCopyWithImpl<$Res, $Val extends PlayerRoundScore>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PlayerRoundScore
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,6 +241,8 @@ class __$$PlayerRoundScoreImplCopyWithImpl<$Res>
       $Res Function(_$PlayerRoundScoreImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PlayerRoundScore
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -298,7 +315,9 @@ class _$PlayerRoundScoreImpl extends _PlayerRoundScore {
   int get hashCode =>
       Object.hash(runtimeType, playerName, focusNode, score, wonRound);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PlayerRoundScore
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlayerRoundScoreImplCopyWith<_$PlayerRoundScoreImpl> get copyWith =>
@@ -322,8 +341,11 @@ abstract class _PlayerRoundScore extends PlayerRoundScore {
   String? get score;
   @override
   bool get wonRound;
+
+  /// Create a copy of PlayerRoundScore
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlayerRoundScoreImplCopyWith<_$PlayerRoundScoreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

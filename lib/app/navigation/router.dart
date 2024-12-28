@@ -5,10 +5,11 @@ import 'package:rummi_assistant/app/navigation/custom_page/platform_modal_page.d
 import 'package:rummi_assistant/app/navigation/route_names.dart';
 import 'package:rummi_assistant/app/widget/bottom_navigation_wrapper.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/game/presentation/game_history_screen.dart';
+import 'package:rummi_assistant/game/presentation/score_input_modal.dart';
+import 'package:rummi_assistant/game/presentation/score_screen.dart';
 import 'package:rummi_assistant/home/presentation/home_screen.dart';
 import 'package:rummi_assistant/home/presentation/player_names_modal.dart';
-import 'package:rummi_assistant/in_game/presentation/score_input_modal.dart';
-import 'package:rummi_assistant/in_game/presentation/score_screen.dart';
 import 'package:rummi_assistant/settings/domain/model/license.dart';
 import 'package:rummi_assistant/settings/presentation/licences_screen.dart';
 import 'package:rummi_assistant/settings/presentation/license_detail_screen.dart';
@@ -102,7 +103,7 @@ GoRouter buildRouter() => GoRouter(
         GoRoute(
           path: '/home',
           name: RouteNames.home,
-          builder: (context, state) => const HomeScreen(),
+          builder: (_, __) => const HomeScreen(),
           routes: [
             GoRoute(
               path: 'timer-selection',
@@ -119,6 +120,11 @@ GoRouter buildRouter() => GoRouter(
               ),
             ),
           ],
+        ),
+        GoRoute(
+          path: '/game-history',
+          name: RouteNames.gameHistory,
+          builder: (_, __) => const GameHistoryScreen(),
         ),
       ],
     );

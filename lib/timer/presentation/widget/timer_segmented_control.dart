@@ -21,7 +21,7 @@ class TimerSegmentedControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final String customSegmentText;
     if (currentValue == _defaultMinuteTimer || currentValue == _defaultTwoMinuteTimer) {
-      customSegmentText = context.localizations.homeCustomTimerSegment;
+      customSegmentText = context.localizations.timerCustomSegment;
     } else {
       customSegmentText = currentValue.secondsText;
     }

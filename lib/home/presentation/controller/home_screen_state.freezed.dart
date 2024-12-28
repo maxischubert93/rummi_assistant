@@ -19,7 +19,9 @@ mixin _$HomeScreenState {
   Duration get timerDuration => throw _privateConstructorUsedError;
   List<Player> get players => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HomeScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HomeScreenStateCopyWith<HomeScreenState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$HomeScreenStateCopyWithImpl<$Res, $Val extends HomeScreenState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HomeScreenState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$HomeScreenStateImplCopyWithImpl<$Res>
       _$HomeScreenStateImpl _value, $Res Function(_$HomeScreenStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HomeScreenState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,7 +143,9 @@ class _$HomeScreenStateImpl extends _HomeScreenState {
   int get hashCode => Object.hash(runtimeType, timerDuration,
       const DeepCollectionEquality().hash(_players));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HomeScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HomeScreenStateImplCopyWith<_$HomeScreenStateImpl> get copyWith =>
@@ -155,8 +163,11 @@ abstract class _HomeScreenState extends HomeScreenState {
   Duration get timerDuration;
   @override
   List<Player> get players;
+
+  /// Create a copy of HomeScreenState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HomeScreenStateImplCopyWith<_$HomeScreenStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

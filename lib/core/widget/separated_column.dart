@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 
 class SeparatedColumn extends StatelessWidget {
