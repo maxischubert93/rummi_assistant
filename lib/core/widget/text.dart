@@ -42,6 +42,16 @@ class HeadlineSmall extends _BaseText {
   }) : super(style: (context) => context.typography.headlineSmall);
 }
 
+class TitleMedium extends _BaseText {
+  TitleMedium(
+    super.text, {
+    super.singleLine = true,
+    super.textAlign,
+    super.color,
+    super.key,
+  }) : super(style: (context) => context.typography.titleMedium);
+}
+
 class Subtitle extends _BaseText {
   Subtitle(
     super.text, {

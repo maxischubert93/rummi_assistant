@@ -8,12 +8,14 @@ class Surface extends StatelessWidget {
     this.width,
     this.height,
     this.expand = false,
+    this.padding,
     super.key,
   });
 
   final Widget? child;
   final double? width;
   final double? height;
+  final EdgeInsets? padding;
   final bool expand;
 
   @override
@@ -21,7 +23,7 @@ class Surface extends StatelessWidget {
     return Container(
       width: width ?? (expand ? double.infinity : null),
       height: height,
-      padding: context.geometry.mediumPadding,
+      padding: padding ?? context.geometry.mediumPadding,
       decoration: BoxDecoration(
         color: context.colors.surface,
         borderRadius: context.geometry.radiusMedium,

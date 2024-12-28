@@ -27,4 +27,9 @@ class Geometry {
         vertical: spacingMedium,
         horizontal: spacingMedium,
       );
+
+  EdgeInsets get smallPadding => EdgeInsets.symmetric(
+        vertical: spacingSmall,
+        horizontal: spacingSmall,
+      );
 }

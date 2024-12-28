@@ -51,7 +51,7 @@ class AppTypography {
         color: colors.onBackground,
         fontFamily: textFont,
         fontSize: 19,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
       );
 
   TextStyle get subtitle => TextStyle(
