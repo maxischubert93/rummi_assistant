@@ -1,4 +1,4 @@
-import 'package:rummi_assistant/core/data/store/model/stored_game.dart';
+import 'package:rummi_assistant/core/data/stored/model/stored_game.dart';
 import 'package:rummi_assistant/core/domain/model/player.dart';
 
 extension ToStored on Player {

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/core/widget/button/menu_button.dart';
-import 'package:rummi_assistant/core/widget/separated_column.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 import 'package:rummi_assistant/settings/presentation/controller/settings_controller.dart';
+import 'package:rummi_assistant/settings/presentation/widget/settings_legal_section.dart';
 import 'package:rummi_assistant/settings/presentation/widget/version_text.dart';
 import 'package:rummi_assistant/timer/presentation/widget/timer_segmented_control.dart';
 
@@ -29,7 +28,7 @@ class SettingsScreen extends ConsumerWidget {
                   context.geometry.spacingLarge.verticalBox,
                   const _TimerSection(),
                   context.geometry.spacingLarge.verticalBox,
-                  const _LegalSection(),
+                  const SettingsLegalSection(),
                   context.geometry.spacingTripleExtraLarge.verticalBox,
                   const VersionText(),
                   context.geometry.spacingLarge.verticalBox,
@@ -62,7 +61,7 @@ class _TimerSection extends ConsumerWidget {
     final timerDuration =
         ref.watch(settingsControllerProvider.select((state) => state.timerDuration));
 
-    return _SettingsSection(
+    return Section(
       title: context.localizations.settingsTimerSectionTitle,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +117,7 @@ class _PlayersSection extends ConsumerWidget {
       return const SizedBox();
     }
 
-    return _SettingsSection(
+    return Section(
       title: context.localizations.settingsPlayerSectionTitle,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -181,61 +180,6 @@ class _PlayerLabel extends StatelessWidget {
           border: Border.all(color: borderColors[index % borderColors.length]),
         ),
         child: BodyLarge(playerName),
-      ),
-    );
-  }
-}
-
-class _LegalSection extends StatelessWidget {
-  const _LegalSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return _SettingsSection(
-      title: context.localizations.settingsLegalSectionTitle,
-      child: SeparatedColumn(
-        spacing: context.geometry.spacingExtraSmall,
-        children: [
-          const MenuButton(
-            routeName: 'routeName',
-            title: 'Privacy Policy',
-            icon: Icons.privacy_tip,
-          ),
-          MenuButton(
-            routeName: RouteNames.licenses,
-            title: context.localizations.settingsOpenSourceLicenses,
-            icon: Icons.library_books,
-          ),
-          const MenuButton(
-            routeName: 'routeName',
-            title: 'Imprint',
-            icon: Icons.local_library_rounded,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SettingsSection extends StatelessWidget {
-  const _SettingsSection({
-    required this.title,
-    required this.child,
-  });
-
-  final String title;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Surface(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Subtitle(title),
-          context.geometry.spacingMedium.verticalBox,
-          child,
-        ],
       ),
     );
   }

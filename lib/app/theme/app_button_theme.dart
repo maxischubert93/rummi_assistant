@@ -25,7 +25,7 @@ class AppButtonTheme {
           border: AppColors.transparent,
           content: colors.onDisabled,
         ),
-        androidRipple: colors.onPrimary.withOpacity(0.2),
+        androidRipple: colors.onPrimary.withValues(alpha: 0.2),
       );
 
   AppButtonStyle get secondary => AppButtonStyle(
@@ -44,7 +44,7 @@ class AppButtonTheme {
           border: AppColors.transparent,
           content: colors.onDisabled,
         ),
-        androidRipple: colors.onSecondary.withOpacity(0.2),
+        androidRipple: colors.onSecondary.withValues(alpha: 0.2),
       );
 
   AppButtonStyle get tertiary => AppButtonStyle(
@@ -63,7 +63,7 @@ class AppButtonTheme {
           border: AppColors.transparent,
           content: colors.onDisabled,
         ),
-        androidRipple: colors.onTertiary.withOpacity(0.2),
+        androidRipple: colors.onTertiary.withValues(alpha: 0.2),
       );
 
   AppButtonStyle get appBarButton => AppButtonStyle(
@@ -75,13 +75,13 @@ class AppButtonTheme {
         iOSPressed: AppButtonStateStyle(
           background: AppColors.transparent,
           border: AppColors.transparent,
-          content: colors.onBackground.withOpacity(0.5),
+          content: colors.onBackground.withValues(alpha: 0.5),
         ),
         disabled: AppButtonStateStyle(
           background: colors.disabled,
           border: AppColors.transparent,
           content: colors.onDisabled,
         ),
-        androidRipple: colors.onBackground.withOpacity(0.2),
+        androidRipple: colors.onBackground.withValues(alpha: 0.2),
       );
 }

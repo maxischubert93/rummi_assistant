@@ -98,7 +98,7 @@ class _CupertinoClickListenerState extends State<_CupertinoClickListener>
       ),
       end: ShapeDecoration(
         shape: highlightShape,
-        color: widget.highlightColor.withOpacity(0.3),
+        color: widget.highlightColor.withValues(alpha: 0.3),
       ),
     );
   }
@@ -187,8 +187,8 @@ class _MaterialClickListener extends StatelessWidget {
             child: InkWell(
               customBorder: border,
               onTap: enabled ? onTap : null,
-              highlightColor: highlightColor.withOpacity(0.12),
-              splashColor: highlightColor.withOpacity(0.2),
+              highlightColor: highlightColor.withValues(alpha: 0.12),
+              splashColor: highlightColor.withValues(alpha: 0.2),
             ),
           ),
         ),

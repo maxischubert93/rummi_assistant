@@ -2,9 +2,11 @@ import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rummi_assistant/app/navigation/router.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/core/data/store/database.dart';
-import 'package:rummi_assistant/core/data/store/game_store.dart';
+import 'package:rummi_assistant/core/data/remote/url_launch_service.dart';
+import 'package:rummi_assistant/core/data/stored/database.dart';
+import 'package:rummi_assistant/core/data/stored/game_store.dart';
 import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
+import 'package:rummi_assistant/core/interactor/url_interactor.dart';
 import 'package:rummi_assistant/settings/data/store/user_settings_store.dart';
 import 'package:rummi_assistant/settings/domain/user_settings.dart';
 import 'package:rummi_assistant/timer/domain/timer_alert_player.dart';
@@ -12,42 +14,50 @@ import 'package:rummi_assistant/timer/service/audio_service.dart';
 
 late PackageInfo packageInfo;
 
+GetIt get _container => GetIt.instance;
+
 Future<void> prepareApp() async {
-  final container = GetIt.instance;
   packageInfo = await PackageInfo.fromPlatform();
-  await _registerStores(container);
-  //await _setupLogging(container);
-  await _registerManagers(container);
-  _registerServices(container);
-  _registerNavigation(container);
-  _registerInteractors(container);
+  _registerStores();
+  //await _setupLogging();
+  _registerManagers();
+  _registerServices();
+  _registerNavigation();
+  _registerInteractors();
+
+  await _container.allReady();
 }
 
-Future<void> _registerStores(GetIt container) async {
-  container
-    ..registerSingleton(await DatabaseBuilder.openDatabase())
+void _registerStores() {
+  _container
+    ..registerSingletonAsync(DatabaseBuilder.openDatabase)
     ..registerSingleton<UserSettings>(UserSettingsStore())
-    ..registerFactory<GameRepository>(GameStore.new);
+    ..registerFactoryAsync<GameRepository>(
+      () async => GameStore(isar: await _container.getAsync()),
+    );
 }
 
-void _registerInteractors(GetIt container) {}
-
-Future<void> _registerManagers(GetIt container) async {
-  container.registerSingleton(GameManager());
-  await container.get<GameManager>().init();
+void _registerInteractors() {
+  _container.registerFactory(() => UrlInteractor(urlLaunchService: UrlLaunchService()));
 }
 
-void _registerServices(GetIt container) {
-  container.registerFactoryParam<TimerAlertPlayer, String, void>(
+void _registerManagers() {
+  _container.registerSingletonAsync(
+    () async => GameManager.createInstance(gameRepository: await _container.getAsync()),
+  );
+}
+
+void _registerServices() {
+  _container.registerFactoryParam<TimerAlertPlayer, String, void>(
     (assetPath, _) => AudioService(assetPath: assetPath),
   );
 }
 
-/*Future<void> _setupLogging(GetIt container) async {
+/*Future<void> _setupLogging() async {
   configureLogger(
     logToConsole: kDebugMode,
     logToFile: !kDebugMode,
-    logFileDirectory: await container.get<LogStore>().logDirectory,
+    logFileDirectory: await _container.get<LogStore>().logDirectory,
     errorCallback: (message, error, stackTrace, {required isFatal}) async {
       if (kDebugMode) return;
       await Sentry.captureException(
@@ -59,10 +69,10 @@ void _registerServices(GetIt container) {
         }),
       );
     },
-    logLevel: container.get<AppConfig>().logLevel,
+    logLevel: _container.get<AppConfig>().logLevel,
   );
 } */
 
-void _registerNavigation(GetIt container) {
-  container.registerSingleton(buildRouter());
+void _registerNavigation() {
+  _container.registerSingleton(buildRouter());
 }

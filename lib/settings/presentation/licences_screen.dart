@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/core/widget/separated_column.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 import 'package:rummi_assistant/settings/domain/model/license.dart';
 

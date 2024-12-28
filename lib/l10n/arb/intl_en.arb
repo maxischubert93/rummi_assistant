@@ -26,7 +26,11 @@
   "settingsFinishGameButton": "Finish game",
   "settingsTimerSectionTitle": "Timer",
   "settingsTimerSectionSoundCheckBox": "Timer sound 🔈",
+  "settingsPrivacyPolicy": "Privacy policy",
+  "settingsTermsOfService": "Terms of service",
   "settingsPlayerSectionTitle": "Player names",
   "settingsPlayerSectionChangeNamesButton": "Change player names",
-  "settingsLegalSectionTitle": "Legal"
+  "settingsLegalSectionTitle": "Legal",
+  "urlPrivacyPolicy": "https://www.maxschubert.dev/rummi-assistant/privacy-policy",
+  "urlTermsOfService": "https://www.maxschubert.dev/rummi-assistant/tos"
 }

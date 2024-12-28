@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/core/interactor/url_interactor.dart';
 
 class MenuButton extends StatelessWidget {
   const MenuButton({
-    required this.routeName,
     required this.title,
     required this.icon,
+    this.webUrl,
+    this.routeName,
     super.key,
-  });
+  }) : assert(routeName != null || webUrl != null, 'routeName or webUrl must be provided');
 
-  final String routeName;
+  final String? routeName;
+  final String? webUrl;
   final String title;
   final IconData icon;
 
@@ -25,7 +29,7 @@ class MenuButton extends StatelessWidget {
           children: [
             Container(
               decoration: ShapeDecoration(
-                color: context.colors.primaryLightest.withOpacity(0.6),
+                color: context.colors.primaryLightest.withValues(alpha: 0.6),
                 shape: const CircleBorder(),
               ),
               child: Padding(
@@ -44,7 +48,11 @@ class MenuButton extends StatelessWidget {
         ),
       ),
       onTap: () {
-        context.pushNamed(routeName);
+        if (webUrl != null) {
+          GetIt.instance<UrlInteractor>().openUrl(webUrl!);
+        } else if (routeName != null) {
+          context.pushNamed(routeName!);
+        }
       },
     );
   }

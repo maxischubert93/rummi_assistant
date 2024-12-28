@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/core/widget/separated_column.dart';
 import 'package:rummi_assistant/settings/domain/model/license.dart';
 
 class LicenseDetailScreen extends StatelessWidget {

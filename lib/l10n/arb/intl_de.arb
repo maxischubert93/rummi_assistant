@@ -24,9 +24,13 @@
   "settingsAppVersion": "Appversion: {version} ({build})",
   "settingsOpenSourceLicenses": "Open Source Lizenzen",
   "settingsFinishGameButton": "Spiel beenden",
+  "settingsPrivacyPolicy": "Datenschutzerklärung",
+  "settingsTermsOfService": "Nutzungsbedingungen",
   "settingsTimerSectionTitle": "Timer",
   "settingsTimerSectionSoundCheckBox": "Timer-Sound 🔈",
   "settingsPlayerSectionTitle": "Spielernamen",
   "settingsPlayerSectionChangeNamesButton": "Spielernamen ändern",
-  "settingsLegalSectionTitle": "Rechtliches"
+  "settingsLegalSectionTitle": "Rechtliches",
+  "urlPrivacyPolicy": "https://www.maxschubert.dev/rummi-assistant/privacy-policy",
+  "urlTermsOfService": "https://www.maxschubert.dev/rummi-assistant/tos"
 }

@@ -4,6 +4,7 @@ import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/home/presentation/controller/home_controller.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
+import 'package:rummi_assistant/settings/presentation/widget/settings_legal_section.dart';
 import 'package:rummi_assistant/timer/timer.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -15,18 +16,31 @@ class HomeScreen extends ConsumerWidget {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          context.geometry.spacingDoubleExtraLarge.verticalBox,
-          Center(
-            child: Display(
-              context.localizations.appName,
-              singleLine: false,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  context.geometry.spacingDoubleExtraLarge.verticalBox,
+                  Center(
+                    child: Display(
+                      context.localizations.appName,
+                      singleLine: false,
+                    ),
+                  ),
+                  context.geometry.spacingDoubleExtraLarge.verticalBox,
+                  const _PlayerSelection(),
+                  context.geometry.spacingDoubleExtraLarge.verticalBox,
+                  const _TimerSelection(),
+                  context.geometry.spacingDoubleExtraLarge.verticalBox,
+                  const _GameHistory(),
+                  context.geometry.spacingDoubleExtraLarge.verticalBox,
+                  const SettingsLegalSection(),
+                  context.geometry.spacingDoubleExtraLarge.verticalBox,
+                ],
+              ),
             ),
           ),
-          const Spacer(),
-          const _PlayerSelection(),
-          const Spacer(),
-          const _TimerSelection(),
-          const Spacer(),
+          context.geometry.spacingMedium.verticalBox,
           AppButton.primary(
             text: context.localizations.homeStartGameButton,
             onPressed: () => ref.read(homeControllerProvider.notifier).newGame(),
@@ -43,7 +57,6 @@ class _PlayerSelection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Surface(
-      expand: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -78,7 +91,6 @@ class _TimerSelection extends ConsumerWidget {
     final state = ref.watch(homeControllerProvider);
 
     return Surface(
-      expand: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -95,3 +107,23 @@ class _TimerSelection extends ConsumerWidget {
     );
   }
 }
+
+class _GameHistory extends StatelessWidget {
+  const _GameHistory();
+
+  @override
+  Widget build(BuildContext context) {
+    return Surface(
+      expand: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Subtitle(context.localizations.homeTimerSection),
+          context.geometry.spacingMedium.verticalBox,
+          context.geometry.spacingMedium.verticalBox,
+        ],
+      ),
+    );
+  }
+}
+

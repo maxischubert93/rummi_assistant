@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:get_it/get_it.dart';
 import 'package:rummi_assistant/core/domain/model/game.dart';
 import 'package:rummi_assistant/core/domain/model/game_round.dart';
 import 'package:rummi_assistant/core/domain/model/player.dart';
@@ -9,11 +8,9 @@ import 'package:rummi_assistant/core/domain/repository/game_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GameManager {
-  GameManager() {
-    _gameSubscription = _gameRepository.currentGame().listen(_currentGameSubject.add);
-  }
+  GameManager(this._gameRepository);
 
-  final GameRepository _gameRepository = GetIt.instance.get();
+  final GameRepository _gameRepository;
   final BehaviorSubject<Game?> _currentGameSubject = BehaviorSubject.seeded(null);
 
   Game? get currentGame => _currentGameSubject.value;
@@ -24,7 +21,14 @@ class GameManager {
 
   late StreamSubscription<Game?> _gameSubscription;
 
+  static Future<GameManager> createInstance({required GameRepository gameRepository}) async {
+    final gameManager = GameManager(gameRepository);
+    await gameManager.init();
+    return gameManager;
+  }
+
   Future<void> init() async {
+    _gameSubscription = _gameRepository.currentGame().listen(_currentGameSubject.add);
     final game = await _gameRepository.getCurrentGame();
     _currentGameSubject.add(game);
   }

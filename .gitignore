@@ -49,3 +49,6 @@ app.*.map.json
 # Auto-generated localization files
 /lib/util/localization/l10n.dart
 /lib/util/localization/intl/*
+
+# FVM Version Cache
+.fvm/
