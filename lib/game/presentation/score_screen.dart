@@ -7,20 +7,35 @@ import 'package:rummi_assistant/timer/presentation/controller/timer_controller.d
 
 const double _cellHeight = 50;
 
-class ScoreScreen extends ConsumerWidget {
-  const ScoreScreen({super.key});
+class ScoreScreen extends StatelessWidget {
+  const ScoreScreen({
+    this.gameId,
+    super.key,
+  });
+
+  final int? gameId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final content = ref.watch(scoreControllerProvider.select((state) => state.players.isEmpty))
-        ? const Center(child: CircularProgressIndicator())
-        : const _Content();
+  Widget build(BuildContext context) {
+    return ProviderScope(
+      overrides: [scoreScreenIdProvider.overrideWithValue(gameId)],
+      child: Consumer(
+        builder: (context, ref, child) {
+          final state = ref.watch(scoreControllerProvider);
 
-    return AppScaffold(
-      excludePadding: true,
-      body: SafeArea(
-        top: false,
-        child: content,
+          final content = state.players.isEmpty
+              ? const Center(child: CircularProgressIndicator())
+              : const _Content();
+
+          return AppScaffold(
+            excludePadding: true,
+            appBarTitle: gameId != null ? context.localizations.gameHistoryDetailTitle : null,
+            body: SafeArea(
+              top: false,
+              child: content,
+            ),
+          );
+        },
       ),
     );
   }
@@ -69,16 +84,17 @@ class _ScoreTable extends ConsumerWidget {
               ),
           ],
         ),
-        Padding(
-          padding: context.geometry.mediumPadding,
-          child: AppButton.primary(
-            text: context.localizations.scoreScreenAddScoreButton,
-            onPressed: () {
-              ref.read(timerControllerProvider.notifier).stopAndReset();
-              ref.read(scoreControllerProvider.notifier).addScore();
-            },
+        if (state.canEdit)
+          Padding(
+            padding: context.geometry.mediumPadding,
+            child: AppButton.primary(
+              text: context.localizations.scoreScreenAddScoreButton,
+              onPressed: () {
+                ref.read(timerControllerProvider.notifier).stopAndReset();
+                ref.read(scoreControllerProvider.notifier).addScore();
+              },
+            ),
           ),
-        ),
       ],
     );
   }

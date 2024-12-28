@@ -18,4 +18,6 @@ abstract class GameRepository {
   Stream<List<Game>> watchFinishedGames();
 
   Future<Game?> getCurrentGame();
+
+  Stream<Game?> watchGameWithId(int gameId);
 }

@@ -22,10 +22,10 @@ class RummiAppBar extends PlatformAppBar {
       actions: trailingActions
           ?.mapIndexed(
             (i, e) => Padding(
-          padding: EdgeInsets.only(right: i == trailingActions!.length - 1 ? 12 : 0),
-          child: SizedBox(width: 48, height: 48, child: e),
-        ),
-      )
+              padding: EdgeInsets.only(right: i == trailingActions!.length - 1 ? 12 : 0),
+              child: SizedBox(width: 48, height: 48, child: e),
+            ),
+          )
           .toList(),
       centerTitle: true,
       elevation: 0,
@@ -60,5 +60,4 @@ class RummiAppBar extends PlatformAppBar {
       brightness: Brightness.light,
     );
   }
-
 }

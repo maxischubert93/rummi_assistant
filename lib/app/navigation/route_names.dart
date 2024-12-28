@@ -9,4 +9,5 @@ class RouteNames {
   static const licenses = 'licences';
   static const licenseDetail = 'licence-detail';
   static const gameHistory = 'game-history';
+  static const gameDetail = 'game-detail';
 }

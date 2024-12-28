@@ -17,41 +17,47 @@ class HomeScreen extends ConsumerWidget {
 
     return AppScaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  context.geometry.spacingDoubleExtraLarge.verticalBox,
-                  Center(
-                    child: Display(
-                      context.localizations.appName,
-                      singleLine: false,
+      excludePadding: true,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: context.geometry.mediumPadding,
+                child: Column(
+                  children: [
+                    context.geometry.spacingExtraLarge.verticalBox,
+                    Center(
+                      child: Display(
+                        context.localizations.appName,
+                        singleLine: false,
+                      ),
                     ),
-                  ),
-                  context.geometry.spacingDoubleExtraLarge.verticalBox,
-                  const _PlayerSelection(),
-                  context.geometry.spacingLarge.verticalBox,
-                  TimerSection(
-                    currentValue: state.timerDuration,
-                    onValueChanged: controller.onTimerDurationChanged,
-                  ),
-                  context.geometry.spacingLarge.verticalBox,
-                  const GameHistorySection(),
-                  context.geometry.spacingLarge.verticalBox,
-                  const SettingsLegalSection(),
-                  context.geometry.spacingDoubleExtraLarge.verticalBox,
-                ],
+                    context.geometry.spacingDoubleExtraLarge.verticalBox,
+                    const _PlayerSelection(),
+                    context.geometry.spacingLarge.verticalBox,
+                    TimerSection(
+                      currentValue: state.timerDuration,
+                      onValueChanged: controller.onTimerDurationChanged,
+                    ),
+                    context.geometry.spacingLarge.verticalBox,
+                    const GameHistorySection(),
+                    context.geometry.spacingLarge.verticalBox,
+                    const SettingsLegalSection(),
+                    context.geometry.spacingDoubleExtraLarge.verticalBox,
+                  ],
+                ),
               ),
             ),
-          ),
-          context.geometry.spacingMedium.verticalBox,
-          AppButton.primary(
-            text: context.localizations.homeStartGameButton,
-            onPressed: () => ref.read(homeControllerProvider.notifier).newGame(),
-          ),
-        ],
+            Padding(
+              padding: context.geometry.mediumPadding,
+              child: AppButton.primary(
+                text: context.localizations.homeStartGameButton,
+                onPressed: () => ref.read(homeControllerProvider.notifier).newGame(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

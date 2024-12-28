@@ -72,4 +72,13 @@ class GameStore implements GameRepository {
       await games.delete(game.id);
     });
   }
+
+  @override
+  Stream<Game?> watchGameWithId(int gameId) {
+    return games
+        .filter()
+        .idEqualTo(gameId)
+        .watch(fireImmediately: true)
+        .map((game) => game.firstOrNull?.toDomain());
+  }
 }

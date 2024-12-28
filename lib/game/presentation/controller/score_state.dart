@@ -7,9 +7,11 @@ part 'score_state.freezed.dart';
 class ScoreState with _$ScoreState {
   const factory ScoreState({
     required List<Player> players,
+    required bool canEdit,
   }) = _ScoreState;
 
-  factory ScoreState.initial() => const ScoreState(
+  factory ScoreState.initial({required bool canEdit}) => ScoreState(
+        canEdit: canEdit,
         players: [],
       );
 

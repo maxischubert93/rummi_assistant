@@ -126,5 +126,13 @@ GoRouter buildRouter() => GoRouter(
           name: RouteNames.gameHistory,
           builder: (_, __) => const GameHistoryScreen(),
         ),
+        GoRoute(
+          path: '/game-detail',
+          name: RouteNames.gameDetail,
+          builder: (context, state) {
+            final gameId = state.extra as int?;
+            return ScoreScreen(gameId: gameId);
+          },
+        ),
       ],
     );

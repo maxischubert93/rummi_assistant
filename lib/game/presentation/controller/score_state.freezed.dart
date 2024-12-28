@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ScoreState {
   List<Player> get players => throw _privateConstructorUsedError;
+  bool get canEdit => throw _privateConstructorUsedError;
 
   /// Create a copy of ScoreState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +32,7 @@ abstract class $ScoreStateCopyWith<$Res> {
           ScoreState value, $Res Function(ScoreState) then) =
       _$ScoreStateCopyWithImpl<$Res, ScoreState>;
   @useResult
-  $Res call({List<Player> players});
+  $Res call({List<Player> players, bool canEdit});
 }
 
 /// @nodoc
@@ -50,12 +51,17 @@ class _$ScoreStateCopyWithImpl<$Res, $Val extends ScoreState>
   @override
   $Res call({
     Object? players = null,
+    Object? canEdit = null,
   }) {
     return _then(_value.copyWith(
       players: null == players
           ? _value.players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
+      canEdit: null == canEdit
+          ? _value.canEdit
+          : canEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -68,7 +74,7 @@ abstract class _$$ScoreStateImplCopyWith<$Res>
       __$$ScoreStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Player> players});
+  $Res call({List<Player> players, bool canEdit});
 }
 
 /// @nodoc
@@ -85,12 +91,17 @@ class __$$ScoreStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? players = null,
+    Object? canEdit = null,
   }) {
     return _then(_$ScoreStateImpl(
       players: null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
               as List<Player>,
+      canEdit: null == canEdit
+          ? _value.canEdit
+          : canEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -98,7 +109,8 @@ class __$$ScoreStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ScoreStateImpl extends _ScoreState {
-  const _$ScoreStateImpl({required final List<Player> players})
+  const _$ScoreStateImpl(
+      {required final List<Player> players, required this.canEdit})
       : _players = players,
         super._();
 
@@ -111,8 +123,11 @@ class _$ScoreStateImpl extends _ScoreState {
   }
 
   @override
+  final bool canEdit;
+
+  @override
   String toString() {
-    return 'ScoreState(players: $players)';
+    return 'ScoreState(players: $players, canEdit: $canEdit)';
   }
 
   @override
@@ -120,12 +135,13 @@ class _$ScoreStateImpl extends _ScoreState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ScoreStateImpl &&
-            const DeepCollectionEquality().equals(other._players, _players));
+            const DeepCollectionEquality().equals(other._players, _players) &&
+            (identical(other.canEdit, canEdit) || other.canEdit == canEdit));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_players));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_players), canEdit);
 
   /// Create a copy of ScoreState
   /// with the given fields replaced by the non-null parameter values.
@@ -137,12 +153,15 @@ class _$ScoreStateImpl extends _ScoreState {
 }
 
 abstract class _ScoreState extends ScoreState {
-  const factory _ScoreState({required final List<Player> players}) =
-      _$ScoreStateImpl;
+  const factory _ScoreState(
+      {required final List<Player> players,
+      required final bool canEdit}) = _$ScoreStateImpl;
   const _ScoreState._() : super._();
 
   @override
   List<Player> get players;
+  @override
+  bool get canEdit;
 
   /// Create a copy of ScoreState
   /// with the given fields replaced by the non-null parameter values.

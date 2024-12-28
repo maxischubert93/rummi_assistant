@@ -17,6 +17,8 @@ class GameManager {
 
   Stream<Game?> get currentGameStream => _currentGameSubject.stream;
 
+  Stream<Game?> gameWithIdStream(int gameId) => _gameRepository.watchGameWithId(gameId);
+
   bool get hasRunningGame => currentGame != null;
 
   late StreamSubscription<Game?> _gameSubscription;

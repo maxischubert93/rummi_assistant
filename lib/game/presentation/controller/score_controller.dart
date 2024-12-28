@@ -7,14 +7,24 @@ import 'package:rummi_assistant/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/game/presentation/controller/score_state.dart';
 
-final scoreControllerProvider =
-    StateNotifierProvider.autoDispose<ScoreController, ScoreState>((ref) {
-  return ScoreController();
-});
+final scoreScreenIdProvider = Provider.autoDispose<int?>((ref) => null);
+
+final scoreControllerProvider = StateNotifierProvider.autoDispose<ScoreController, ScoreState>(
+  (ref) {
+    final gameId = ref.watch(scoreScreenIdProvider);
+    return ScoreController(gameId);
+  },
+  dependencies: [scoreScreenIdProvider],
+);
 
 class ScoreController extends StateNotifier<ScoreState> {
-  ScoreController() : super(ScoreState.initial()) {
-    _gameSubscription = _gameManager.currentGameStream.filterNull().listen((game) {
+  ScoreController(int? gameId) : super(ScoreState.initial(canEdit: gameId == null)) {
+    _gameSubscription = switch (gameId != null) {
+      true => _gameManager.gameWithIdStream(gameId!),
+      false => _gameManager.currentGameStream,
+    }
+        .filterNull()
+        .listen((game) {
       state = state.copyWith(players: game.players);
     });
   }

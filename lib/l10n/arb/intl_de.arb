@@ -5,6 +5,7 @@
   "gameHistoryScreenTitle": "Spielverlauf",
   "gameHistoryItemPlayersSubtitle": "Spieler:",
   "gameHistoryItemWinnerSubtitle": "Sieger:",
+  "gameHistoryDetailTitle": "Spielverlauf",
   "gameHistoryEmptyText": "Noch keine Spiele gespielt",
   "homeStartGameButton": "Spiel starten",
   "homePlayerSection": "Spieler",
