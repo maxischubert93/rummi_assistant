@@ -133,7 +133,11 @@ class _WinnerInputPage extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Subtitle(context.localizations.scoreInputModalSelectWinnerTitle),
+        Subtitle(
+          context.localizations.scoreInputModalSelectWinnerTitle,
+          singleLine: false,
+          textAlign: TextAlign.center,
+        ),
         const Spacer(),
         ButtonGroup(
           buttonTexts: playerScores.map((score) => score.playerName).toList(),

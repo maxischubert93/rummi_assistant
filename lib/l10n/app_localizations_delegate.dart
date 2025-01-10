@@ -9,7 +9,11 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   @override
   Future<AppLocalizations> load(Locale locale) {
     final localizations = lookupAppLocalizations(locale);
-    GetIt.instance.registerSingleton<AppLocalizations>(localizations);
+    final instance = GetIt.instance;
+    if (instance.isRegistered<AppLocalizations>()) {
+      instance.unregister<AppLocalizations>();
+    }
+    instance.registerSingleton(localizations);
     return SynchronousFuture<AppLocalizations>(localizations);
   }
 

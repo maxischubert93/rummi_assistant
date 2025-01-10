@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/l10n/l10n.dart';
 
 class BottomNavigationWrapper extends StatelessWidget {
   const BottomNavigationWrapper({
@@ -44,18 +45,18 @@ class BottomNavigationWrapper extends StatelessWidget {
             context.colors.navBarTheme.materialRippleColor,
           ),
         ),
-        items: const [
+        items:  [
           BottomNavigationBarItem(
-            icon: Icon(Icons.watch),
-            label: 'Timer',
+            icon: const Icon(Icons.watch),
+            label: context.localizations.tabBarTimer,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.numbers),
-            label: 'Score',
+            icon: const Icon(Icons.numbers),
+            label: context.localizations.tabBarScore,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: const Icon(Icons.settings),
+            label: context.localizations.tabBarSettings,
           ),
         ],
       ),

@@ -35,6 +35,7 @@ class _AppState extends State<App> {
         ],
         supportedLocales: AppLocalizations.supportedLocales,
         routerConfig: router,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
