@@ -28,8 +28,6 @@ class GameManager {
   }
 
   Future<void> init() async {
-    await _gameRepository.performMigrationIfNeeded();
-
     _gameSubscription = _gameRepository.watchCurrentGame().listen(_currentGameSubject.add);
     final game = await _gameRepository.getCurrentGame();
     _currentGameSubject.add(game);

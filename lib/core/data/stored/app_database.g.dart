@@ -308,11 +308,11 @@ class $StoredPlayersTable extends StoredPlayers
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _scoresMeta = const VerificationMeta('scores');
   @override
-  late final GeneratedColumn<String> scores = GeneratedColumn<String>(
-      'scores', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+  late final GeneratedColumnWithTypeConverter<List<int>, String> scores =
+      GeneratedColumn<String>('scores', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
+          .withConverter<List<int>>($StoredPlayersTable.$converterscores);
   @override
   List<GeneratedColumn> get $columns => [id, gameId, name, scores];
   @override
@@ -340,12 +340,6 @@ class $StoredPlayersTable extends StoredPlayers
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
-    if (data.containsKey('scores')) {
-      context.handle(_scoresMeta,
-          scores.isAcceptableOrUnknown(data['scores']!, _scoresMeta));
-    } else if (isInserting) {
-      context.missing(_scoresMeta);
-    }
     return context;
   }
 
@@ -361,8 +355,9 @@ class $StoredPlayersTable extends StoredPlayers
           .read(DriftSqlType.int, data['${effectivePrefix}game_id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      scores: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}scores'])!,
+      scores: $StoredPlayersTable.$converterscores.fromSql(attachedDatabase
+          .typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}scores'])!),
     );
   }
 
@@ -370,6 +365,9 @@ class $StoredPlayersTable extends StoredPlayers
   $StoredPlayersTable createAlias(String alias) {
     return $StoredPlayersTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<List<int>, String> $converterscores =
+      const ScoresListConverter();
 }
 
 class StoredPlayer extends DataClass implements Insertable<StoredPlayer> {
@@ -379,7 +377,7 @@ class StoredPlayer extends DataClass implements Insertable<StoredPlayer> {
 
   /// Scores stored as comma-separated values
   /// We'll need to parse this when reading/writing
-  final String scores;
+  final List<int> scores;
   const StoredPlayer(
       {required this.id,
       required this.gameId,
@@ -391,7 +389,10 @@ class StoredPlayer extends DataClass implements Insertable<StoredPlayer> {
     map['id'] = Variable<int>(id);
     map['game_id'] = Variable<int>(gameId);
     map['name'] = Variable<String>(name);
-    map['scores'] = Variable<String>(scores);
+    {
+      map['scores'] =
+          Variable<String>($StoredPlayersTable.$converterscores.toSql(scores));
+    }
     return map;
   }
 
@@ -411,7 +412,7 @@ class StoredPlayer extends DataClass implements Insertable<StoredPlayer> {
       id: serializer.fromJson<int>(json['id']),
       gameId: serializer.fromJson<int>(json['gameId']),
       name: serializer.fromJson<String>(json['name']),
-      scores: serializer.fromJson<String>(json['scores']),
+      scores: serializer.fromJson<List<int>>(json['scores']),
     );
   }
   @override
@@ -421,11 +422,12 @@ class StoredPlayer extends DataClass implements Insertable<StoredPlayer> {
       'id': serializer.toJson<int>(id),
       'gameId': serializer.toJson<int>(gameId),
       'name': serializer.toJson<String>(name),
-      'scores': serializer.toJson<String>(scores),
+      'scores': serializer.toJson<List<int>>(scores),
     };
   }
 
-  StoredPlayer copyWith({int? id, int? gameId, String? name, String? scores}) =>
+  StoredPlayer copyWith(
+          {int? id, int? gameId, String? name, List<int>? scores}) =>
       StoredPlayer(
         id: id ?? this.id,
         gameId: gameId ?? this.gameId,
@@ -468,7 +470,7 @@ class StoredPlayersCompanion extends UpdateCompanion<StoredPlayer> {
   final Value<int> id;
   final Value<int> gameId;
   final Value<String> name;
-  final Value<String> scores;
+  final Value<List<int>> scores;
   const StoredPlayersCompanion({
     this.id = const Value.absent(),
     this.gameId = const Value.absent(),
@@ -479,7 +481,7 @@ class StoredPlayersCompanion extends UpdateCompanion<StoredPlayer> {
     this.id = const Value.absent(),
     required int gameId,
     required String name,
-    required String scores,
+    required List<int> scores,
   })  : gameId = Value(gameId),
         name = Value(name),
         scores = Value(scores);
@@ -501,7 +503,7 @@ class StoredPlayersCompanion extends UpdateCompanion<StoredPlayer> {
       {Value<int>? id,
       Value<int>? gameId,
       Value<String>? name,
-      Value<String>? scores}) {
+      Value<List<int>>? scores}) {
     return StoredPlayersCompanion(
       id: id ?? this.id,
       gameId: gameId ?? this.gameId,
@@ -523,7 +525,8 @@ class StoredPlayersCompanion extends UpdateCompanion<StoredPlayer> {
       map['name'] = Variable<String>(name.value);
     }
     if (scores.present) {
-      map['scores'] = Variable<String>(scores.value);
+      map['scores'] = Variable<String>(
+          $StoredPlayersTable.$converterscores.toSql(scores.value));
     }
     return map;
   }
@@ -545,6 +548,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $StoredGamesTable storedGames = $StoredGamesTable(this);
   late final $StoredPlayersTable storedPlayers = $StoredPlayersTable(this);
+  late final GamesDao gamesDao = GamesDao(this as AppDatabase);
+  late final PlayersDao playersDao = PlayersDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -808,14 +813,14 @@ typedef $$StoredPlayersTableCreateCompanionBuilder = StoredPlayersCompanion
   Value<int> id,
   required int gameId,
   required String name,
-  required String scores,
+  required List<int> scores,
 });
 typedef $$StoredPlayersTableUpdateCompanionBuilder = StoredPlayersCompanion
     Function({
   Value<int> id,
   Value<int> gameId,
   Value<String> name,
-  Value<String> scores,
+  Value<List<int>> scores,
 });
 
 final class $$StoredPlayersTableReferences
@@ -854,8 +859,10 @@ class $$StoredPlayersTableFilterComposer
   ColumnFilters<String> get name => $composableBuilder(
       column: $table.name, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get scores => $composableBuilder(
-      column: $table.scores, builder: (column) => ColumnFilters(column));
+  ColumnWithTypeConverterFilters<List<int>, List<int>, String> get scores =>
+      $composableBuilder(
+          column: $table.scores,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
   $$StoredGamesTableFilterComposer get gameId {
     final $$StoredGamesTableFilterComposer composer = $composerBuilder(
@@ -932,7 +939,7 @@ class $$StoredPlayersTableAnnotationComposer
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
 
-  GeneratedColumn<String> get scores =>
+  GeneratedColumnWithTypeConverter<List<int>, String> get scores =>
       $composableBuilder(column: $table.scores, builder: (column) => column);
 
   $$StoredGamesTableAnnotationComposer get gameId {
@@ -982,7 +989,7 @@ class $$StoredPlayersTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<int> gameId = const Value.absent(),
             Value<String> name = const Value.absent(),
-            Value<String> scores = const Value.absent(),
+            Value<List<int>> scores = const Value.absent(),
           }) =>
               StoredPlayersCompanion(
             id: id,
@@ -994,7 +1001,7 @@ class $$StoredPlayersTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required int gameId,
             required String name,
-            required String scores,
+            required List<int> scores,
           }) =>
               StoredPlayersCompanion.insert(
             id: id,

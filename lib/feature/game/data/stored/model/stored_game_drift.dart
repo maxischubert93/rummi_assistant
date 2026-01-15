@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:rummi_assistant/feature/game/data/stored/converter/scores_list_converter.dart';
 
 /// Drift table definition for games
 class StoredGames extends Table {
@@ -24,7 +25,7 @@ class StoredPlayers extends Table {
 
   /// Scores stored as comma-separated values
   /// We'll need to parse this when reading/writing
-  TextColumn get scores => text()();
+  TextColumn get scores => text().map(const ScoresListConverter())();
 
   @override
   String get tableName => 'players';
