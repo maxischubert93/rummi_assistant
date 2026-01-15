@@ -1,11 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
-import 'package:rummi_assistant/game/domain/repository/game_repository.dart';
-import 'package:rummi_assistant/game/data/stored/mapping/game.dart';
-import 'package:rummi_assistant/game/data/stored/mapping/player.dart';
-import 'package:rummi_assistant/game/data/stored/model/stored_game.dart';
-import 'package:rummi_assistant/game/domain/model/game.dart';
-import 'package:rummi_assistant/game/domain/model/player.dart';
+import 'package:rummi_assistant/feature/game/domain/repository/game_repository.dart';
+import 'package:rummi_assistant/feature/game/data/stored/mapping/game.dart';
+import 'package:rummi_assistant/feature/game/data/stored/mapping/player.dart';
+import 'package:rummi_assistant/feature/game/data/stored/model/stored_game.dart';
+import 'package:rummi_assistant/feature/game/domain/model/game.dart';
+import 'package:rummi_assistant/feature/game/domain/model/player.dart';
 
 class GameStore implements GameRepository {
   late final Isar _isar = GetIt.instance.get();

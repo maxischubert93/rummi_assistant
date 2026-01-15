@@ -1,6 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:rummi_assistant/core/app/theme/color_scheme.dart';
-import 'package:rummi_assistant/util/assets/fonts.gen.dart';
+import 'package:rummi_assistant/core/util/assets/fonts.gen.dart';
 
 class AppTypography {
   const AppTypography(this.colors);

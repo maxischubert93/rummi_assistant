@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:rummi_assistant/core/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/util/assets/assets.gen.dart';
-import 'package:rummi_assistant/util/extension/svg.dart';
+import 'package:rummi_assistant/core/util/assets/assets.gen.dart';
+import 'package:rummi_assistant/core/extension/svg.dart';
 
 class BaseButton extends StatelessWidget {
   const BaseButton({
