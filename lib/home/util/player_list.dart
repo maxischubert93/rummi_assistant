@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:rummi_assistant/core/domain/model/player.dart';
+import 'package:rummi_assistant/game/game.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 List<Player> generatePlayersList(int length) {

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:rummi_assistant/util/extension/target_platform.dart';
+import 'package:rummi_assistant/core/core.dart';
 
 class FileStore {
   Directory? _internalDirectory;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:rummi_assistant/app/app.dart';
+import 'package:rummi_assistant/core/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/util/assets/assets.gen.dart';
 import 'package:rummi_assistant/util/extension/svg.dart';

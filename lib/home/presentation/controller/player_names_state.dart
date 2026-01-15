@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rummi_assistant/core/domain/model/player.dart';
+import 'package:rummi_assistant/game/game.dart';
 
 part 'player_names_state.freezed.dart';
 

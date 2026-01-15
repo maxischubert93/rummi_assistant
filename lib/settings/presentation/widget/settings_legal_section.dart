@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rummi_assistant/app/app.dart';
+import 'package:rummi_assistant/core/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 

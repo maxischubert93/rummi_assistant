@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
-import 'package:rummi_assistant/app/theme/app_colors.dart';
+import 'package:rummi_assistant/core/app/theme/app_colors.dart';
 import 'package:rummi_assistant/core/core.dart';
 
 class ButtonGroup extends StatelessWidget {

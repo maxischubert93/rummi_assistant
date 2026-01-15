@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/app/app.dart';
+import 'package:rummi_assistant/core/app/app.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 import 'package:rummi_assistant/settings/domain/model/license.dart';

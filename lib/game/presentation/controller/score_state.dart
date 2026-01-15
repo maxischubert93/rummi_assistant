@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/game/game.dart';
 
 part 'score_state.freezed.dart';
 

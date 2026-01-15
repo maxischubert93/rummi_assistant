@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:rummi_assistant/app/theme/shadows.dart';
+import 'package:rummi_assistant/core/app/theme/shadows.dart';
 import 'package:rummi_assistant/core/extension/context_extension.dart';
 
 class Surface extends StatelessWidget {

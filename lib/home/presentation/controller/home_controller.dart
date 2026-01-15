@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/app/app.dart';
-import 'package:rummi_assistant/core/core.dart';
+import 'package:rummi_assistant/core/app/app.dart';
 import 'package:rummi_assistant/core/extension/iterable.dart';
+import 'package:rummi_assistant/game/game.dart';
 import 'package:rummi_assistant/home/presentation/controller/home_screen_state.dart';
 import 'package:rummi_assistant/home/util/player_list.dart';
 

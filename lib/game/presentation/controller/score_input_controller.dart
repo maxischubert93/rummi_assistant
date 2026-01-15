@@ -2,8 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/game/domain/mapping/game_round.dart';
+import 'package:rummi_assistant/game/domain/model/mapping/game_round.dart';
+import 'package:rummi_assistant/game/game.dart';
 import 'package:rummi_assistant/game/presentation/controller/score_controller.dart';
 import 'package:rummi_assistant/game/presentation/controller/score_input_state.dart';
 

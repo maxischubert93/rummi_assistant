@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rummi_assistant/core/domain/model/player.dart';
+import 'package:rummi_assistant/game/game.dart';
 import 'package:rummi_assistant/home/util/player_list.dart';
 
 part 'home_screen_state.freezed.dart';
