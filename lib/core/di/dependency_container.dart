@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:isar/isar.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rummi_assistant/core/core.dart';
@@ -36,13 +35,12 @@ Future<void> prepareApp() async {
 
 Future<void> _registerStores() async {
   _container
-    ..registerSingletonAsync(DatabaseBuilder.openDatabase)
     ..registerSingleton(AppDatabase())
     ..registerSingleton<UserSettings>(UserSettingsStore())
     ..registerFactory<GameRepository>(GameStoreDrift.new);
 
-  final oldStore = GameStore();
-  final migrator = IsarToDriftMigrator(isarStore: oldStore, driftStore: _container.get());
+  final isar = await DatabaseBuilder.openDatabase();
+  final migrator = IsarToDriftMigrator(isarStore: GameStore(isar), driftStore: GameStoreDrift());
   await migrator.migrate();
 }
 
@@ -53,7 +51,6 @@ void _registerInteractors() {
 void _registerManagers() {
   _container.registerSingletonAsync(
     () => GameManager.createInstance(gameRepository: _container.get()),
-    dependsOn: [Isar],
   );
 }
 

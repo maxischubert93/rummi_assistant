@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
 import 'package:rummi_assistant/feature/game/data/stored/mapping/game.dart';
 import 'package:rummi_assistant/feature/game/data/stored/mapping/player.dart';
@@ -8,7 +7,9 @@ import 'package:rummi_assistant/feature/game/domain/model/player.dart';
 import 'package:rummi_assistant/feature/game/domain/repository/game_repository.dart';
 
 class GameStore implements GameRepository {
-  late final Isar _isar = GetIt.instance.get();
+  GameStore(this._isar);
+
+  final Isar _isar;
 
   IsarCollection<StoredGame> get games => _isar.storedGames;
 
