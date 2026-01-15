@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:rummi_assistant/core/extension/context_extension.dart';
-import 'package:rummi_assistant/core/widget/separated_row.dart';
+import 'package:rummi_assistant/core/presentation/widget/separated_row.dart';
 
 class RummiAppBar extends PlatformAppBar {
   RummiAppBar({

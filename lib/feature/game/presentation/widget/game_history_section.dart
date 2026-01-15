@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/core/app/app.dart';
+
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 

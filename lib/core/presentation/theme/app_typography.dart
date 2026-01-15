@@ -1,5 +1,5 @@
 import 'package:flutter/rendering.dart';
-import 'package:rummi_assistant/core/app/theme/color_scheme.dart';
+import 'package:rummi_assistant/core/presentation/theme/color_scheme.dart';
 import 'package:rummi_assistant/core/util/assets/fonts.gen.dart';
 
 class AppTypography {

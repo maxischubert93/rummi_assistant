@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/home/presentation/controller/home_controller.dart';
-import 'package:rummi_assistant/l10n/l10n.dart';
 import 'package:rummi_assistant/feature/settings/settings.dart';
 import 'package:rummi_assistant/feature/timer/timer.dart';
+import 'package:rummi_assistant/l10n/l10n.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

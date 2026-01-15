@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/core/widget/number_text_field.dart';
+import 'package:rummi_assistant/core/presentation/widget/number_text_field.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 class TimerSelectionModal extends StatefulWidget {

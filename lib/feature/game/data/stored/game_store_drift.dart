@@ -104,4 +104,27 @@ class GameStoreDrift implements GameRepository {
       return storedGame.toDomain(players);
     });
   }
+
+  /// Bulk insert multiple games with their players (useful for migration)
+  Future<void> bulkInsertGames(List<Game> games) async {
+    await _db.transaction(() async {
+      for (final game in games) {
+        // Insert the game
+        final gameId = await _gamesDao.insertGame(
+          StoredGamesCompanion(
+            id: Value(game.id),
+            timerDurationInSeconds: Value(game.timerDuration.inSeconds),
+            isFinished: Value(game.isFinished),
+            createdAt: Value(game.createdAt),
+          ),
+        );
+
+        // Insert players for this game
+        final playerCompanions = game.players
+            .map((player) => player.toStoredCompanion(gameId))
+            .toList();
+        await _playersDao.insertPlayers(playerCompanions);
+      }
+    });
+  }
 }

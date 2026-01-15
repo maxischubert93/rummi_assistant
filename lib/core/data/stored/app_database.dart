@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:rummi_assistant/core/data/stored/database_file_store.dart';
+import 'package:rummi_assistant/feature/game/data/stored/converter/scores_list_converter.dart';
 import 'package:rummi_assistant/feature/game/data/stored/dao/games_dao.dart';
 import 'package:rummi_assistant/feature/game/data/stored/dao/players_dao.dart';
 import 'package:rummi_assistant/feature/game/data/stored/model/stored_game_drift.dart';
@@ -18,7 +19,6 @@ class AppDatabase extends _$AppDatabase {
         onCreate: (Migrator m) async {
           await m.createAll();
         },
-        onUpgrade: (Migrator m, int from, int to) async {
-        },
+        onUpgrade: (Migrator m, int from, int to) async {},
       );
 }

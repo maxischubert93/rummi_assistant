@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rummi_assistant/core/app/theme/app_button_theme.dart';
-import 'package:rummi_assistant/core/app/theme/app_colors.dart';
-import 'package:rummi_assistant/core/app/theme/app_nav_bar_theme.dart';
-import 'package:rummi_assistant/core/app/theme/segmented_control_theme.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_button_theme.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_colors.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_nav_bar_theme.dart';
+import 'package:rummi_assistant/core/presentation/theme/segmented_control_theme.dart';
 
 @immutable
 abstract class AppColorScheme {

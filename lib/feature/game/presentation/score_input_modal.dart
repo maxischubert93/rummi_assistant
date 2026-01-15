@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/core/widget/number_text_field.dart';
+import 'package:rummi_assistant/core/presentation/widget/number_text_field.dart';
 import 'package:rummi_assistant/feature/game/presentation/controller/score_input_controller.dart';
 import 'package:rummi_assistant/feature/game/presentation/widget/button_group.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';

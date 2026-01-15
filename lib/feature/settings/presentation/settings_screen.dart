@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/l10n/l10n.dart';
 import 'package:rummi_assistant/feature/settings/presentation/controller/settings_controller.dart';
 import 'package:rummi_assistant/feature/settings/presentation/widget/settings_legal_section.dart';
 import 'package:rummi_assistant/feature/settings/presentation/widget/version_text.dart';
 import 'package:rummi_assistant/feature/timer/presentation/widget/timer_section.dart';
+import 'package:rummi_assistant/l10n/l10n.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});

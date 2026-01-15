@@ -19,4 +19,3 @@ class PlayersDao extends DatabaseAccessor<AppDatabase> with _$PlayersDaoMixin {
     });
   }
 }
-

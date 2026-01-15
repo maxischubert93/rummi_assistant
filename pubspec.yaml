@@ -84,7 +84,7 @@ flutter:
           weight: 700
 
 flutter_gen:
-  output: lib/util/assets/
+  output: lib/core/util/assets/
 
   integrations:
     flutter_svg: true

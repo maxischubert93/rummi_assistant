@@ -1,12 +1,16 @@
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
+import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:rummi_assistant/core/app/navigation/router.dart';
+import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/data/remote/url_launch_service.dart';
 import 'package:rummi_assistant/core/data/stored/app_database.dart';
 import 'package:rummi_assistant/core/data/stored/database.dart';
 import 'package:rummi_assistant/core/interactor/url_interactor.dart';
+import 'package:rummi_assistant/core/presentation/navigation/router.dart';
 import 'package:rummi_assistant/feature/game/data/stored/game_store.dart';
+import 'package:rummi_assistant/feature/game/data/stored/game_store_drift.dart';
+import 'package:rummi_assistant/feature/game/data/stored/isar_to_drift_migrator.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/settings/data/store/user_settings_store.dart';
 import 'package:rummi_assistant/feature/settings/domain/user_settings.dart';
@@ -18,9 +22,10 @@ late PackageInfo packageInfo;
 GetIt get _container => GetIt.instance;
 
 Future<void> prepareApp() async {
+  configureLogger(logLevel: Level.info);
   packageInfo = await PackageInfo.fromPlatform();
-  _registerStores();
-  //await _setupLogging();
+
+  await _registerStores();
   _registerManagers();
   _registerServices();
   _registerNavigation();
@@ -29,12 +34,16 @@ Future<void> prepareApp() async {
   await _container.allReady();
 }
 
-void _registerStores() {
+Future<void> _registerStores() async {
   _container
     ..registerSingletonAsync(DatabaseBuilder.openDatabase)
     ..registerSingleton(AppDatabase())
     ..registerSingleton<UserSettings>(UserSettingsStore())
-    ..registerFactory<GameRepository>(GameStore.new);
+    ..registerFactory<GameRepository>(GameStoreDrift.new);
+
+  final oldStore = GameStore();
+  final migrator = IsarToDriftMigrator(isarStore: oldStore, driftStore: _container.get());
+  await migrator.migrate();
 }
 
 void _registerInteractors() {
@@ -53,26 +62,6 @@ void _registerServices() {
     (assetPath, _) => AudioService(assetPath: assetPath),
   );
 }
-
-/*Future<void> _setupLogging() async {
-  configureLogger(
-    logToConsole: kDebugMode,
-    logToFile: !kDebugMode,
-    logFileDirectory: await _container.get<LogStore>().logDirectory,
-    errorCallback: (message, error, stackTrace, {required isFatal}) async {
-      if (kDebugMode) return;
-      await Sentry.captureException(
-        error,
-        stackTrace: stackTrace,
-        hint: Hint.withMap({
-          'message': message,
-          'isFatal': isFatal,
-        }),
-      );
-    },
-    logLevel: _container.get<AppConfig>().logLevel,
-  );
-} */
 
 void _registerNavigation() {
   _container.registerSingleton(buildRouter());

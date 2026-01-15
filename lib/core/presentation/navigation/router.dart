@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/core/app/navigation/custom_page/platform_modal_page.dart';
-import 'package:rummi_assistant/core/app/navigation/route_names.dart';
-import 'package:rummi_assistant/core/app/widget/bottom_navigation_wrapper.dart';
+import 'package:rummi_assistant/core/presentation/navigation/bottom_navigation_wrapper.dart';
+import 'package:rummi_assistant/core/presentation/navigation/custom_page/platform_modal_page.dart';
+import 'package:rummi_assistant/core/presentation/navigation/route_names.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/game/presentation/game_history_screen.dart';
 import 'package:rummi_assistant/feature/game/presentation/score_input_modal.dart';

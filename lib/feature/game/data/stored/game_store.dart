@@ -1,21 +1,16 @@
 import 'package:get_it/get_it.dart';
 import 'package:isar/isar.dart';
-import 'package:rummi_assistant/feature/game/domain/repository/game_repository.dart';
 import 'package:rummi_assistant/feature/game/data/stored/mapping/game.dart';
 import 'package:rummi_assistant/feature/game/data/stored/mapping/player.dart';
 import 'package:rummi_assistant/feature/game/data/stored/model/stored_game.dart';
 import 'package:rummi_assistant/feature/game/domain/model/game.dart';
 import 'package:rummi_assistant/feature/game/domain/model/player.dart';
+import 'package:rummi_assistant/feature/game/domain/repository/game_repository.dart';
 
 class GameStore implements GameRepository {
   late final Isar _isar = GetIt.instance.get();
 
   IsarCollection<StoredGame> get games => _isar.storedGames;
-
-  @override
-  Future<void> performMigrationIfNeeded() async {
-    // No migration required
-  }
 
   @override
   Future<Game> newGame({
@@ -80,5 +75,12 @@ class GameStore implements GameRepository {
         .idEqualTo(gameId)
         .watch(fireImmediately: true)
         .map((game) => game.firstOrNull?.toDomain());
+  }
+
+  /// Get all games (internal use only, e.g., for migration)
+  /// Not part of GameRepository interface
+  Future<List<Game>> getAllGames() async {
+    final storedGames = await games.where().findAll();
+    return storedGames.map((game) => game.toDomain()).toList();
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:rummi_assistant/core/app/theme/color_scheme.dart';
+import 'package:rummi_assistant/core/presentation/theme/color_scheme.dart';
 
 @immutable
 class AppNavBarTheme {

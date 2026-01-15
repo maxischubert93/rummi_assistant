@@ -10,13 +10,11 @@ class GamesDao extends DatabaseAccessor<AppDatabase> with _$GamesDaoMixin {
 
   /// Get the current game (not finished)
   Future<StoredGame?> getCurrentGame() =>
-      (select(storedGames)..where((tbl) => tbl.isFinished.equals(false)))
-          .getSingleOrNull();
+      (select(storedGames)..where((tbl) => tbl.isFinished.equals(false))).getSingleOrNull();
 
   /// Watch the current game (not finished)
   Stream<StoredGame?> watchCurrentGame() =>
-      (select(storedGames)..where((tbl) => tbl.isFinished.equals(false)))
-          .watchSingleOrNull();
+      (select(storedGames)..where((tbl) => tbl.isFinished.equals(false))).watchSingleOrNull();
 
   /// Watch all finished games ordered by creation date descending
   Stream<List<StoredGame>> watchFinishedGames() => (select(storedGames)
@@ -40,4 +38,3 @@ class GamesDao extends DatabaseAccessor<AppDatabase> with _$GamesDaoMixin {
   Future<int> deleteGameById(int id) =>
       (delete(storedGames)..where((tbl) => tbl.id.equals(id))).go();
 }
-

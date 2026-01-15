@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:rummi_assistant/core/app/theme/app_colors.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_colors.dart';
 
 class Shadows {
   static List<BoxShadow> surfaceShadow = [

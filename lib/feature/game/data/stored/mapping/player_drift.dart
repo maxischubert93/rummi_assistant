@@ -20,4 +20,3 @@ extension StoredPlayerDriftToDomain on StoredPlayer {
     );
   }
 }
-

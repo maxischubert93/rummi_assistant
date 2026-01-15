@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:rummi_assistant/core/app/theme/app_theme.dart';
-import 'package:rummi_assistant/core/app/theme/app_typography.dart';
-import 'package:rummi_assistant/core/app/theme/color_scheme.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_theme.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_typography.dart';
+import 'package:rummi_assistant/core/presentation/theme/color_scheme.dart';
 
 extension AppPlatformThemeExtension on AppTheme {
   MaterialAppRouterData get materialAppRouterData {

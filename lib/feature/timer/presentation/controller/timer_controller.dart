@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
+import 'package:rummi_assistant/core/util/assets/assets.gen.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/timer/domain/timer_alert_player.dart';
 import 'package:rummi_assistant/feature/timer/presentation/controller/timer_state.dart';
-import 'package:rummi_assistant/core/util/assets/assets.gen.dart';
 
 final timerControllerProvider =
     StateNotifierProvider.autoDispose<TimerController, TimerState>((ref) => TimerController());

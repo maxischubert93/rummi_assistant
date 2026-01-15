@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:rummi_assistant/core/app/theme/app_colors.dart';
-import 'package:rummi_assistant/core/app/theme/color_scheme.dart';
-import 'package:rummi_assistant/core/app/theme/component_styles/app_button_style.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_colors.dart';
+import 'package:rummi_assistant/core/presentation/theme/color_scheme.dart';
+import 'package:rummi_assistant/core/presentation/theme/component_styles/app_button_style.dart';
 
 @immutable
 class AppButtonTheme {

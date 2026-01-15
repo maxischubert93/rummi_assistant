@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/core/app/app.dart';
+import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/extension/duration.dart';
-import 'package:rummi_assistant/core/widget/segmented_control.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 class TimerSegmentedControl extends StatelessWidget {

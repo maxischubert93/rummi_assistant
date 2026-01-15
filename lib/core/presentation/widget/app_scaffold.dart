@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rummi_assistant/core/app/theme/app_colors.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/core/widget/app_bar.dart';
-import 'package:rummi_assistant/core/widget/button/app_bar_button.dart';
+import 'package:rummi_assistant/core/presentation/theme/app_colors.dart';
+import 'package:rummi_assistant/core/presentation/widget/app_bar.dart';
+import 'package:rummi_assistant/core/presentation/widget/button/app_bar_button.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({

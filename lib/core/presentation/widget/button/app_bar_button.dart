@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:rummi_assistant/core/extension/context_extension.dart';
-import 'package:rummi_assistant/core/widget/button/base_button.dart';
+import 'package:rummi_assistant/core/presentation/widget/button/base_button.dart';
 
 @immutable
 class AppBarBackButton extends StatelessWidget {
