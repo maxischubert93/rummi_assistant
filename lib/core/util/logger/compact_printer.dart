@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
-//
-// ignore: depend_on_referenced_packages
 import 'package:stack_trace/stack_trace.dart';
 
 class CompactPrinter extends LogPrinter {
