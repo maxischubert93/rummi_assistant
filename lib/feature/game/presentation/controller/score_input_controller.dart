@@ -8,7 +8,10 @@ import 'package:rummi_assistant/feature/game/presentation/controller/score_contr
 import 'package:rummi_assistant/feature/game/presentation/controller/score_input_state.dart';
 
 final scoreInputControllerProvider =
-    NotifierProvider.autoDispose<ScoreInputController, ScoreInputState>(ScoreInputController.new);
+    NotifierProvider.autoDispose<ScoreInputController, ScoreInputState>(
+      ScoreInputController.new,
+      dependencies: [scoreControllerProvider],
+    );
 
 class ScoreInputController extends Notifier<ScoreInputState> {
   late final GoRouter _router = GetIt.instance.get();
@@ -18,8 +21,9 @@ class ScoreInputController extends Notifier<ScoreInputState> {
   ScoreInputState build() {
     return ScoreInputState.initial(
       playerNames: ref.watch(
-        scoreControllerProvider
-            .select((state) => state.players.map((player) => player.name).toList()),
+        scoreControllerProvider.select(
+          (state) => state.players.map((player) => player.name).toList(),
+        ),
       ),
     );
   }

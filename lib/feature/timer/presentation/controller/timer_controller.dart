@@ -1,25 +1,17 @@
 import 'dart:async';
 
-import 'package:flutter_riverpod/legacy.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rummi_assistant/core/util/assets/assets.gen.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/timer/domain/timer_alert_player.dart';
 import 'package:rummi_assistant/feature/timer/presentation/controller/timer_state.dart';
 
-final timerControllerProvider = StateNotifierProvider.autoDispose<TimerController, TimerState>(
-  (ref) => TimerController(),
+final timerControllerProvider = NotifierProvider.autoDispose<TimerController, TimerState>(
+  TimerController.new,
 );
 
-class TimerController extends StateNotifier<TimerState> {
-  TimerController() : super(TimerState.initial()) {
-    _gameSubscription = _gameManager.currentGameStream.listen((game) {
-      if (game != null) {
-        state = state.copyWith(timerDuration: game.timerDuration);
-      }
-    });
-  }
-
+class TimerController extends Notifier<TimerState> {
   static const int _timerInterval = 50;
   static const int _tickerSeconds = 10;
   late final GameManager _gameManager = GetIt.instance.get();
@@ -28,6 +20,24 @@ class TimerController extends StateNotifier<TimerState> {
   StreamSubscription<Game?>? _gameSubscription;
 
   Timer? _timer;
+
+  @override
+  TimerState build() {
+    _gameSubscription = _gameManager.currentGameStream.listen((game) {
+      if (game != null) {
+        state = state.copyWith(timerDuration: game.timerDuration);
+      }
+    });
+
+    ref.onDispose(() {
+      _timer?.cancel();
+      _gameSubscription?.cancel();
+      _alertPlayer.dispose();
+      _tickerPlayer.dispose();
+    });
+
+    return TimerState.initial();
+  }
 
   void start() {
     _timer = Timer.periodic(const Duration(milliseconds: _timerInterval), _onTick);
@@ -81,14 +91,5 @@ class TimerController extends StateNotifier<TimerState> {
   Future<void> stopAudio() async {
     await _alertPlayer.stop();
     await _tickerPlayer.stop();
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    _gameSubscription?.cancel();
-    _alertPlayer.dispose();
-    _tickerPlayer.dispose();
-    super.dispose();
   }
 }
