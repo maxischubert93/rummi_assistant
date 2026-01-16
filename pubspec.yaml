@@ -2,7 +2,7 @@ name: rummi_assistant
 description: "A Rummikub assistant app that helps you play the game."
 publish_to: 'none'
 
-version: 1.0.2+5
+version: 1.1.0+6
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
@@ -42,6 +42,9 @@ dependencies:
   isar: 3.1.0+1
   isar_flutter_libs: 3.1.0+1
   path_provider: ^2.1.5
+  path: ^1.8.0
+  drift: ^2.16.0
+  sqlite3_flutter_libs: ^0.5.0
 
 dependency_overrides:
   analyzer: ^6.4.1
@@ -54,6 +57,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.8.0
   mocktail: ^1.0.4
   isar_generator: 3.1.0+1
+  drift_dev: ^2.16.0
 
   # Lint
   riverpod_lint: ^2.6.3
@@ -80,7 +84,7 @@ flutter:
           weight: 700
 
 flutter_gen:
-  output: lib/util/assets/
+  output: lib/core/util/assets/
 
   integrations:
     flutter_svg: true
