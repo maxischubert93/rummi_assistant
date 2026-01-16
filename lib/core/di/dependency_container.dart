@@ -4,12 +4,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/data/remote/url_launch_service.dart';
 import 'package:rummi_assistant/core/data/stored/app_database.dart';
-import 'package:rummi_assistant/core/data/stored/database.dart';
 import 'package:rummi_assistant/core/interactor/url_interactor.dart';
 import 'package:rummi_assistant/core/presentation/navigation/router.dart';
 import 'package:rummi_assistant/feature/game/data/stored/game_store.dart';
-import 'package:rummi_assistant/feature/game/data/stored/game_store_drift.dart';
-import 'package:rummi_assistant/feature/game/data/stored/isar_to_drift_migrator.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/settings/data/store/user_settings_store.dart';
 import 'package:rummi_assistant/feature/settings/domain/user_settings.dart';
@@ -38,10 +35,6 @@ Future<void> _registerStores() async {
     ..registerSingleton(AppDatabase())
     ..registerSingleton<UserSettings>(UserSettingsStore())
     ..registerFactory<GameRepository>(GameStoreDrift.new);
-
-  final isar = await DatabaseBuilder.openDatabase();
-  final migrator = IsarToDriftMigrator(isarStore: GameStore(isar), driftStore: GameStoreDrift());
-  await migrator.migrate();
 }
 
 void _registerInteractors() {

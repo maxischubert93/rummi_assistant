@@ -6,9 +6,9 @@ import 'package:rummi_assistant/feature/home/presentation/controller/home_contro
 import 'package:rummi_assistant/feature/home/presentation/controller/player_names_state.dart';
 
 final playerNamesControllerProvider =
-    AutoDisposeNotifierProvider<PlayerNamesController, PlayerNamesState>(PlayerNamesController.new);
+    NotifierProvider.autoDispose<PlayerNamesController, PlayerNamesState>(PlayerNamesController.new);
 
-class PlayerNamesController extends AutoDisposeNotifier<PlayerNamesState> {
+class PlayerNamesController extends Notifier<PlayerNamesState> {
   late final GoRouter _router = GetIt.instance.get();
   late final GameManager _gameManager = GetIt.instance.get();
 

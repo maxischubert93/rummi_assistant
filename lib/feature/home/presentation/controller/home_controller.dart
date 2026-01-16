@@ -8,9 +8,9 @@ import 'package:rummi_assistant/feature/home/presentation/controller/home_screen
 import 'package:rummi_assistant/feature/home/util/player_list.dart';
 
 final homeControllerProvider =
-    AutoDisposeNotifierProvider<HomeController, HomeScreenState>(HomeController.new);
+    NotifierProvider.autoDispose<HomeController, HomeScreenState>(HomeController.new);
 
-class HomeController extends AutoDisposeNotifier<HomeScreenState> {
+class HomeController extends Notifier<HomeScreenState> {
   late final GoRouter _router = GetIt.instance.get();
   late final GameManager _gameManager = GetIt.instance.get();
 

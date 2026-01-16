@@ -1,12 +1,12 @@
 import 'package:drift/drift.dart';
 import 'package:rummi_assistant/core/data/stored/app_database.dart';
-import 'package:rummi_assistant/feature/game/data/stored/model/stored_game_drift.dart';
+import 'package:rummi_assistant/feature/game/data/stored/model/stored_game.dart';
 
 part 'games_dao.g.dart';
 
 @DriftAccessor(tables: [StoredGames])
 class GamesDao extends DatabaseAccessor<AppDatabase> with _$GamesDaoMixin {
-  GamesDao(super.db);
+  GamesDao(super.attachedDatabase);
 
   /// Get the current game (not finished)
   Future<StoredGame?> getCurrentGame() =>

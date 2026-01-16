@@ -1,87 +1,130 @@
-import 'package:isar/isar.dart';
+import 'package:drift/drift.dart';
+import 'package:get_it/get_it.dart';
+import 'package:rummi_assistant/core/data/stored/app_database.dart';
+import 'package:rummi_assistant/feature/game/data/stored/dao/games_dao.dart';
+import 'package:rummi_assistant/feature/game/data/stored/dao/players_dao.dart';
 import 'package:rummi_assistant/feature/game/data/stored/mapping/game.dart';
 import 'package:rummi_assistant/feature/game/data/stored/mapping/player.dart';
-import 'package:rummi_assistant/feature/game/data/stored/model/stored_game.dart';
 import 'package:rummi_assistant/feature/game/domain/model/game.dart';
 import 'package:rummi_assistant/feature/game/domain/model/player.dart';
 import 'package:rummi_assistant/feature/game/domain/repository/game_repository.dart';
 
-class GameStore implements GameRepository {
-  GameStore(this._isar);
+class GameStoreDrift implements GameRepository {
+  late final AppDatabase _db = GetIt.instance.get();
 
-  final Isar _isar;
+  GamesDao get _gamesDao => _db.gamesDao;
 
-  IsarCollection<StoredGame> get games => _isar.storedGames;
+  PlayersDao get _playersDao => _db.playersDao;
 
   @override
   Future<Game> newGame({
     required Duration timerDuration,
     required List<Player> players,
   }) async {
-    final game = StoredGame()
-      ..timerDurationInSeconds = timerDuration.inSeconds
-      ..isFinished = false
-      ..createdAt = DateTime.now()
-      ..players = players.map((player) => player.toStored()).toList();
-    await _isar.writeTxn(() async {
-      await games.filter().isFinishedEqualTo(false).deleteAll();
-      await games.put(game);
-    });
-    return game.toDomain();
+    // Delete any existing current game
+    await _gamesDao.deleteAllCurrentGames();
+
+    // Insert the new game
+    final gameId = await _gamesDao.insertGame(
+      StoredGamesCompanion.insert(
+        timerDurationInSeconds: timerDuration.inSeconds,
+        isFinished: const Value(false),
+        createdAt: DateTime.now(),
+      ),
+    );
+
+    // Insert players for the new game
+    final playerCompanions = players.map((player) => player.toStoredCompanion(gameId)).toList();
+    await _playersDao.insertPlayers(playerCompanions);
+
+    // Fetch and return the newly created game
+    final storedGame = await _gamesDao.getCurrentGame();
+    final storedPlayers = await _playersDao.getPlayersByGameId(gameId);
+
+    return storedGame!.toDomain(storedPlayers);
   }
 
   @override
   Future<void> updateGame(Game game) async {
-    await _isar.writeTxn(() async {
-      await games.put(game.toStored());
+    // Update the game
+    await _gamesDao.insertGame(game.toStoredCompanion());
+
+    // Update players - delete existing and re-insert
+    await _db.transaction(() async {
+      // Delete existing players for this game
+      await (_db.delete(_db.storedPlayers)..where((tbl) => tbl.gameId.equals(game.id))).go();
+
+      // Insert updated players
+      final playerCompanions =
+          game.players.map((player) => player.toStoredCompanion(game.id)).toList();
+      await _playersDao.insertPlayers(playerCompanions);
     });
   }
 
   @override
   Stream<Game?> watchCurrentGame() {
-    return games
-        .filter()
-        .isFinishedEqualTo(false)
-        .watch()
-        .map((game) => game.firstOrNull?.toDomain());
-  }
-
-  @override
-  Stream<List<Game>> watchFinishedGames() {
-    return games
-        .filter()
-        .isFinishedEqualTo(true)
-        .sortByCreatedAtDesc()
-        .watch(fireImmediately: true)
-        .map((games) => games.map((game) => game.toDomain()).toList());
-  }
-
-  @override
-  Future<Game?> getCurrentGame() async {
-    final storedGame = await games.filter().isFinishedEqualTo(false).findFirst();
-    return storedGame?.toDomain();
-  }
-
-  @override
-  Future<void> deleteGame(Game game) {
-    return _isar.writeTxn(() async {
-      await games.delete(game.id);
+    return _gamesDao.watchCurrentGame().asyncMap((storedGame) async {
+      if (storedGame == null) return null;
+      final players = await _playersDao.getPlayersByGameId(storedGame.id);
+      return storedGame.toDomain(players);
     });
   }
 
   @override
-  Stream<Game?> watchGameWithId(int gameId) {
-    return games
-        .filter()
-        .idEqualTo(gameId)
-        .watch(fireImmediately: true)
-        .map((game) => game.firstOrNull?.toDomain());
+  Stream<List<Game>> watchFinishedGames() {
+    return _gamesDao.watchFinishedGames().asyncMap((storedGames) async {
+      final games = <Game>[];
+      for (final storedGame in storedGames) {
+        final players = await _playersDao.getPlayersByGameId(storedGame.id);
+        games.add(storedGame.toDomain(players));
+      }
+      return games;
+    });
   }
 
-  /// Get all games (internal use only, e.g., for migration)
-  /// Not part of GameRepository interface
-  Future<List<Game>> getAllGames() async {
-    final storedGames = await games.where().findAll();
-    return storedGames.map((game) => game.toDomain()).toList();
+  @override
+  Future<Game?> getCurrentGame() async {
+    final storedGame = await _gamesDao.getCurrentGame();
+    if (storedGame == null) return null;
+
+    final players = await _playersDao.getPlayersByGameId(storedGame.id);
+    return storedGame.toDomain(players);
+  }
+
+  @override
+  Future<void> deleteGame(Game game) async {
+    await _gamesDao.deleteGameById(game.id);
+  }
+
+  @override
+  Stream<Game?> watchGameWithId(int gameId) {
+    return _gamesDao.watchGameById(gameId).asyncMap((storedGame) async {
+      if (storedGame == null) return null;
+      final players = await _playersDao.getPlayersByGameId(storedGame.id);
+      return storedGame.toDomain(players);
+    });
+  }
+
+  /// Bulk insert multiple games with their players (useful for migration)
+  Future<void> bulkInsertGames(List<Game> games) async {
+    await _db.transaction(() async {
+      for (final game in games) {
+        // Insert the game
+        final gameId = await _gamesDao.insertGame(
+          StoredGamesCompanion(
+            id: Value(game.id),
+            timerDurationInSeconds: Value(game.timerDuration.inSeconds),
+            isFinished: Value(game.isFinished),
+            createdAt: Value(game.createdAt),
+          ),
+        );
+
+        // Insert players for this game
+        final playerCompanions = game.players
+            .map((player) => player.toStoredCompanion(gameId))
+            .toList();
+        await _playersDao.insertPlayers(playerCompanions);
+      }
+    });
   }
 }

@@ -6,7 +6,7 @@ import 'package:rummi_assistant/core/extension/context_extension.dart';
 import 'package:rummi_assistant/core/presentation/widget/separated_row.dart';
 
 class RummiAppBar extends PlatformAppBar {
-  RummiAppBar({
+  const RummiAppBar({
     required Widget super.title,
     super.trailingActions,
     super.leading,

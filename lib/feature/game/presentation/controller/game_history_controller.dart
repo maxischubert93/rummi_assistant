@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/core/core.dart';
@@ -9,8 +9,8 @@ import 'package:rummi_assistant/feature/game/presentation/controller/game_histor
 
 final gameHistoryControllerProvider =
     StateNotifierProvider.autoDispose<GameHistoryController, GameHistoryState>((ref) {
-  return GameHistoryController();
-});
+      return GameHistoryController();
+    });
 
 class GameHistoryController extends StateNotifier<GameHistoryState> {
   GameHistoryController() : super(GameHistoryState.initial()) {

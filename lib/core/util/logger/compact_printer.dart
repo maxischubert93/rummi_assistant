@@ -12,7 +12,7 @@ class CompactPrinter extends LogPrinter {
         _maxMessageLength = maxMessageLength,
         super();
 
-  static final _levelPrefixes = {
+  static final Map<Level, String> _levelPrefixes = {
     Level.trace: '[T]',
     Level.debug: '[D]',
     Level.info: '[I]',

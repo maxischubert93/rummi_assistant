@@ -9,10 +9,12 @@ linter:
     prefer_constructors_over_static_methods: false
     public_member_api_docs: false
     sort_pub_dependencies: false
+    specify_nonobvious_property_types: false
+    discarded_futures: false
 
 analyzer:
   exclude:
     - lib/**.g.dart
     - lib/**/generated/**
   plugins:
-    - custom_lint
+    - riverpod_lint

@@ -5,7 +5,7 @@ class AppColors {
   static const Color transparent = Color(0x00000000);
 
   static const int _redPrimaryColor = 0xFF870819;
-  static const red = ColorSwatch(_redPrimaryColor, {
+  static const ColorSwatch<int> red = ColorSwatch(_redPrimaryColor, {
     50: Color(0xFFF3E6E8),
     100: Color(0xFFDAB2B8),
     200: Color(0xFFC88D95),
@@ -19,7 +19,7 @@ class AppColors {
   });
 
   static const int _bluePrimaryColor = 0xFF457CA5;
-  static const blue = ColorSwatch(_bluePrimaryColor, {
+  static const ColorSwatch<int> blue = ColorSwatch(_bluePrimaryColor, {
     50: Color(0xFFECF2F6),
     100: Color(0xFFC5D6E3),
     200: Color(0xFFA9C3D6),
@@ -33,7 +33,7 @@ class AppColors {
   });
 
   static const int _orangePrimaryColor = 0xFFFB940E;
-  static const orange = ColorSwatch(_orangePrimaryColor, {
+  static const ColorSwatch<int> orange = ColorSwatch(_orangePrimaryColor, {
     50: Color(0xFFFFF4E7),
     100: Color(0xFFFEDEB4),
     200: Color(0xFFFDCE90),
@@ -47,7 +47,7 @@ class AppColors {
   });
 
   static const int _greyPrimaryColor = 0xFF8E8E93;
-  static const grey = ColorSwatch(_greyPrimaryColor, {
+  static const ColorSwatch<int> grey = ColorSwatch(_greyPrimaryColor, {
     50: Color(0xFFFAFAFA),
     100: Color(0xFFF2F2F7),
     200: Color(0xFFE5E5EA),
@@ -61,7 +61,7 @@ class AppColors {
   });
 
   static const int _whitePrimaryColor = 0xFFFFFFFF;
-  static const white = ColorSwatch(_whitePrimaryColor, {
+  static const ColorSwatch<int> white = ColorSwatch(_whitePrimaryColor, {
     50: Color(_whitePrimaryColor),
     100: Color(0xFFFDFCF8),
     200: Color(0xFFFDFAF5),

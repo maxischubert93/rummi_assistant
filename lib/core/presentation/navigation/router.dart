@@ -27,7 +27,7 @@ GoRouter buildRouter() => GoRouter(
       initialLocation: '/timer',
       routes: [
         StatefulShellRoute.indexedStack(
-          redirect: (_, __) {
+          redirect: (_, _) {
             if (!GetIt.instance.get<GameManager>().hasRunningGame) {
               return '/home';
             } else {
@@ -35,7 +35,7 @@ GoRouter buildRouter() => GoRouter(
             }
           },
           parentNavigatorKey: _rootNavigatorKey,
-          builder: (_, __, navigationShell) =>
+          builder: (_, _, navigationShell) =>
               BottomNavigationWrapper(navigationShell: navigationShell),
           branches: [
             StatefulShellBranch(
@@ -45,7 +45,7 @@ GoRouter buildRouter() => GoRouter(
                   parentNavigatorKey: _timerTabNavigatorKey,
                   path: '/timer',
                   name: RouteNames.timer,
-                  builder: (_, __) => const TimerScreen(),
+                  builder: (_, _) => const TimerScreen(),
                 ),
               ],
             ),
@@ -56,7 +56,7 @@ GoRouter buildRouter() => GoRouter(
                   parentNavigatorKey: _scoreTabNavigatorKey,
                   path: '/score',
                   name: RouteNames.score,
-                  builder: (_, __) => const ScoreScreen(),
+                  builder: (_, _) => const ScoreScreen(),
                   routes: [
                     GoRoute(
                       path: 'score-input',
@@ -78,12 +78,12 @@ GoRouter buildRouter() => GoRouter(
                   parentNavigatorKey: _settingsTabNavigatorKey,
                   path: '/settings',
                   name: RouteNames.settings,
-                  builder: (_, __) => const SettingsScreen(),
+                  builder: (_, _) => const SettingsScreen(),
                   routes: [
                     GoRoute(
                       path: 'licenses',
                       name: RouteNames.licenses,
-                      builder: (_, __) => const LicensesScreen(),
+                      builder: (_, _) => const LicensesScreen(),
                       routes: [
                         GoRoute(
                           path: 'license-detail',
@@ -103,7 +103,7 @@ GoRouter buildRouter() => GoRouter(
         GoRoute(
           path: '/home',
           name: RouteNames.home,
-          builder: (_, __) => const HomeScreen(),
+          builder: (_, _) => const HomeScreen(),
           routes: [
             GoRoute(
               path: 'timer-selection',
@@ -124,7 +124,7 @@ GoRouter buildRouter() => GoRouter(
         GoRoute(
           path: '/game-history',
           name: RouteNames.gameHistory,
-          builder: (_, __) => const GameHistoryScreen(),
+          builder: (_, _) => const GameHistoryScreen(),
         ),
         GoRoute(
           path: '/game-detail',

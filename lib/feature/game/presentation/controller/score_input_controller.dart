@@ -8,9 +8,9 @@ import 'package:rummi_assistant/feature/game/presentation/controller/score_contr
 import 'package:rummi_assistant/feature/game/presentation/controller/score_input_state.dart';
 
 final scoreInputControllerProvider =
-    AutoDisposeNotifierProvider<ScoreInputController, ScoreInputState>(ScoreInputController.new);
+    NotifierProvider.autoDispose<ScoreInputController, ScoreInputState>(ScoreInputController.new);
 
-class ScoreInputController extends AutoDisposeNotifier<ScoreInputState> {
+class ScoreInputController extends Notifier<ScoreInputState> {
   late final GoRouter _router = GetIt.instance.get();
   late final GameManager _gameManager = GetIt.instance.get();
 

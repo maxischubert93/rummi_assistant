@@ -1,12 +1,12 @@
 import 'package:drift/drift.dart';
 import 'package:rummi_assistant/core/data/stored/app_database.dart';
-import 'package:rummi_assistant/feature/game/data/stored/model/stored_game_drift.dart';
+import 'package:rummi_assistant/feature/game/data/stored/model/stored_game.dart';
 
 part 'players_dao.g.dart';
 
 @DriftAccessor(tables: [StoredPlayers])
 class PlayersDao extends DatabaseAccessor<AppDatabase> with _$PlayersDaoMixin {
-  PlayersDao(super.db);
+  PlayersDao(super.attachedDatabase);
 
   /// Get all players for a specific game
   Future<List<StoredPlayer>> getPlayersByGameId(int gameId) =>

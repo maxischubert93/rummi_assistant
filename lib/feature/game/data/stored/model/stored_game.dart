@@ -1,23 +1,32 @@
-import 'package:isar/isar.dart';
+import 'package:drift/drift.dart';
+import 'package:rummi_assistant/feature/game/data/stored/converter/scores_list_converter.dart';
 
-part 'stored_game.g.dart';
+/// Drift table definition for games
+class StoredGames extends Table {
+  IntColumn get id => integer().autoIncrement()();
 
-@collection
-@Name('Games')
-class StoredGame {
-  Id id = Isar.autoIncrement;
+  IntColumn get timerDurationInSeconds => integer()();
 
-  late int timerDurationInSeconds;
+  BoolColumn get isFinished => boolean().withDefault(const Constant(false))();
 
-  bool isFinished = false;
+  DateTimeColumn get createdAt => dateTime()();
 
-  late List<StoredPlayer> players;
-
-  late DateTime createdAt;
+  @override
+  String get tableName => 'games';
 }
 
-@embedded
-class StoredPlayer {
-  late String name;
-  late List<int> scores;
+/// Drift table definition for players (as separate table with foreign key)
+class StoredPlayers extends Table {
+  IntColumn get id => integer().autoIncrement()();
+
+  IntColumn get gameId => integer().references(StoredGames, #id, onDelete: KeyAction.cascade)();
+
+  TextColumn get name => text()();
+
+  /// Scores stored as comma-separated values
+  /// We'll need to parse this when reading/writing
+  TextColumn get scores => text().map(const ScoresListConverter())();
+
+  @override
+  String get tableName => 'players';
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/core/core.dart';
@@ -10,8 +10,8 @@ import 'package:rummi_assistant/feature/settings/presentation/controller/setting
 
 final settingsControllerProvider =
     StateNotifierProvider.autoDispose<SettingsController, SettingsState>(
-  (ref) => SettingsController(),
-);
+      (ref) => SettingsController(),
+    );
 
 class SettingsController extends StateNotifier<SettingsState> {
   SettingsController() : super(SettingsState.initial()) {

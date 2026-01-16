@@ -133,7 +133,7 @@ class _FoundationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformWidget(
-      material: (_, __) => _MaterialButton(
+      material: (_, _) => _MaterialButton(
         isEnabled: isEnabled,
         style: style,
         onPressed: onPressed,
@@ -148,7 +148,7 @@ class _FoundationButton extends StatelessWidget {
           trailingIcon: trailingIcon,
         ),
       ),
-      cupertino: (_, __) => _CupertinoButton(
+      cupertino: (_, _) => _CupertinoButton(
         isEnabled: isEnabled,
         style: style,
         onPressed: onPressed,
@@ -295,7 +295,7 @@ class _CupertinoButtonState extends State<_CupertinoButton> {
           onPressed: widget.isEnabled ? widget.onPressed : null,
           disabledColor: widget.style.disabled.background,
           pressedOpacity: 1,
-          minSize: 0,
+          minimumSize: Size.zero,
           padding: EdgeInsets.zero,
           borderRadius: widget.borderRadius,
           child: _Content(
