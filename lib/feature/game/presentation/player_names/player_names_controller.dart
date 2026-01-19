@@ -2,11 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
-import 'package:rummi_assistant/feature/home/presentation/controller/home_controller.dart';
-import 'package:rummi_assistant/feature/home/presentation/controller/player_names_state.dart';
+import 'package:rummi_assistant/feature/game/presentation/player_names/player_names_state.dart';
 
 final playerNamesControllerProvider =
-    NotifierProvider.autoDispose<PlayerNamesController, PlayerNamesState>(PlayerNamesController.new);
+    NotifierProvider.autoDispose<PlayerNamesController, PlayerNamesState>(
+      PlayerNamesController.new,
+    );
 
 class PlayerNamesController extends Notifier<PlayerNamesState> {
   late final GoRouter _router = GetIt.instance.get();
@@ -15,11 +16,8 @@ class PlayerNamesController extends Notifier<PlayerNamesState> {
   @override
   PlayerNamesState build() {
     final List<Player> players;
-    if (_gameManager.hasRunningGame) {
-      players = _gameManager.currentGame!.players;
-    } else {
-      players = ref.watch(homeControllerProvider.select((state) => state.players));
-    }
+    players = _gameManager.currentGame!.players;
+
     return PlayerNamesState.initial(players);
   }
 

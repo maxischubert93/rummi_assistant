@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'score_input_state.freezed.dart';
 
 @freezed
-class ScoreInputState with _$ScoreInputState {
+abstract class ScoreInputState with _$ScoreInputState {
   const factory ScoreInputState({
     required List<PlayerRoundScore> playerScores,
   }) = _ScoreInputState;
@@ -33,7 +33,7 @@ class ScoreInputState with _$ScoreInputState {
 }
 
 @freezed
-class PlayerRoundScore with _$PlayerRoundScore {
+abstract class PlayerRoundScore with _$PlayerRoundScore {
   const factory PlayerRoundScore({
     required String playerName,
     required FocusNode focusNode,

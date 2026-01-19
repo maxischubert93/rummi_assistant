@@ -42,9 +42,7 @@ void _registerInteractors() {
 }
 
 void _registerManagers() {
-  _container.registerSingletonAsync(
-    () => GameManager.createInstance(gameRepository: _container.get()),
-  );
+  _container.registerSingleton(GameManager(_container.get()));
 }
 
 void _registerServices() {

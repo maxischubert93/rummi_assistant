@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
-import 'package:rummi_assistant/feature/game/presentation/controller/score_controller.dart';
+import 'package:rummi_assistant/feature/game/presentation/score/score_controller.dart';
 import 'package:rummi_assistant/feature/timer/presentation/controller/timer_controller.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 

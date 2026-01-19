@@ -4,8 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/feature/game/domain/model/mapping/game_round.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
-import 'package:rummi_assistant/feature/game/presentation/controller/score_controller.dart';
-import 'package:rummi_assistant/feature/game/presentation/controller/score_input_state.dart';
+import 'package:rummi_assistant/feature/game/presentation/score/score_controller.dart';
+import 'package:rummi_assistant/feature/game/presentation/score_input/score_input_state.dart';
 
 final scoreInputControllerProvider =
     NotifierProvider.autoDispose<ScoreInputController, ScoreInputState>(

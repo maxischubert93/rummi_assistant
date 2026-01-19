@@ -5,7 +5,7 @@ import 'package:rummi_assistant/feature/game/game.dart';
 part 'player_names_state.freezed.dart';
 
 @freezed
-class PlayerNamesState with _$PlayerNamesState {
+abstract class PlayerNamesState with _$PlayerNamesState {
   const factory PlayerNamesState({
     required List<String> playerNames,
     required List<FocusNode> focusNodes,

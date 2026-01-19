@@ -5,11 +5,11 @@ import 'package:rummi_assistant/core/presentation/navigation/bottom_navigation_w
 import 'package:rummi_assistant/core/presentation/navigation/custom_page/platform_modal_page.dart';
 import 'package:rummi_assistant/core/presentation/navigation/route_names.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
-import 'package:rummi_assistant/feature/game/presentation/game_history_screen.dart';
-import 'package:rummi_assistant/feature/game/presentation/score_input_modal.dart';
-import 'package:rummi_assistant/feature/game/presentation/score_screen.dart';
+import 'package:rummi_assistant/feature/game/presentation/history/game_history_screen.dart';
+import 'package:rummi_assistant/feature/game/presentation/score/score_screen.dart';
+import 'package:rummi_assistant/feature/game/presentation/score_input/score_input_modal.dart';
 import 'package:rummi_assistant/feature/home/presentation/home_screen.dart';
-import 'package:rummi_assistant/feature/home/presentation/player_names_modal.dart';
+import 'package:rummi_assistant/feature/game/presentation/player_names/player_names_modal.dart';
 import 'package:rummi_assistant/feature/settings/domain/model/license.dart';
 import 'package:rummi_assistant/feature/settings/presentation/licences_screen.dart';
 import 'package:rummi_assistant/feature/settings/presentation/license_detail_screen.dart';

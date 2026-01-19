@@ -5,7 +5,9 @@ import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GameManager {
-  GameManager(this._gameRepository);
+  GameManager(this._gameRepository) {
+    _gameSubscription = _gameRepository.watchCurrentGame().listen(_currentGameSubject.add);
+  }
 
   final GameRepository _gameRepository;
   final BehaviorSubject<Game?> _currentGameSubject = BehaviorSubject.seeded(null);
@@ -20,22 +22,11 @@ class GameManager {
 
   late StreamSubscription<Game?> _gameSubscription;
 
-  static Future<GameManager> createInstance({required GameRepository gameRepository}) async {
-    final gameManager = GameManager(gameRepository);
-    await gameManager.init();
-    return gameManager;
-  }
-
-  Future<void> init() async {
-    _gameSubscription = _gameRepository.watchCurrentGame().listen(_currentGameSubject.add);
-    final game = await _gameRepository.getCurrentGame();
-    _currentGameSubject.add(game);
-  }
-
   Future<void> newGame({
     required Duration timerDuration,
     required List<Player> players,
   }) async {
+    await _gameRepository.deleteRunningGames();
     final game = await _gameRepository.newGame(
       timerDuration: timerDuration,
       players: players,

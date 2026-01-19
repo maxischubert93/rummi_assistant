@@ -4,7 +4,7 @@ import 'package:rummi_assistant/feature/game/game.dart';
 part 'game_history_state.freezed.dart';
 
 @freezed
-class GameHistoryState with _$GameHistoryState {
+abstract class GameHistoryState with _$GameHistoryState {
   const factory GameHistoryState({
     required List<Game> games,
   }) = _GameHistoryState;

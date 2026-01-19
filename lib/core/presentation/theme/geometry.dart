@@ -23,7 +23,12 @@ class Geometry {
 
   double get spacingTripleExtraLarge => 64;
 
-  EdgeInsets get mediumPadding => EdgeInsets.symmetric(
+  EdgeInsets get largePadding => EdgeInsets.symmetric(
+        vertical: spacingLarge,
+        horizontal: spacingLarge,
+      )
+
+  ;EdgeInsets get mediumPadding => EdgeInsets.symmetric(
         vertical: spacingMedium,
         horizontal: spacingMedium,
       );

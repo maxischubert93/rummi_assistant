@@ -74,6 +74,8 @@ abstract class AppColorScheme {
   Color get navigation;
 
   Color get inactiveNavigation;
+
+  Color get shadow;
 }
 
 @immutable
@@ -130,6 +132,9 @@ class _LightAppColorScheme implements AppColorScheme {
 
   @override
   Color get tertiary => AppColors.orange;
+
+  @override
+  Color get shadow => AppColors.black.withValues(alpha: 0.25);
 
   @override
   ColorScheme get materialColorScheme => ColorScheme(

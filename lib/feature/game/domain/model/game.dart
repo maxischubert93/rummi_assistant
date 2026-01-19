@@ -4,7 +4,7 @@ import 'package:rummi_assistant/feature/game/domain/model/player.dart';
 part 'game.freezed.dart';
 
 @freezed
-class Game with _$Game {
+abstract class Game with _$Game {
   const factory Game({
     required int id,
     required Duration timerDuration,

@@ -45,7 +45,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.41
 
 dependency_overrides:
-    analyzer: ^10.0.0
+    analyzer: ^9.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/presentation/widget/name_text_field.dart';
-import 'package:rummi_assistant/feature/home/presentation/controller/player_names_controller.dart';
-import 'package:rummi_assistant/feature/home/presentation/controller/player_names_state.dart';
+import 'package:rummi_assistant/feature/game/presentation/player_names/player_names_controller.dart';
+import 'package:rummi_assistant/feature/game/presentation/player_names/player_names_state.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 class PlayerNamesModal extends ConsumerWidget {

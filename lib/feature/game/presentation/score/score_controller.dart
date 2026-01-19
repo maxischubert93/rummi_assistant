@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
-import 'package:rummi_assistant/feature/game/presentation/controller/score_state.dart';
+import 'package:rummi_assistant/feature/game/presentation/score/score_state.dart';
 
 final scoreScreenIdProvider = Provider.autoDispose<int?>((ref) => null);
 

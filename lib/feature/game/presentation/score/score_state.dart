@@ -4,7 +4,7 @@ import 'package:rummi_assistant/feature/game/game.dart';
 part 'score_state.freezed.dart';
 
 @freezed
-class ScoreState with _$ScoreState {
+abstract class ScoreState with _$ScoreState {
   const factory ScoreState({
     required List<Player> players,
     required bool canEdit,
@@ -38,7 +38,7 @@ class ScoreState with _$ScoreState {
 }
 
 @freezed
-class TotalPlayerScore with _$TotalPlayerScore {
+abstract class TotalPlayerScore with _$TotalPlayerScore {
   const factory TotalPlayerScore({
     required int totalScore,
     required bool isWinning,

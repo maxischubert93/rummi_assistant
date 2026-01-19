@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/extension/date_time.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
-import 'package:rummi_assistant/feature/game/presentation/controller/game_history_controller.dart';
+import 'package:rummi_assistant/feature/game/presentation/history/game_history_controller.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
 class GameHistoryScreen extends ConsumerWidget {
