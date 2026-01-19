@@ -15,7 +15,7 @@ class BottomNavigationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      cupertino: (_, __) => CupertinoPageScaffoldData(
+      cupertino: (_, _) => CupertinoPageScaffoldData(
         widgetKey: ValueKey(navigationShell.currentIndex),
       ),
       body: navigationShell,
@@ -27,7 +27,7 @@ class BottomNavigationWrapper extends StatelessWidget {
             initialLocation: index == navigationShell.currentIndex,
           );
         },
-        cupertino: (_, __) => CupertinoTabBarData(
+        cupertino: (_, _) => CupertinoTabBarData(
           inactiveColor: context.colors.navBarTheme.inactive,
           activeColor: context.colors.navBarTheme.active,
           iconSize: 24,
@@ -38,7 +38,7 @@ class BottomNavigationWrapper extends StatelessWidget {
             ),
           ),
         ),
-        material3: (_, __) => MaterialNavigationBarData(
+        material3: (_, _) => MaterialNavigationBarData(
           elevation: 0,
           indicatorColor: context.colors.navBarTheme.materialIndicatorColor,
           overlayColor: WidgetStatePropertyAll<Color>(

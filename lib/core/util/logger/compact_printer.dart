@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 //
-// ignore: depend_on_referenced_packages
+//ignore: depend_on_referenced_packages
 import 'package:stack_trace/stack_trace.dart';
 
 class CompactPrinter extends LogPrinter {
@@ -12,7 +12,7 @@ class CompactPrinter extends LogPrinter {
         _maxMessageLength = maxMessageLength,
         super();
 
-  static final _levelPrefixes = {
+  static final Map<Level, String> _levelPrefixes = {
     Level.trace: '[T]',
     Level.debug: '[D]',
     Level.info: '[I]',

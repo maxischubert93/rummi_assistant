@@ -21,14 +21,14 @@ class PlatformClickListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformWidget(
-      material: (_, __) => _MaterialClickListener(
+      material: (_, _) => _MaterialClickListener(
         highlightColor: highlightColor ?? context.colors.onPrimary,
         onTap: onTap,
         enabled: enabled,
         border: border,
         child: child,
       ),
-      cupertino: (_, __) => _CupertinoClickListener(
+      cupertino: (_, _) => _CupertinoClickListener(
         highlightColor: highlightColor ?? context.colors.onPrimary,
         onTap: onTap,
         enabled: enabled,

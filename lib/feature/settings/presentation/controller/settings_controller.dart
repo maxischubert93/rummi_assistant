@@ -8,13 +8,20 @@ import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/settings/domain/user_settings.dart';
 import 'package:rummi_assistant/feature/settings/presentation/controller/settings_state.dart';
 
-final settingsControllerProvider =
-    StateNotifierProvider.autoDispose<SettingsController, SettingsState>(
-  (ref) => SettingsController(),
+final settingsControllerProvider = NotifierProvider.autoDispose<SettingsController, SettingsState>(
+  SettingsController.new,
 );
 
-class SettingsController extends StateNotifier<SettingsState> {
-  SettingsController() : super(SettingsState.initial()) {
+class SettingsController extends Notifier<SettingsState> {
+  late final GameManager _gameManager = GetIt.instance.get();
+  late final GoRouter _router = GetIt.instance.get();
+  late final UserSettings _settings = GetIt.instance.get();
+
+  StreamSubscription<Game>? _gameSubscription;
+  StreamSubscription<bool>? _settingsSubscription;
+
+  @override
+  SettingsState build() {
     _gameSubscription = _gameManager.currentGameStream.filterNull().listen((game) {
       state = state.copyWith(players: game.players, timerDuration: game.timerDuration);
     });
@@ -22,14 +29,14 @@ class SettingsController extends StateNotifier<SettingsState> {
     _settingsSubscription = _settings.isTimerSoundEnabledStream.listen((isEnabled) {
       state = state.copyWith(isTimerSoundEnabled: isEnabled);
     });
+
+    ref.onDispose(() {
+      _gameSubscription?.cancel();
+      _settingsSubscription?.cancel();
+    });
+
+    return SettingsState.initial();
   }
-
-  late final GameManager _gameManager = GetIt.instance.get();
-  late final GoRouter _router = GetIt.instance.get();
-  late final UserSettings _settings = GetIt.instance.get();
-
-  StreamSubscription<Game>? _gameSubscription;
-  StreamSubscription<bool>? _settingsSubscription;
 
   Future<void> finishGame() async {
     await _gameManager.finishCurrentGame();
@@ -49,12 +56,5 @@ class SettingsController extends StateNotifier<SettingsState> {
 
   Future<void> onTimerDurationChanged(Duration duration) async {
     await _gameManager.updateTimerDuration(duration);
-  }
-
-  @override
-  void dispose() {
-    _gameSubscription?.cancel();
-    _settingsSubscription?.cancel();
-    super.dispose();
   }
 }

@@ -5,7 +5,7 @@ part 'license.freezed.dart';
 
 @freezed
 @immutable
-class License with _$License {
+abstract class License with _$License {
   const factory License({
     required String packageName,
     required List<LicenseParagraph> paragraphs,

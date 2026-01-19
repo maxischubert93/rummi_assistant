@@ -37,10 +37,10 @@ class AppScaffold extends StatelessWidget {
       ),
       child: PlatformScaffold(
         backgroundColor: context.colors.background,
-        material: (_, __) => MaterialScaffoldData(
+        material: (_, _) => MaterialScaffoldData(
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         ),
-        cupertino: (_, __) => CupertinoPageScaffoldData(
+        cupertino: (_, _) => CupertinoPageScaffoldData(
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         ),
         appBar: appBarTitle != null

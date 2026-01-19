@@ -4,7 +4,7 @@ import 'package:rummi_assistant/feature/game/game.dart';
 part 'settings_state.freezed.dart';
 
 @freezed
-class SettingsState with _$SettingsState {
+abstract class SettingsState with _$SettingsState {
   const factory SettingsState({
     required List<Player> players,
     required Duration timerDuration,

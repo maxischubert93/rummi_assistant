@@ -8,7 +8,7 @@ class UserSettingsStore implements UserSettings {
   }
 
   static const _timerSoundEnabled = 'timer_sound_enabled';
-  static const _driftMigrationDone = 'drift_migration_done';
+  static const _migrationDone = 'drift_migration_done';
 
   final BehaviorSubject<bool> _timerSoundEnabledSubject = BehaviorSubject<bool>.seeded(true);
 
@@ -33,12 +33,12 @@ class UserSettingsStore implements UserSettings {
   @override
   Future<bool> isDriftMigrationDone() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_driftMigrationDone) ?? false;
+    return prefs.getBool(_migrationDone) ?? false;
   }
 
   @override
   Future<void> setIsDriftMigrationDone(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_driftMigrationDone, value);
+    await prefs.setBool(_migrationDone, value);
   }
 }

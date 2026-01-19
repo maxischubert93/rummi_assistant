@@ -1,25 +1,26 @@
+import 'package:drift/drift.dart';
+import 'package:rummi_assistant/core/data/stored/app_database.dart';
 import 'package:rummi_assistant/feature/game/data/stored/mapping/player.dart';
-import 'package:rummi_assistant/feature/game/data/stored/model/stored_game.dart';
 import 'package:rummi_assistant/feature/game/domain/model/game.dart';
 
-extension ToStored on Game {
-  StoredGame toStored() {
-    return StoredGame()
-      ..id = id
-      ..timerDurationInSeconds = timerDuration.inSeconds
-      ..isFinished = isFinished
-      ..createdAt = createdAt
-      ..players = players.map((e) => e.toStored()).toList();
+extension GameToStoredDrift on Game {
+  StoredGamesCompanion toStoredCompanion() {
+    return StoredGamesCompanion(
+      id: Value(id),
+      timerDurationInSeconds: Value(timerDuration.inSeconds),
+      isFinished: Value(isFinished),
+      createdAt: Value(createdAt),
+    );
   }
 }
 
-extension ToDomain on StoredGame {
-  Game toDomain() {
+extension StoredGameDriftToDomain on StoredGame {
+  Game toDomain(List<StoredPlayer> players) {
     return Game(
       id: id,
       timerDuration: Duration(seconds: timerDurationInSeconds),
       isFinished: isFinished,
-      players: players.map((e) => e.toDomain()).toList(),
+      players: players.map((p) => p.toDomain()).toList(),
       createdAt: createdAt,
     );
   }

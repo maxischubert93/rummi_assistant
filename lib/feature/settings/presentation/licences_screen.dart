@@ -31,7 +31,7 @@ class LicensesScreen extends ConsumerWidget {
       appBarTitle: context.localizations.settingsOpenSourceLicenses,
       body: asyncLicenses.when(
         data: (licenses) => _LicensesList(licenses: licenses),
-        error: (_, __) => Center(
+        error: (_, _) => Center(
           child: Body(
             'Error loading licences',
             textAlign: TextAlign.center,

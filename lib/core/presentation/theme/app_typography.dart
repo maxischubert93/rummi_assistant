@@ -7,8 +7,8 @@ class AppTypography {
 
   final AppColorScheme colors;
 
-  static const textFont = FontFamily.lato;
-  static const displayFont = FontFamily.luckiestGuy;
+  static const String textFont = FontFamily.lato;
+  static const String displayFont = FontFamily.luckiestGuy;
 
   TextStyle get display => TextStyle(
         color: colors.primary,

@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:rummi_assistant/feature/game/domain/model/game_round.dart';
-import 'package:rummi_assistant/feature/game/presentation/controller/score_input_state.dart';
+import 'package:rummi_assistant/feature/game/presentation/score_input/score_input_state.dart';
 
 extension ToGameRound on List<PlayerRoundScore> {
   GameRound toGameRound() {
