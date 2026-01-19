@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Change player names'**
   String get homePlayerSectionChangeNamesButton;
 
+  /// No description provided for @newGameCardStartGame.
+  ///
+  /// In en, this message translates to:
+  /// **'New game'**
+  String get newGameCardStartGame;
+
   /// No description provided for @playerNamesModalTitle.
   ///
   /// In en, this message translates to:

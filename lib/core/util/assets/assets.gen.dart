@@ -27,8 +27,11 @@ class $AssetsIconsGen {
   /// File path: assets/icons/chevron_up.svg
   SvgGenImage get chevronUp => const SvgGenImage('assets/icons/chevron_up.svg');
 
+  /// File path: assets/icons/new_game.svg
+  SvgGenImage get newGame => const SvgGenImage('assets/icons/new_game.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [appIcon, chevronDown, chevronUp];
+  List<SvgGenImage> get values => [appIcon, chevronDown, chevronUp, newGame];
 }
 
 class $AssetsSoundsGen {

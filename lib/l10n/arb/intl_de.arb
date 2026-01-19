@@ -11,6 +11,7 @@
   "homePlayerSection": "Spieler",
   "homePlayerAmountSegment": "{amount} Spieler",
   "homePlayerSectionChangeNamesButton": "Spielernamen ändern",
+  "newGameCardStartGame": "Neues Spiel",
   "playerNamesModalTitle": "Spielernamen ändern",
   "playerNamesModalSectionTitle": "Name für Spieler {playerNumber}",
   "playerNamesModalButton": "Namen ändern",

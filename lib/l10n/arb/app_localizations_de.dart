@@ -47,6 +47,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homePlayerSectionChangeNamesButton => 'Spielernamen ändern';
 
   @override
+  String get newGameCardStartGame => 'Neues Spiel';
+
+  @override
   String get playerNamesModalTitle => 'Spielernamen ändern';
 
   @override

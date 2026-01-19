@@ -13,13 +13,16 @@ class NewGameCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(
+        maxWidth: context.geometry.maxContentWidth,
+      ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            context.colors.primary,
             context.colors.secondary,
+            context.colors.tertiary,
           ],
         ),
         borderRadius: context.geometry.radiusLarge,
@@ -31,105 +34,69 @@ class NewGameCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onStartGame,
-          borderRadius: context.geometry.radiusLarge,
-          child: Padding(
-            padding: context.geometry.largePadding,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Decorative tiles at the top
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _RummikubTile(
-                      number: '7',
-                      color: context.colors.error,
-                    ),
-                    context.geometry.spacingSmall.horizontalBox,
-                    _RummikubTile(
-                      number: '8',
-                      color: context.colors.tertiary,
-                    ),
-                    context.geometry.spacingSmall.horizontalBox,
-                    _RummikubTile(
-                      number: '9',
-                      color: context.colors.primary,
+      child: PlatformClickListener(
+        onTap: onStartGame,
+        child: Padding(
+          padding: context.geometry.largePadding,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Decorative tiles at the top
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _RummikubTile(
+                    number: '1',
+                    color: context.colors.secondary,
+                  ),
+                  context.geometry.spacingSmall.horizontalBox,
+                  _RummikubTile(
+                    number: '2',
+                    color: context.colors.tertiary,
+                  ),
+                  context.geometry.spacingSmall.horizontalBox,
+                  _RummikubTile(
+                    number: '3',
+                    color: context.colors.primary,
+                  ),
+                ],
+              ),
+              context.geometry.spacingMedium.verticalBox,
+
+              // Start button
+              Container(
+                padding: context.geometry.mediumPadding,
+                decoration: BoxDecoration(
+                  color: context.colors.primary,
+                  borderRadius: context.geometry.radiusMedium,
+                  boxShadow: [
+                    BoxShadow(
+                      color: context.colors.primary.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
-                context.geometry.spacingMedium.verticalBox,
-
-                // Title
-                Text(
-                  context.localizations.homeStartGameButton,
-                  style: context.typography.headlineMedium.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: context.colors.onPrimary,
-                  ),
-                ),
-                context.geometry.spacingSmall.verticalBox,
-
-                // Subtitle
-                Text(
-                  'Start a new Rummikub game',
-                  style: context.typography.body.copyWith(
-                    color: context.colors.onPrimary.withValues(alpha: 0.8),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                context.geometry.spacingMedium.verticalBox,
-
-                // Start button
-                Container(
-                  decoration: BoxDecoration(
-                    color: context.colors.primary,
-                    borderRadius: context.geometry.radiusMedium,
-                    boxShadow: [
-                      BoxShadow(
-                        color: context.colors.primary.withValues(alpha: 0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: onStartGame,
-                      borderRadius: context.geometry.radiusMedium,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: context.geometry.spacingLarge,
-                          vertical: context.geometry.spacingMedium,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.play_arrow_rounded,
-                              color: context.colors.onPrimary,
-                              size: 28,
-                            ),
-                            context.geometry.spacingSmall.horizontalBox,
-                            Text(
-                              'Start Game',
-                              style: context.typography.titleMedium.copyWith(
-                                color: context.colors.onPrimary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.casino_outlined,
+                      color: context.colors.onPrimary,
+                      size: 32,
+                    ),
+                    context.geometry.spacingMedium.horizontalBox,
+                    Text(
+                      context.localizations.newGameCardStartGame,
+                      style: context.typography.titleLarge.copyWith(
+                        color: context.colors.onPrimary,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

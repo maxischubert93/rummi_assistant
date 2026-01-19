@@ -10,4 +10,7 @@ class RouteNames {
   static const licenseDetail = 'licence-detail';
   static const gameHistory = 'game-history';
   static const gameDetail = 'game-detail';
+  static const newGame = 'new-game';
+  static const newGamePlayerNames = 'new-game-player-names';
+  static const newGameTimer = 'new-game-timer';
 }

@@ -46,6 +46,7 @@ class GameStoreDrift implements GameRepository {
     });
   }
 
+  @override
   Future<Game?> getLastGame() async {
     final game = await _gamesDao.getLastGame();
     return game?.toDomain();
