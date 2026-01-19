@@ -5,6 +5,7 @@ part 'player.freezed.dart';
 @freezed
 abstract class Player with _$Player {
   const factory Player({
+    required int id,
     required String name,
     @Default([]) List<int> scores,
   }) = _Player;
