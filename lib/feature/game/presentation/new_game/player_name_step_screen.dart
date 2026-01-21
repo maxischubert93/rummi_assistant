@@ -19,28 +19,34 @@ class PlayerNameStepScreen extends ConsumerWidget {
     return AppScaffold(
       appBarTitle: context.localizations.newGamePlayerNamesStepTitle,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: context.geometry.mediumPadding,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              PlayerNamesInput(
-                focusNodes: state.focusNodes,
-                onPlayerNameChanged: controller.onPlayerNameChanged,
-                onSubmitted: controller.onPlayerNameSubmitted,
-                playerNames: state.playerNames,
-                errorCase: state.errorCase,
-              ),
-              context.geometry.spacingMedium.verticalBox,
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: context.geometry.maxContentWidth),
-                child: AppButton.primary(
-                  text: context.localizations.newGameContinueButton,
-                  onPressed: controller.onPlayerNameStepFinished,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: context.geometry.mediumPadding,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    PlayerNamesInput(
+                      focusNodes: state.focusNodes,
+                      onPlayerNameChanged: controller.onPlayerNameChanged,
+                      onSubmitted: controller.onPlayerNameSubmitted,
+                      playerNames: state.playerNames,
+                      errorCase: state.errorCase,
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            context.geometry.spacingMedium.verticalBox,
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: context.geometry.maxContentWidth),
+              child: AppButton.primary(
+                text: context.localizations.newGameContinueButton,
+                onPressed: controller.onPlayerNameStepFinished,
+              ),
+            ),
+          ],
         ),
       ),
     );
