@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rummi_assistant/feature/game/presentation/new_game/new_game_config.dart';
+import 'package:rummi_assistant/feature/game/presentation/player_names/player_names_state.dart';
 
 part 'new_game_state.freezed.dart';
 
@@ -29,4 +30,22 @@ abstract class NewGameState with _$NewGameState {
 
   // Check that there are no empty player names
   bool get isContinueToTimerButtonEnabled => playerNames.every((name) => name.trim().isNotEmpty);
+
+  bool get areNamesValid => trimmedNames.every((name) => name.isNotEmpty);
+
+  bool get areNamesUnique => trimmedNames.toSet().length == playerNames.length;
+
+  bool get isConfirmButtonEnabled => areNamesValid && areNamesUnique;
+
+  List<String> get trimmedNames => playerNames.map((name) => name.trim()).toList();
+
+  ErrorCase? get errorCase {
+    if (!areNamesValid) {
+      return ErrorCase.emptyName;
+    }
+    if (!areNamesUnique) {
+      return ErrorCase.duplicateName;
+    }
+    return null;
+  }
 }

@@ -21,13 +21,13 @@ class PlayerNamesController extends Notifier<PlayerNamesState> {
     return PlayerNamesState.initial(players);
   }
 
-  void onPlayerNameChanged({required int index, required String name}) {
+  void onPlayerNameChanged(int index, String name) {
     final playerNames = List<String>.from(state.playerNames);
     playerNames[index] = name;
     state = state.copyWith(playerNames: playerNames);
   }
 
-  void onSubmitted({required int index}) {
+  void onSubmitted(int index) {
     if (index < state.playerNames.length - 1) {
       state.focusNodes[index + 1].requestFocus();
     } else {

@@ -9,22 +9,21 @@ import 'package:rummi_assistant/feature/game/presentation/new_game/new_game_conf
 import 'package:rummi_assistant/feature/game/presentation/new_game/new_game_state.dart';
 import 'package:rummi_assistant/feature/game/util/player_list.dart';
 
-final newGameConfigProvider = Provider<NewGameConfig>((_) => throw UnimplementedError());
-
-final newGameControllerProvider = NotifierProvider.autoDispose<NewGameController, NewGameState>(
-  NewGameController.new,
-);
+final newGameControllerProvider = NotifierProvider.autoDispose
+    .family<NewGameController, NewGameState, NewGameConfig>(
+      NewGameController.new,
+    );
 
 class NewGameController extends Notifier<NewGameState> {
+  NewGameController(this._config);
+
   late final GoRouter _router = GetIt.instance.get();
   late final GameManager _gameManager = GetIt.instance.get();
 
-  late final NewGameConfig _config;
+  final NewGameConfig _config;
 
   @override
   NewGameState build() {
-    _config = ref.read(newGameConfigProvider);
-
     return NewGameState.fromConfig(newGameConfig: _config);
   }
 
@@ -43,28 +42,29 @@ class NewGameController extends Notifier<NewGameState> {
         (_) => FocusNode(),
       ),
     );
+    _router.pushNamed(RouteNames.newGamePlayerNames, extra: _config);
   }
 
   void onPlayerNameStepFinished() {
-    // route to timer step
+    _router.pushNamed(RouteNames.newGameTimer, extra: _config);
   }
 
   void onTimerDurationChanged(Duration duration) {
     state = state.copyWith(timerDuration: duration);
   }
 
-  void onTimerStepFinished() {
-    _gameManager.newGame(timerDuration: state.timerDuration, playerNames: state.playerNames);
-    _router.goNamed(RouteNames.timer);
+  Future<void> onTimerStepFinished() async {
+    await _gameManager.newGame(timerDuration: state.timerDuration, playerNames: state.playerNames);
+    await _router.replaceNamed<void>(RouteNames.timer);
   }
 
-  void onPlayerNameChanged({required int index, required String name}) {
+  void onPlayerNameChanged(int index, String name) {
     final playerNames = List<String>.from(state.playerNames);
     playerNames[index] = name;
     state = state.copyWith(playerNames: playerNames);
   }
 
-  void onPlayerNameSubmitted({required int index}) {
+  void onPlayerNameSubmitted(int index) {
     if (index < state.playerNames.length - 1) {
       state.focusNodes[index + 1].requestFocus();
     } else {

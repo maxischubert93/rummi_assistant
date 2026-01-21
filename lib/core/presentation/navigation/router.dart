@@ -6,6 +6,10 @@ import 'package:rummi_assistant/core/presentation/navigation/custom_page/platfor
 import 'package:rummi_assistant/core/presentation/navigation/route_names.dart';
 import 'package:rummi_assistant/feature/game/game.dart';
 import 'package:rummi_assistant/feature/game/presentation/history/game_history_screen.dart';
+import 'package:rummi_assistant/feature/game/presentation/new_game/new_game_config.dart';
+import 'package:rummi_assistant/feature/game/presentation/new_game/player_amount_step_screen.dart';
+import 'package:rummi_assistant/feature/game/presentation/new_game/player_name_step_screen.dart';
+import 'package:rummi_assistant/feature/game/presentation/new_game/timer_step_screen.dart';
 import 'package:rummi_assistant/feature/game/presentation/player_names/player_names_modal.dart';
 import 'package:rummi_assistant/feature/game/presentation/score/score_screen.dart';
 import 'package:rummi_assistant/feature/game/presentation/score_input/score_input_modal.dart';
@@ -117,6 +121,31 @@ GoRouter buildRouter() => GoRouter(
           pageBuilder: (context, state) => PlatformModalPage<List<String>>(
             builder: (_) => const PlayerNamesModal(),
           ),
+        ),
+        GoRoute(
+          path: 'new-game-player-amount',
+          name: RouteNames.newGamePlayerAmount,
+          builder: (context, state) => PlayerAmountStepScreen(
+            config: state.extra as NewGameConfig? ?? NewGameConfig.defaultGame(),
+          ),
+          routes: [
+            GoRoute(
+              path: 'new-game-player-names',
+              name: RouteNames.newGamePlayerNames,
+              builder: (context, state) =>  PlayerNameStepScreen(
+                config: state.extra as NewGameConfig? ?? NewGameConfig.defaultGame(),
+              ),
+              routes: [
+                GoRoute(
+                  path: 'new-game-timer',
+                  name: RouteNames.newGameTimer,
+                  builder: (context, state) => TimerStepScreen(
+                    config: state.extra as NewGameConfig? ?? NewGameConfig.defaultGame(),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     ),
