@@ -24,12 +24,12 @@ class GameManager {
 
   Future<void> newGame({
     required Duration timerDuration,
-    required List<Player> players,
+    required List<String> playerNames,
   }) async {
     await _gameRepository.deleteRunningGames();
     final game = await _gameRepository.newGame(
       timerDuration: timerDuration,
-      players: players,
+      playerNames: playerNames,
     );
     _currentGameSubject.add(game);
   }

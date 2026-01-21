@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Player {
 
- String get name; List<int> get scores;
+ int get id; String get name; List<int> get scores;
 /// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PlayerCopyWith<Player> get copyWith => _$PlayerCopyWithImpl<Player>(this as Pla
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Player&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.scores, scores));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Player&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.scores, scores));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,name,const DeepCollectionEquality().hash(scores));
+int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(scores));
 
 @override
 String toString() {
-  return 'Player(name: $name, scores: $scores)';
+  return 'Player(id: $id, name: $name, scores: $scores)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PlayerCopyWith<$Res>  {
   factory $PlayerCopyWith(Player value, $Res Function(Player) _then) = _$PlayerCopyWithImpl;
 @useResult
 $Res call({
- String name, List<int> scores
+ int id, String name, List<int> scores
 });
 
 
@@ -62,9 +62,10 @@ class _$PlayerCopyWithImpl<$Res>
 
 /// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? scores = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? scores = null,}) {
   return _then(_self.copyWith(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,scores: null == scores ? _self.scores : scores // ignore: cast_nullable_to_non_nullable
 as List<int>,
   ));
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  List<int> scores)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  List<int> scores)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Player() when $default != null:
-return $default(_that.name,_that.scores);case _:
+return $default(_that.id,_that.name,_that.scores);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.name,_that.scores);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  List<int> scores)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  List<int> scores)  $default,) {final _that = this;
 switch (_that) {
 case _Player():
-return $default(_that.name,_that.scores);case _:
+return $default(_that.id,_that.name,_that.scores);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.name,_that.scores);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  List<int> scores)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  List<int> scores)?  $default,) {final _that = this;
 switch (_that) {
 case _Player() when $default != null:
-return $default(_that.name,_that.scores);case _:
+return $default(_that.id,_that.name,_that.scores);case _:
   return null;
 
 }
@@ -207,9 +208,10 @@ return $default(_that.name,_that.scores);case _:
 
 
 class _Player extends Player {
-  const _Player({required this.name, final  List<int> scores = const []}): _scores = scores,super._();
+  const _Player({required this.id, required this.name, final  List<int> scores = const []}): _scores = scores,super._();
   
 
+@override final  int id;
 @override final  String name;
  final  List<int> _scores;
 @override@JsonKey() List<int> get scores {
@@ -229,16 +231,16 @@ _$PlayerCopyWith<_Player> get copyWith => __$PlayerCopyWithImpl<_Player>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Player&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._scores, _scores));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Player&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._scores, _scores));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,name,const DeepCollectionEquality().hash(_scores));
+int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(_scores));
 
 @override
 String toString() {
-  return 'Player(name: $name, scores: $scores)';
+  return 'Player(id: $id, name: $name, scores: $scores)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$PlayerCopyWith<$Res> implements $PlayerCopyWith<$Res> {
   factory _$PlayerCopyWith(_Player value, $Res Function(_Player) _then) = __$PlayerCopyWithImpl;
 @override @useResult
 $Res call({
- String name, List<int> scores
+ int id, String name, List<int> scores
 });
 
 
@@ -266,9 +268,10 @@ class __$PlayerCopyWithImpl<$Res>
 
 /// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? scores = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? scores = null,}) {
   return _then(_Player(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,scores: null == scores ? _self._scores : scores // ignore: cast_nullable_to_non_nullable
 as List<int>,
   ));

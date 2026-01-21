@@ -70,12 +70,12 @@ class AppButtonTheme {
         active: AppButtonStateStyle(
           background: AppColors.transparent,
           border: AppColors.transparent,
-          content: colors.onBackground,
+          content: colors.primary,
         ),
         iOSPressed: AppButtonStateStyle(
           background: AppColors.transparent,
           border: AppColors.transparent,
-          content: colors.onBackground.withValues(alpha: 0.5),
+          content: colors.primary.withValues(alpha: 0.5),
         ),
         disabled: AppButtonStateStyle(
           background: colors.disabled,

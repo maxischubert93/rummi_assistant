@@ -22,6 +22,7 @@ class Surface extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? (expand ? double.infinity : null),
+      constraints: BoxConstraints(maxWidth: width ?? context.geometry.maxContentWidth),
       height: height,
       padding: padding ?? context.geometry.mediumPadding,
       decoration: BoxDecoration(

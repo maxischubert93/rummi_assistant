@@ -33,18 +33,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gameHistoryEmptyText => 'No games played yet';
 
   @override
-  String get homeStartGameButton => 'Start game';
+  String get playerSection => 'Players';
 
   @override
-  String get homePlayerSection => 'Players';
-
-  @override
-  String homePlayerAmountSegment(Object amount) {
+  String playerAmountSegment(Object amount) {
     return '$amount players';
   }
-
-  @override
-  String get homePlayerSectionChangeNamesButton => 'Change player names';
 
   @override
   String get playerNamesModalTitle => 'Edit player names';
@@ -64,6 +58,24 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get playerNamesModalErrorDuplicateName =>
       'Please enter unique names for all players';
+
+  @override
+  String get newGameContinueButton => 'Continue';
+
+  @override
+  String get newGameCardStartGame => 'New game';
+
+  @override
+  String get newGameConfigurationFinishedButton => 'Start game';
+
+  @override
+  String get newGamePlayerAmountStepTitle => 'Select number of players';
+
+  @override
+  String get newGamePlayerNamesStepTitle => 'Enter player names';
+
+  @override
+  String get newGameTimerStepTitle => 'Set timer duration';
 
   @override
   String defaultPlayerName(Object playerNumber) {

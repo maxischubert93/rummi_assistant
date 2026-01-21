@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NewGameState {
 
- Duration get timerDuration; int get amountOfPlayers; List<String> get playerNames;
+ Duration get timerDuration; int get amountOfPlayers; List<String> get playerNames; List<FocusNode> get focusNodes;
 /// Create a copy of NewGameState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $NewGameStateCopyWith<NewGameState> get copyWith => _$NewGameStateCopyWithImpl<N
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewGameState&&(identical(other.timerDuration, timerDuration) || other.timerDuration == timerDuration)&&(identical(other.amountOfPlayers, amountOfPlayers) || other.amountOfPlayers == amountOfPlayers)&&const DeepCollectionEquality().equals(other.playerNames, playerNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewGameState&&(identical(other.timerDuration, timerDuration) || other.timerDuration == timerDuration)&&(identical(other.amountOfPlayers, amountOfPlayers) || other.amountOfPlayers == amountOfPlayers)&&const DeepCollectionEquality().equals(other.playerNames, playerNames)&&const DeepCollectionEquality().equals(other.focusNodes, focusNodes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,timerDuration,amountOfPlayers,const DeepCollectionEquality().hash(playerNames));
+int get hashCode => Object.hash(runtimeType,timerDuration,amountOfPlayers,const DeepCollectionEquality().hash(playerNames),const DeepCollectionEquality().hash(focusNodes));
 
 @override
 String toString() {
-  return 'NewGameState(timerDuration: $timerDuration, amountOfPlayers: $amountOfPlayers, playerNames: $playerNames)';
+  return 'NewGameState(timerDuration: $timerDuration, amountOfPlayers: $amountOfPlayers, playerNames: $playerNames, focusNodes: $focusNodes)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $NewGameStateCopyWith<$Res>  {
   factory $NewGameStateCopyWith(NewGameState value, $Res Function(NewGameState) _then) = _$NewGameStateCopyWithImpl;
 @useResult
 $Res call({
- Duration timerDuration, int amountOfPlayers, List<String> playerNames
+ Duration timerDuration, int amountOfPlayers, List<String> playerNames, List<FocusNode> focusNodes
 });
 
 
@@ -62,12 +62,13 @@ class _$NewGameStateCopyWithImpl<$Res>
 
 /// Create a copy of NewGameState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? timerDuration = null,Object? amountOfPlayers = null,Object? playerNames = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? timerDuration = null,Object? amountOfPlayers = null,Object? playerNames = null,Object? focusNodes = null,}) {
   return _then(_self.copyWith(
 timerDuration: null == timerDuration ? _self.timerDuration : timerDuration // ignore: cast_nullable_to_non_nullable
 as Duration,amountOfPlayers: null == amountOfPlayers ? _self.amountOfPlayers : amountOfPlayers // ignore: cast_nullable_to_non_nullable
 as int,playerNames: null == playerNames ? _self.playerNames : playerNames // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,focusNodes: null == focusNodes ? _self.focusNodes : focusNodes // ignore: cast_nullable_to_non_nullable
+as List<FocusNode>,
   ));
 }
 
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Duration timerDuration,  int amountOfPlayers,  List<String> playerNames)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Duration timerDuration,  int amountOfPlayers,  List<String> playerNames,  List<FocusNode> focusNodes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NewGameState() when $default != null:
-return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames);case _:
+return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames,_that.focusNodes);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Duration timerDuration,  int amountOfPlayers,  List<String> playerNames)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Duration timerDuration,  int amountOfPlayers,  List<String> playerNames,  List<FocusNode> focusNodes)  $default,) {final _that = this;
 switch (_that) {
 case _NewGameState():
-return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames);case _:
+return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames,_that.focusNodes);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Duration timerDuration,  int amountOfPlayers,  List<String> playerNames)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Duration timerDuration,  int amountOfPlayers,  List<String> playerNames,  List<FocusNode> focusNodes)?  $default,) {final _that = this;
 switch (_that) {
 case _NewGameState() when $default != null:
-return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames);case _:
+return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames,_that.focusNodes);case _:
   return null;
 
 }
@@ -207,8 +208,8 @@ return $default(_that.timerDuration,_that.amountOfPlayers,_that.playerNames);cas
 /// @nodoc
 
 
-class _NewGameState implements NewGameState {
-  const _NewGameState({required this.timerDuration, required this.amountOfPlayers, required final  List<String> playerNames}): _playerNames = playerNames;
+class _NewGameState extends NewGameState {
+  const _NewGameState({required this.timerDuration, required this.amountOfPlayers, required final  List<String> playerNames, required final  List<FocusNode> focusNodes}): _playerNames = playerNames,_focusNodes = focusNodes,super._();
   
 
 @override final  Duration timerDuration;
@@ -218,6 +219,13 @@ class _NewGameState implements NewGameState {
   if (_playerNames is EqualUnmodifiableListView) return _playerNames;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_playerNames);
+}
+
+ final  List<FocusNode> _focusNodes;
+@override List<FocusNode> get focusNodes {
+  if (_focusNodes is EqualUnmodifiableListView) return _focusNodes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_focusNodes);
 }
 
 
@@ -231,16 +239,16 @@ _$NewGameStateCopyWith<_NewGameState> get copyWith => __$NewGameStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewGameState&&(identical(other.timerDuration, timerDuration) || other.timerDuration == timerDuration)&&(identical(other.amountOfPlayers, amountOfPlayers) || other.amountOfPlayers == amountOfPlayers)&&const DeepCollectionEquality().equals(other._playerNames, _playerNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewGameState&&(identical(other.timerDuration, timerDuration) || other.timerDuration == timerDuration)&&(identical(other.amountOfPlayers, amountOfPlayers) || other.amountOfPlayers == amountOfPlayers)&&const DeepCollectionEquality().equals(other._playerNames, _playerNames)&&const DeepCollectionEquality().equals(other._focusNodes, _focusNodes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,timerDuration,amountOfPlayers,const DeepCollectionEquality().hash(_playerNames));
+int get hashCode => Object.hash(runtimeType,timerDuration,amountOfPlayers,const DeepCollectionEquality().hash(_playerNames),const DeepCollectionEquality().hash(_focusNodes));
 
 @override
 String toString() {
-  return 'NewGameState(timerDuration: $timerDuration, amountOfPlayers: $amountOfPlayers, playerNames: $playerNames)';
+  return 'NewGameState(timerDuration: $timerDuration, amountOfPlayers: $amountOfPlayers, playerNames: $playerNames, focusNodes: $focusNodes)';
 }
 
 
@@ -251,7 +259,7 @@ abstract mixin class _$NewGameStateCopyWith<$Res> implements $NewGameStateCopyWi
   factory _$NewGameStateCopyWith(_NewGameState value, $Res Function(_NewGameState) _then) = __$NewGameStateCopyWithImpl;
 @override @useResult
 $Res call({
- Duration timerDuration, int amountOfPlayers, List<String> playerNames
+ Duration timerDuration, int amountOfPlayers, List<String> playerNames, List<FocusNode> focusNodes
 });
 
 
@@ -268,12 +276,13 @@ class __$NewGameStateCopyWithImpl<$Res>
 
 /// Create a copy of NewGameState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? timerDuration = null,Object? amountOfPlayers = null,Object? playerNames = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? timerDuration = null,Object? amountOfPlayers = null,Object? playerNames = null,Object? focusNodes = null,}) {
   return _then(_NewGameState(
 timerDuration: null == timerDuration ? _self.timerDuration : timerDuration // ignore: cast_nullable_to_non_nullable
 as Duration,amountOfPlayers: null == amountOfPlayers ? _self.amountOfPlayers : amountOfPlayers // ignore: cast_nullable_to_non_nullable
 as int,playerNames: null == playerNames ? _self._playerNames : playerNames // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,focusNodes: null == focusNodes ? _self._focusNodes : focusNodes // ignore: cast_nullable_to_non_nullable
+as List<FocusNode>,
   ));
 }
 

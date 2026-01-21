@@ -82,12 +82,14 @@ class _Content extends StatelessWidget {
               mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (leadingIcon != null) leadingIcon!.coloredSvg(contentColor),
+                if (leadingIcon != null)
+                  leadingIcon!.coloredSvg(contentColor, height: 28, width: 28),
                 if (leadingIcon != null) geometry.spacingSmall.horizontalBox,
                 if (text != null) Button(text!, color: contentColor),
                 if (centerIcon != null) Icon(centerIcon, color: contentColor),
                 if (trailingIcon != null) geometry.spacingSmall.horizontalBox,
-                if (trailingIcon != null) trailingIcon!.coloredSvg(contentColor),
+                if (trailingIcon != null)
+                  trailingIcon!.coloredSvg(contentColor, height: 28, width: 28),
               ],
             ),
           ),

@@ -146,29 +146,17 @@ abstract class AppLocalizations {
   /// **'No games played yet'**
   String get gameHistoryEmptyText;
 
-  /// No description provided for @homeStartGameButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Start game'**
-  String get homeStartGameButton;
-
-  /// No description provided for @homePlayerSection.
+  /// No description provided for @playerSection.
   ///
   /// In en, this message translates to:
   /// **'Players'**
-  String get homePlayerSection;
+  String get playerSection;
 
-  /// No description provided for @homePlayerAmountSegment.
+  /// No description provided for @playerAmountSegment.
   ///
   /// In en, this message translates to:
   /// **'{amount} players'**
-  String homePlayerAmountSegment(Object amount);
-
-  /// No description provided for @homePlayerSectionChangeNamesButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Change player names'**
-  String get homePlayerSectionChangeNamesButton;
+  String playerAmountSegment(Object amount);
 
   /// No description provided for @playerNamesModalTitle.
   ///
@@ -199,6 +187,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter unique names for all players'**
   String get playerNamesModalErrorDuplicateName;
+
+  /// No description provided for @newGameContinueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get newGameContinueButton;
+
+  /// No description provided for @newGameCardStartGame.
+  ///
+  /// In en, this message translates to:
+  /// **'New game'**
+  String get newGameCardStartGame;
+
+  /// No description provided for @newGameConfigurationFinishedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start game'**
+  String get newGameConfigurationFinishedButton;
+
+  /// No description provided for @newGamePlayerAmountStepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select number of players'**
+  String get newGamePlayerAmountStepTitle;
+
+  /// No description provided for @newGamePlayerNamesStepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter player names'**
+  String get newGamePlayerNamesStepTitle;
+
+  /// No description provided for @newGameTimerStepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set timer duration'**
+  String get newGameTimerStepTitle;
 
   /// No description provided for @defaultPlayerName.
   ///

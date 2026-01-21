@@ -23,18 +23,20 @@ class Geometry {
 
   double get spacingTripleExtraLarge => 64;
 
-  EdgeInsets get largePadding => EdgeInsets.symmetric(
-        vertical: spacingLarge,
-        horizontal: spacingLarge,
-      )
+  double get maxContentWidth => 1000;
 
-  ;EdgeInsets get mediumPadding => EdgeInsets.symmetric(
-        vertical: spacingMedium,
-        horizontal: spacingMedium,
-      );
+  EdgeInsets get largePadding => EdgeInsets.symmetric(
+    vertical: spacingLarge,
+    horizontal: spacingLarge,
+  );
+
+  EdgeInsets get mediumPadding => EdgeInsets.symmetric(
+    vertical: spacingMedium,
+    horizontal: spacingMedium,
+  );
 
   EdgeInsets get smallPadding => EdgeInsets.symmetric(
-        vertical: spacingSmall,
-        horizontal: spacingSmall,
-      );
+    vertical: spacingSmall,
+    horizontal: spacingSmall,
+  );
 }

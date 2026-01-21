@@ -18,24 +18,25 @@ class HomeScreen extends ConsumerWidget {
       resizeToAvoidBottomInset: false,
       excludePadding: true,
       body: SafeArea(
+        bottom: false,
         child: SingleChildScrollView(
           padding: context.geometry.mediumPadding,
           child: Column(
             children: [
-              context.geometry.spacingExtraLarge.verticalBox,
+              context.geometry.spacingTripleExtraLarge.verticalBox,
               Center(
                 child: Display(
                   context.localizations.appName,
                   singleLine: false,
                 ),
               ),
-              context.geometry.spacingDoubleExtraLarge.verticalBox,
+              context.geometry.spacingTripleExtraLarge.verticalBox,
               NewGameCard(
                 onStartGame: controller.onNewGame,
               ),
-              context.geometry.spacingDoubleExtraLarge.verticalBox,
+              context.geometry.spacingTripleExtraLarge.verticalBox,
               const GameHistorySection(),
-              context.geometry.spacingLarge.verticalBox,
+              context.geometry.spacingTripleExtraLarge.verticalBox,
               const SettingsLegalSection(),
               context.geometry.spacingDoubleExtraLarge.verticalBox,
             ],
