@@ -89,12 +89,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get scoreInputModalButtonStep => 'Punkte eintragen';
 
   @override
-  String get scoreInputModalButtonFinish => 'Fertig';
-
-  @override
-  String scoreInputModalTitle(Object playerName) {
-    return 'Punkte für $playerName';
-  }
+  String get scoreInputModalTitle => 'Punkte für Spieler eintragen';
 
   @override
   String get scoreInputModalSelectWinnerTitle => 'Wer hat gewonnen?';

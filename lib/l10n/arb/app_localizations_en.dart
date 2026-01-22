@@ -89,12 +89,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scoreInputModalButtonStep => 'Submit score';
 
   @override
-  String get scoreInputModalButtonFinish => 'Finish';
-
-  @override
-  String scoreInputModalTitle(Object playerName) {
-    return 'Enter score for $playerName';
-  }
+  String get scoreInputModalTitle => 'Enter scores for players';
 
   @override
   String get scoreInputModalSelectWinnerTitle => 'Select the round winner';

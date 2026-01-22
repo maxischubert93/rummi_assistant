@@ -18,6 +18,7 @@ class ButtonGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+      alignment: .center,
       spacing: context.geometry.spacingSmall,
       runSpacing: context.geometry.spacingSmall,
       children: buttonTexts.mapIndexed((index, text) {
@@ -53,8 +54,8 @@ class _SelectableButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: context.geometry.spacingMedium,
-          vertical: context.geometry.spacingSmall,
+          horizontal: context.geometry.spacingLarge,
+          vertical: context.geometry.spacingMedium,
         ),
         decoration: BoxDecoration(
           color: isSelected ? context.colors.primary : AppColors.transparent,
