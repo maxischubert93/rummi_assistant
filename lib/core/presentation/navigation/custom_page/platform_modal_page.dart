@@ -70,7 +70,7 @@ class _ModalContainer extends StatelessWidget {
             children: [
               geometry.spacingMedium.verticalBox,
               const _Handlebar(),
-              geometry.spacingExtraLarge.verticalBox,
+              geometry.spacingMedium.verticalBox,
               ConstrainedBox(
                 constraints: BoxConstraints(
                   maxHeight: constraints.maxHeight -

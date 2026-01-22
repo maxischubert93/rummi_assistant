@@ -6,6 +6,13 @@ import 'package:rummi_assistant/core/presentation/theme/geometry.dart';
 
 extension ThemeExtension on BuildContext {
   AppColorScheme get colors => AppTheme.of(this).colors;
+
   AppTypography get typography => AppTheme.of(this).typography;
+
   Geometry get geometry => AppTheme.of(this).geometry;
+
+  bool get isLargeScreen {
+    final width = MediaQuery.of(this).size.width;
+    return width >= 600;
+  }
 }

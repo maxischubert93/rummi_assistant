@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rummi_assistant/core/core.dart';
 import 'package:rummi_assistant/core/presentation/widget/number_text_field.dart';
 import 'package:rummi_assistant/feature/game/presentation/score_input/score_input_controller.dart';
+import 'package:rummi_assistant/feature/game/presentation/score_input/score_input_state.dart';
 import 'package:rummi_assistant/feature/game/presentation/widget/button_group.dart';
 import 'package:rummi_assistant/l10n/l10n.dart';
 
@@ -27,94 +28,21 @@ class _PlayerInputPageViewState extends ConsumerState<_PlayerInputPageView> {
 
   @override
   Widget build(BuildContext context) {
-    final playerCount =
-        ref.watch(scoreInputControllerProvider.select((state) => state.playerCount));
-
-    final nodes = ref.watch(
-      scoreInputControllerProvider
-          .select((state) => state.playerScores.map((score) => score.focusNode).toList()),
+    final playerCount = ref.watch(
+      scoreInputControllerProvider.select((state) => state.playerCount),
     );
 
     return SizedBox(
-      height: 200,
+      height: 300,
       child: PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         itemCount: playerCount,
-        itemBuilder: (context, index) {
-          final isLast = index == playerCount - 1;
-
-          return _PlayerInputPage(
-            index: index,
-            isLast: isLast,
-            onPrevious: () {
-              _pageController.previous();
-              if (index == 1) {
-                nodes[index].unfocus();
-              } else if (index >= 2) {
-                nodes[index - 1].requestFocus();
-              }
-            },
-            onNext: () {
-              _pageController.next();
-              if (!isLast) {
-                nodes[index + 1].requestFocus();
-              }
-            },
-          );
+        itemBuilder: (_, index) => switch (index == 0) {
+          true => _WinnerInputPage(onNext: _pageController.next),
+          false => _ScoreInputPage(onBack: _pageController.previous),
         },
       ),
-    );
-  }
-}
-
-class _PlayerInputPage extends ConsumerWidget {
-  const _PlayerInputPage({
-    required this.index,
-    required this.isLast,
-    required this.onPrevious,
-    required this.onNext,
-  });
-
-  final int index;
-  final bool isLast;
-  final void Function() onPrevious;
-  final void Function() onNext;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(scoreInputControllerProvider);
-
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _PageViewControl(
-          isEnabled: index > 0,
-          onPressed: onPrevious,
-          position: PageViewControlPosition.leading,
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.geometry.spacingMedium),
-            child: switch (index == 0) {
-              true => _WinnerInputPage(onNext: onNext),
-              false => _ScoreInputPage(
-                  index: index,
-                  isLast: isLast,
-                  onNext: () {
-                    if (!isLast) onNext();
-                  },
-                ),
-            },
-          ),
-        ),
-        _PageViewControl(
-          isEnabled: (index > 0 && !isLast && state.losingPlayerScores[index - 1].isScoreValid) ||
-              (index == 0 && state.hasWinner),
-          onPressed: onNext,
-          position: PageViewControlPosition.trailing,
-        ),
-      ],
     );
   }
 }
@@ -129,6 +57,7 @@ class _WinnerInputPage extends ConsumerWidget {
     final playerScores = ref.watch(
       scoreInputControllerProvider.select((state) => state.playerScores),
     );
+    final controller = ref.read(scoreInputControllerProvider.notifier);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -143,9 +72,7 @@ class _WinnerInputPage extends ConsumerWidget {
           buttonTexts: playerScores.map((score) => score.playerName).toList(),
           selectedIndex: playerScores.indexWhere((score) => score.wonRound),
           onSelected: (index) {
-            ref.read(scoreInputControllerProvider.notifier).onWinnerSelected(
-                  index: index,
-                );
+            controller.onWinnerSelected(index: index);
             onNext();
           },
         ),
@@ -157,61 +84,58 @@ class _WinnerInputPage extends ConsumerWidget {
 
 class _ScoreInputPage extends ConsumerWidget {
   const _ScoreInputPage({
-    required this.index,
-    required this.onNext,
-    required this.isLast,
+    required this.onBack,
   });
 
-  final int index;
-  final bool isLast;
-  final void Function() onNext;
+  final void Function() onBack;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(
-      scoreInputControllerProvider.select((state) => state.losingPlayerScores[index - 1]),
-    );
-
-    ScoreInputController notifier() => ref.read(scoreInputControllerProvider.notifier);
+    final state = ref.watch(scoreInputControllerProvider);
+    final controller = ref.read(scoreInputControllerProvider.notifier);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Subtitle(
-          context.localizations.scoreInputModalTitle(state.playerName),
-          singleLine: false,
+        Row(
+          children: [
+            _PageViewBackButton(onPressed: onBack),
+            Expanded(
+              child: Center(
+                child: HeadlineSmall(
+                  context.localizations.scoreInputModalTitle,
+                  singleLine: false,
+                ),
+              ),
+            ),
+            Visibility.maintain(
+              visible: false,
+              child: _PageViewBackButton(onPressed: onBack),
+            ),
+          ],
         ),
-        context.geometry.spacingLarge.verticalBox,
-        NumberTextField(
-          onChanged: (value) => notifier().onScoreChanged(
-            playerName: state.playerName,
-            points: value,
-          ),
-          onSubmitted: (value) {
-            notifier().onScoreChanged(
-              playerName: state.playerName,
-              points: value,
-            );
-            onNext();
-          },
-          maxLength: 4,
-          focusNode: state.focusNode,
+        context.geometry.spacingExtraLarge.verticalBox,
+        Row(
+          children: state.losingPlayerScores
+              .map(
+                (score) => Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.geometry.spacingSmall,
+                    ),
+                    child: _PlayerScoreInput(score: score),
+                  ),
+                ),
+              )
+              .toList(),
         ),
-        context.geometry.spacingSmall.verticalBox,
+        const Spacer(),
         Padding(
           padding: EdgeInsets.all(context.geometry.spacingMedium),
           child: AppButton.primary(
-            text: isLast
-                ? context.localizations.scoreInputModalButtonFinish
-                : context.localizations.scoreInputModalButtonStep,
-            isEnabled: state.isScoreValid,
-            onPressed: () {
-              if (isLast) {
-                ref.read(scoreInputControllerProvider.notifier).submitScore();
-              } else {
-                onNext();
-              }
-            },
+            text: context.localizations.scoreInputModalButtonStep,
+            isEnabled: state.isSubmitEnabled,
+            onPressed: controller.submitScore,
           ),
         ),
       ],
@@ -219,43 +143,61 @@ class _ScoreInputPage extends ConsumerWidget {
   }
 }
 
-class _PageViewControl extends StatelessWidget {
-  const _PageViewControl({
-    required this.isEnabled,
+class _PlayerScoreInput extends ConsumerWidget {
+  const _PlayerScoreInput({required this.score});
+
+  final PlayerRoundScore score;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(scoreInputControllerProvider.notifier);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Subtitle(score.playerName),
+        context.geometry.spacingSmall.verticalBox,
+        NumberTextField(
+          key: ValueKey(score.playerName),
+          focusNode: score.focusNode,
+          maxLength: 4,
+          onChanged: (value) => controller.onScoreChanged(
+            playerName: score.playerName,
+            points: value,
+          ),
+          onSubmitted: (value) => controller.onScoreSubmitted(
+            playerName: score.playerName,
+            points: value,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PageViewBackButton extends StatelessWidget {
+  const _PageViewBackButton({
     required this.onPressed,
-    required this.position,
   });
 
-  final bool isEnabled;
   final void Function() onPressed;
-  final PageViewControlPosition position;
 
   @override
   Widget build(BuildContext context) {
-    final icon = switch (position) {
-      PageViewControlPosition.leading => Icons.chevron_left,
-      PageViewControlPosition.trailing => Icons.chevron_right,
-    };
-
     return PlatformClickListener(
       onTap: onPressed,
-      enabled: isEnabled,
       highlightColor: context.colors.primary,
       child: Container(
         width: 56,
-        height: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: context.geometry.spacingSmall),
         child: Icon(
-          icon,
+          Icons.chevron_left,
           size: 40,
-          color: isEnabled ? context.colors.primary : context.colors.disabled,
+          color: context.colors.primary,
         ),
       ),
     );
   }
 }
-
-enum PageViewControlPosition { leading, trailing }
 
 extension NavigationAnimation on PageController {
   static const _duration = Duration(milliseconds: 300);

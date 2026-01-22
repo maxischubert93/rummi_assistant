@@ -242,17 +242,11 @@ abstract class AppLocalizations {
   /// **'Submit score'**
   String get scoreInputModalButtonStep;
 
-  /// No description provided for @scoreInputModalButtonFinish.
-  ///
-  /// In en, this message translates to:
-  /// **'Finish'**
-  String get scoreInputModalButtonFinish;
-
   /// No description provided for @scoreInputModalTitle.
   ///
   /// In en, this message translates to:
-  /// **'Enter score for {playerName}'**
-  String scoreInputModalTitle(Object playerName);
+  /// **'Enter scores for players'**
+  String get scoreInputModalTitle;
 
   /// No description provided for @scoreInputModalSelectWinnerTitle.
   ///

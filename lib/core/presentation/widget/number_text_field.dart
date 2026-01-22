@@ -5,8 +5,8 @@ import 'package:rummi_assistant/core/core.dart';
 class NumberTextField extends StatelessWidget {
   const NumberTextField({
     required this.onChanged,
-    required this.onSubmitted,
     required this.maxLength,
+    this.onSubmitted,
     this.enabled = true,
     this.placeHolder,
     this.focusNode,
@@ -14,7 +14,7 @@ class NumberTextField extends StatelessWidget {
   });
 
   final void Function(String) onChanged;
-  final void Function(String) onSubmitted;
+  final void Function(String)? onSubmitted;
   final int maxLength;
   final bool enabled;
   final String? placeHolder;

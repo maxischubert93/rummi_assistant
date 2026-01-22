@@ -52,4 +52,16 @@ class ScoreInputController extends Notifier<ScoreInputState> {
     }).toList();
     state = state.copyWith(playerScores: updated);
   }
+
+  void onScoreSubmitted({required String playerName, required String? points}) {
+    final index = state.playerScores.indexWhere((score) => score.playerName == playerName);
+    if (index == -1) return;
+
+    // Move to next player input or submit
+    if (index + 1 < state.playerScores.length) {
+      state.playerScores[index + 1].focusNode.requestFocus();
+    } else {
+      submitScore();
+    }
+  }
 }
